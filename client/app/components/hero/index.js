@@ -1,8 +1,8 @@
 import angular from 'angular';
 import HeroController from './hero.controller';
 
-import randomNames from '../../services/randomNames';
-import greetings from '../greetings';
+import randomNames from 'services/randomNames';
+import greetings from 'components/greetings';
 
 export default angular
   .module('app.component.hero', [ randomNames.name, greetings.name ])

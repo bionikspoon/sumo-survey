@@ -62,7 +62,10 @@ module.exports = {
 
   plugins: getPlugins(ENV),
 
-  resolve: { extensions: [ '', '.js' ] },
+  resolve: {
+    root: [ PATHS.base(), PATHS.src(), PATHS.app() ],
+    extensions: [ '', '.js' ],
+  },
   devtool: ENV_IS.PRODUCTION ? 'source-map' : 'inline-source-map',
   postcss: getPostcss,
   cache: DEBUG,

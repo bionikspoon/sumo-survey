@@ -1,0 +1,29 @@
+{
+  "name": "Question",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "text": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {
+    "choices": {
+      "type": "hasMany",
+      "model": "QuestionChoice",
+      "foreignKey": "questionId"
+    },
+    "creator": {
+      "type": "belongsTo",
+      "model": "Admin",
+      "foreignKey": "creatorId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

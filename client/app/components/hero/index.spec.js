@@ -1,7 +1,6 @@
 /* eslint-env angular/mocks, jasmine */
 
 import 'angular-mocks';
-
 import appHero from './';
 
 describe('Hero Component', () => {
@@ -29,6 +28,6 @@ describe('Hero Component', () => {
     expect(element[ 0 ].classList.contains('ng-scope')).toBeTruthy();
     expect(element[ 0 ].classList.contains('ng-isolate-scope')).toBeTruthy();
   });
-  
-  
+
+
 });

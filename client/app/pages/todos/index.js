@@ -1,23 +1,9 @@
 import angular from 'angular';
-import lbServices from '../../../loopbackServices';
+import showErrors from 'components/showErrors';
+import lbServices from 'loopbackServices';
 
 export default angular
-  .module('app.pages.todos', [ lbServices ])
-  .directive('showErrors', () => ({
-    restrict: 'A',
-    require: '^form',
-    link(scope, el) {
-      const inputEl = angular.element(el[ 0 ].querySelector('[id]'));
-
-      inputEl.bind('blur', () => {
-        el.toggleClass('has-error', hasError());
-      });
-
-      function hasError() {
-        return inputEl[ 0 ].classList.contains('ng-invalid') && inputEl[ 0 ].classList.contains('ng-dirty');
-      }
-    },
-  }))
+  .module('app.pages.todos', [ lbServices, showErrors.name ])
   .config(routeConfig);
 
 /* @ngInject */
@@ -32,7 +18,7 @@ function routeConfig($stateProvider) {
 }
 
 /* @ngInject */
-function TodosController(Note) {
+function TodosController($log, Note) {
   const vm = this;
   vm.notes = Note.find();
 
@@ -60,6 +46,6 @@ function TodosController(Note) {
 
     Note.deleteById(todo,
       () => vm.notes.splice(index, 1),
-      err => console.log('err', err));
+      $log.error);
   };
 }

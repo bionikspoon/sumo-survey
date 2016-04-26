@@ -15,5 +15,25 @@
   },
   "Note": {
     "dataSource": "sql"
+  },
+  "Question": {
+    "dataSource": "sql",
+    "public": true
+  },
+  "QuestionChoice": {
+    "dataSource": "sql",
+    "public": true
+  },
+  "QuestionAnswer": {
+    "dataSource": "sql",
+    "public": true
+  },
+  "Admin": {
+    "dataSource": "sql",
+    "public": true
+  },
+  "Guest": {
+    "dataSource": "sql",
+    "public": true
   }
 }

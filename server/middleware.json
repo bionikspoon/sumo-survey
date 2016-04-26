@@ -1,9 +1,9 @@
 {
   "initial:before": {
-    "loopback#favicon": { }
+    "loopback#favicon": {}
   },
   "initial": {
-    "compression": { },
+    "compression": {},
     "cors": {
       "params": {
         "origin": true,
@@ -11,7 +11,7 @@
         "maxAge": 86400
       }
     },
-    "helmet#xssFilter": { },
+    "helmet#xssFilter": {},
     "helmet#frameguard": {
       "params": [
         "deny"
@@ -23,16 +23,16 @@
         "includeSubdomains": true
       }
     },
-    "helmet#hidePoweredBy": { },
-    "helmet#ieNoOpen": { },
-    "helmet#noSniff": { },
+    "helmet#hidePoweredBy": {},
+    "helmet#ieNoOpen": {},
+    "helmet#noSniff": {},
     "helmet#noCache": {
       "enabled": false
     }
   },
-  "session": { },
-  "auth": { },
-  "parse": { },
+  "session": {},
+  "auth": {},
+  "parse": {},
   "routes": {
     "loopback#rest": {
       "paths": [
@@ -40,13 +40,11 @@
       ]
     }
   },
-  "files": {
-
-  },
+  "files": {},
   "final": {
-    "loopback#urlNotFound": { }
+    "loopback#urlNotFound": {}
   },
   "final:after": {
-    "loopback#errorHandler": { }
+    "loopback#errorHandler": {}
   }
 }

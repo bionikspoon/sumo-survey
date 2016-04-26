@@ -1,0 +1,29 @@
+{
+  "name": "QuestionAnswer",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "question": {
+      "type": "belongsTo",
+      "model": "Question",
+      "foreignKey": "questionId"
+    },
+    "choice": {
+      "type": "belongsTo",
+      "model": "QuestionChoice",
+      "foreignKey": "choiceId"
+    },
+    "guest": {
+      "type": "belongsTo",
+      "model": "Guest",
+      "foreignKey": "guestId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

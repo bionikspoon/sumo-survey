@@ -1,0 +1,26 @@
+{
+  "name": "Guest",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "questions": {
+      "type": "hasMany",
+      "model": "Question",
+      "foreignKey": "",
+      "through": "QuestionAnswer"
+    },
+    "answers": {
+      "type": "hasMany",
+      "model": "QuestionChoice",
+      "foreignKey": "",
+      "through": "QuestionAnswer"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}
