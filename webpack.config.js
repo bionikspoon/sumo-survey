@@ -136,11 +136,27 @@ function getLoaders(env) {
     { test: /\.js$/, loader: 'babel?cacheDirectory', include: LOADER_INCLUDES },
     {
       test: /\.html$/,
-      // loader: 'file?name=[name].[hash:5].[ext]',
       loader: `ngtemplate?relativeTo=${PATHS.src()}!html?interpolate`,
       include: LOADER_INCLUDES,
     },
-    { test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/, loader: 'file' },
+    {
+      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff',
+    },
+    {
+      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff',
+    },
+    {
+      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream',
+    },
+    {
+      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file',
+    },
+    {
+      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml',
+    },
+    {
+      test: /\.(png|jpg|jpeg|gif)$/, loader: 'url?limit=10000',
+    },
   ];
   switch (env) {
     case DEVELOPMENT:

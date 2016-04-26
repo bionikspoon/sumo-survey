@@ -36,32 +36,31 @@ gulp.task('browser-sync', [ 'clean', 'loopback-angular', 'nodemon' ], () => {
     ],
 
     proxy: 'http://localhost:3000',
-    // files: [ 'client/**/*.' ],
     port: 5000,
-  })
+    open: false,
+  });
 });
 
-gulp.task('loopback-angular', ()=> gulp
+gulp.task('loopback-angular', () => gulp
   .src('./server/server.js')
   .pipe(loopbackAngular())
   .pipe(rename('index.js'))
   .pipe(gulp.dest('./client/loopbackServices'))
 );
 
-gulp.task('browser-sync-reload', [ 'loopback-angular' ], () => {browserSync.reload({ stream: false })});
+gulp.task('browser-sync-reload', [ 'loopback-angular' ], () => { browserSync.reload({ stream: false }) });
 
 gulp.task('nodemon', callback => {
-  let started = false;
+  process.env.STARTED = false;
   return nodemon({
     script: './',
     watch: [ 'server/**/*', 'common/**/*' ],
   })
     .on('start', () => {
-      if (!started) {callback();}
-      started = true;
+      if (process.env.STARTED === 'false') { callback(); }
+      process.env.STARTED = true;
     })
-    .on('restart', function () {
-      gulp.start('loopback-angular')
+    .on('restart', () => {
+      gulp.start('loopback-angular');
     });
-
 });

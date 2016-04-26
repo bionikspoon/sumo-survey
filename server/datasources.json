@@ -2,5 +2,14 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "sql": {
+    "host": "localhost",
+    "port": 3306,
+    "database": "sumo-survey",
+    "password": "",
+    "name": "sql",
+    "user": "sumo-survey",
+    "connector": "mysql"
   }
 }

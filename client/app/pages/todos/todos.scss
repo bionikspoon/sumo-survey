@@ -1,0 +1,11 @@
+#todos {
+  .list-group-item {
+    .delete-todo {
+      visibility: hidden;
+    }
+    &:hover .delete-todo {
+      visibility: visible;
+    }
+  }
+
+}

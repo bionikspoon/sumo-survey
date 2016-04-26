@@ -1,0 +1,28 @@
+<div class="container" id="todos">
+  <h1 class="page-header">Todos</h1>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="note in vm.notes">
+      <h4 class="list-group-item-heading">
+        {{note.title}}
+        <button class="btn btn-danger btn-xs delete-todo" ng-click="vm.delete(note)">&times;</button>
+      </h4>
+      <p class="list-group-item-text">
+        {{note.content}}
+      </p>
+    </li>
+  </ul>
+  <form id="add-todo" name="todo" class="form-inline" ng-submit="vm.addTodo(todo)" novalidate>
+    <div class="form-group" show-errors>
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" ng-model="todo.title" required>
+    </div>
+    <div class="form-group" show-errors>
+      <label for="content">Description</label>
+      <input type="text" class="form-control" id="content" ng-model="todo.content" required>
+    </div>
+    <button type="submit" class="btn btn-default" ng-disabled="todo.$invalid">Add Todo</button>
+  </form>
+  <div class="alert alert-danger" ng-if="vm.error">
+    {{vm.error.message}}
+  </div>
+</div>
