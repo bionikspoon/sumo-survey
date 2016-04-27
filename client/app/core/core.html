@@ -5,6 +5,11 @@
 <div class="container">
   <hr>
   <footer>
+    <button class="btn btn-default" ng-click="app.login()" ng-disabled="app.isAuthenticated()">Login</button>
+    <button class="btn btn-default" ng-click="app.logout()" ng-disabled="!app.isAuthenticated()">Logout</button>
+    <div>
+      <pre><code>{{ app.currentUser | json }}</code></pre>
+    </div>
     <p>&copy; 2015 Company, Inc. | I like {{app.noun}}</p>
   </footer>
 </div>

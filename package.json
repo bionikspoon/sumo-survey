@@ -7,6 +7,15 @@
     "pretest": "jshint .",
     "posttest": "nsp check"
   },
+  "vendor": [
+    "angular",
+    "angular-animate",
+    "angular-resource",
+    "angular-touch",
+    "angular-ui-router",
+    "angular-ui-bootstrap/src/collapse",
+    "lodash/sample"
+  ],
   "dependencies": {
     "angular": "1.5.5",
     "angular-animate": "1.5.5",

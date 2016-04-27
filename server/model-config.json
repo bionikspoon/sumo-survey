@@ -13,8 +13,21 @@
       "./mixins"
     ]
   },
-  "Note": {
-    "dataSource": "sql"
+  "AccessToken": {
+    "dataSource": "sql",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "sql",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "sql",
+    "public": false
+  },
+  "Role": {
+    "dataSource": "sql",
+    "public": false
   },
   "Question": {
     "dataSource": "sql",

@@ -63,7 +63,7 @@ module.exports = {
   plugins: getPlugins(ENV),
 
   resolve: {
-    root: [ PATHS.base(), PATHS.src(), PATHS.app() ],
+    root: [ PATHS.base(), PATHS.app() ],
     extensions: [ '', '.js' ],
   },
   devtool: ENV_IS.PRODUCTION ? 'source-map' : 'inline-source-map',
@@ -91,10 +91,12 @@ function getEntry(env) {
       entry.main.push(PATHS.src('app.bootstrap.js'));
       entry.main.push(`webpack-hot-middleware/client?http://${HOST}:${PORT}`);
       entry.main.push('webpack/hot/only-dev-server');
+      entry.vendor.push(...require('./package.json').vendor);
+      entry.models = [ 'loopbackServices' ];
       break;
 
     case PRODUCTION:
-      entry.vendor.push(...Object.keys(require('./package.json').dependencies));
+      entry.vendor.push(...require('./package.json').vendor);
 
       entry.main.push(PATHS.src('app.bootstrap.js'));
       break;
@@ -219,6 +221,7 @@ function getPlugins(env) {
       plugins.push(new NpmInstallPlugin({ saveDev: true }));
       plugins.push(new webpack.HotModuleReplacementPlugin());
       plugins.push(new webpack.NoErrorsPlugin());
+      plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'models', 'vendor', 'manifest' ] }));
       break;
 
     case PRODUCTION:
@@ -237,9 +240,7 @@ function getPlugins(env) {
       //   })
       // );
       plugins.push(new webpack.optimize.AggressiveMergingPlugin());
-      plugins.push(
-        new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] })
-      );
+      plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] }));
       plugins.push(new webpack.optimize.DedupePlugin());
       break;
 
