@@ -5,5 +5,4 @@ module.exports = function (app, cb) {
   app.datasources.sql.automigrate(() => {
     Admin.create({ email: 'admin@example.com', password: 'secret' }, cb)
   });
-
 };

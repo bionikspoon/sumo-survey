@@ -5,6 +5,7 @@
   "scripts": {
     "start": "gulp",
     "build": "gulp build",
+    "build:release": "npm run build -- --release",
     "pretest": "jshint .",
     "posttest": "nsp check"
   },
@@ -92,6 +93,7 @@
     "precss": "1.4.0",
     "raw-loader": "0.5.1",
     "resolve-url-loader": "1.4.3",
+    "run-sequence": "1.1.5",
     "sass-loader": "3.2.0",
     "serve-favicon": "2.3.0",
     "style-loader": "0.13.1",

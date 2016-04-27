@@ -90,8 +90,7 @@ function getEntry(env) {
     case DEVELOPMENT:
       // enforce order
       entry.main.push(PATHS.src('app.bootstrap.js'));
-      entry.main.push(`webpack-hot-middleware/client?http://${HOST}:${PORT}`);
-      entry.main.push('webpack/hot/only-dev-server');
+      entry.main.push(`webpack-hot-middleware/client?http://${HOST}:${PORT}&reload=true`);
       entry.vendor.push(...require('./package.json').vendor);
       break;
 
@@ -214,6 +213,8 @@ function getPlugins(env) {
       'process.env.NODE_ENV': JSON.stringify(env),
       __PRODUCTION__: JSON.stringify(ENV_IS.PRODUCTION),
     }),
+
+    new webpack.optimize.OccurenceOrderPlugin(),
   ];
 
   switch (env) {
@@ -222,7 +223,7 @@ function getPlugins(env) {
       plugins.push(new webpack.HotModuleReplacementPlugin());
       plugins.push(new webpack.NoErrorsPlugin());
       plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] }));
-      plugins.push(new WriteFilePlugin());
+      plugins.push(new WriteFilePlugin({ log: VERBOSE }));
       break;
 
     case PRODUCTION:
