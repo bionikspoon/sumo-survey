@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const unipath = require('unipath');
 const postcssImport = require('postcss-import');
 const precss = require('precss');
@@ -221,6 +222,7 @@ function getPlugins(env) {
       plugins.push(new webpack.HotModuleReplacementPlugin());
       plugins.push(new webpack.NoErrorsPlugin());
       plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] }));
+      plugins.push(new WriteFilePlugin());
       break;
 
     case PRODUCTION:
