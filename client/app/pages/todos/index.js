@@ -1,6 +1,6 @@
 import angular from 'angular';
 import showErrors from 'components/showErrors';
-import lbServices from 'loopbackServices';
+import lbServices from 'client/loopbackServices';
 
 export default angular
   .module('app.pages.todos', [ lbServices, showErrors.name ])

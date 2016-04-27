@@ -92,7 +92,6 @@ function getEntry(env) {
       entry.main.push(`webpack-hot-middleware/client?http://${HOST}:${PORT}`);
       entry.main.push('webpack/hot/only-dev-server');
       entry.vendor.push(...require('./package.json').vendor);
-      entry.models = [ 'loopbackServices' ];
       break;
 
     case PRODUCTION:
@@ -221,7 +220,7 @@ function getPlugins(env) {
       plugins.push(new NpmInstallPlugin({ saveDev: true }));
       plugins.push(new webpack.HotModuleReplacementPlugin());
       plugins.push(new webpack.NoErrorsPlugin());
-      plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'models', 'vendor', 'manifest' ] }));
+      plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] }));
       break;
 
     case PRODUCTION:

@@ -1,4 +1,3 @@
-module.exports = function (app, cb) {
+module.exports = function (app) {
   app.enableAuth();
-  process.nextTick(cb);
 };

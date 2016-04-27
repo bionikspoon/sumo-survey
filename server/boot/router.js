@@ -1,5 +1,4 @@
-module.exports = function (app, cb) {
+module.exports = function (app) {
   const router = app.loopback.Router();
   app.use(router);
-  process.nextTick(cb); // Remove if you pass `cb` to an async function yourself
 };

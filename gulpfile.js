@@ -20,25 +20,30 @@ gulp.task('default', [ 'clean', 'browser-sync' ]);
 
 gulp.task('clean', callback => fs.emptyDir(PATHS.dist(), callback));
 
-gulp.task('browser-sync', [ 'clean', 'loopback-angular', 'nodemon' ], () => {
+gulp.task('browser-sync', [ 'clean', 'nodemon' ], () => {
   const bundler = webpack(webpackConfig);
-  browserSync.init({
-    baseDir: PATHS.src(),
 
-    middleware: [
-      webpackDevMiddleware(bundler, {
-        publicPath: webpackConfig.output.publicPath,
-        stats: webpackConfig.stats,
-        noInfo: webpackConfig.stats,
-      }),
+  setTimeout(startBrowserSync, 500); // eslint-disable-line angular/timeout-service
 
-      webpackHotMiddleware(bundler),
-    ],
+  function startBrowserSync() {
+    browserSync.init({
+      baseDir: PATHS.src(),
 
-    proxy: 'http://localhost:3000',
-    port: 5000,
-    open: false,
-  });
+      middleware: [
+        webpackDevMiddleware(bundler, {
+          publicPath: webpackConfig.output.publicPath,
+          stats: webpackConfig.stats,
+          noInfo: webpackConfig.stats,
+        }),
+
+        webpackHotMiddleware(bundler),
+      ],
+
+      proxy: 'http://localhost:3000',
+      port: 5000,
+      open: false,
+    });
+  }
 });
 
 gulp.task('loopback-angular', () => gulp
@@ -50,17 +55,18 @@ gulp.task('loopback-angular', () => gulp
 
 gulp.task('browser-sync-reload', [ 'loopback-angular' ], () => { browserSync.reload({ stream: false }) });
 
-gulp.task('nodemon', callback => {
-  process.env.STARTED = false;
-  return nodemon({
+let started = false;
+
+gulp.task('nodemon', [ 'clean', 'loopback-angular' ], callback =>
+  nodemon({
     script: './',
     watch: [ 'server/**/*', 'common/**/*' ],
   })
     .on('start', () => {
-      if (process.env.STARTED === 'false') { callback(); }
-      process.env.STARTED = true;
+      if (!started) { callback(); }
+      started = true;
     })
     .on('restart', () => {
       gulp.start('loopback-angular');
-    });
-});
+    })
+);
