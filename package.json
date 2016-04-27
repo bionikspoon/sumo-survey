@@ -114,5 +114,13 @@
     "loopback"
   ],
   "author": "Manu Phatak <bionikspoon@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bionikspoon/sumo-survey.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bionikspoon/sumo-survey/issues"
+  },
+  "homepage": "https://github.com/bionikspoon/sumo-survey#readme"
 }
