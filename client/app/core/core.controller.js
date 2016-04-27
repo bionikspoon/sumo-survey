@@ -1,4 +1,4 @@
-/* @ngInject */
+/** @ngInject **/
 export default function CoreController($log, $rootScope, Auth) {
   const app = this;
 

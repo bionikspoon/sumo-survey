@@ -1,4 +1,4 @@
-/* @ngInject */
+/** @ngInject **/
 export default function coreConfig($urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('/');
 

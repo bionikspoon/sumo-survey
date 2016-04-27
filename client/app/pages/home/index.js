@@ -6,7 +6,7 @@ export default angular
   .module('app.page.home', [ appHero.name, appFocus.name ])
   .config(routeConfig);
 
-/* @ngInject */
+/** @ngInject **/
 function routeConfig($stateProvider) {
   $stateProvider
     .state('home', { url: '/', templateUrl: require('./home.html') });

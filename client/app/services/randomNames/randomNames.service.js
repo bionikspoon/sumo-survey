@@ -1,7 +1,7 @@
 import sample from 'lodash/sample';
 
 export default class RandomNames {
-  /* @ngInject */
+  /** @ngInject **/
   constructor() {
     this.names = [ 'Angular', 'JavaScript', 'WebPack', '21st Century' ];
   }

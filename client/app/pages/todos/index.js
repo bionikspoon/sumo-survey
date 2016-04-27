@@ -6,7 +6,7 @@ export default angular
   .module('app.pages.todos', [ lbServices, showErrors.name ])
   .config(routeConfig);
 
-/* @ngInject */
+/** @ngInject **/
 function routeConfig($stateProvider) {
   $stateProvider
     .state('todos', {
@@ -17,7 +17,7 @@ function routeConfig($stateProvider) {
     });
 }
 
-/* @ngInject */
+/** @ngInject **/
 function TodosController($log, Note) {
   const vm = this;
   vm.notes = Note.find();

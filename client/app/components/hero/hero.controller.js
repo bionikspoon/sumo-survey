@@ -1,4 +1,4 @@
-/* @ngInject */
+/** @ngInject **/
 export default function HeroController(randomNames) {
   const $ctrl = this;
   $ctrl.name = 'world';
