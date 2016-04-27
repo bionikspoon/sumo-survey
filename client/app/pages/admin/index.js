@@ -1,12 +1,11 @@
 import angular from 'angular';
 
 export default angular
-  .module('app.page.home', [])
+  .module('app.page.admin', [])
   .config(routeConfig);
 
 /** @ngInject **/
 function routeConfig($stateProvider) {
   $stateProvider
-    .state('home', { url: '/', templateUrl: require('./home.html') });
+    .state('admin', { url: '/admin/', templateUrl: require('./admin.html') });
 }
-

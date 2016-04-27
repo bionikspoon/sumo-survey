@@ -4,12 +4,13 @@ import lbServices from 'client/loopbackServices';
 
 import Auth from 'services/Auth';
 
-import navbar from 'components/navbar/navbar.module';
+import navbar from 'components/navbar';
+import footer from 'components/footer';
 import coreConfig from './core.config';
 import CoreController from './core.controller';
 
 export default angular
-  .module('app.core', [ uiRouter, lbServices, Auth.name, navbar.name ])
+  .module('app.core', [ uiRouter, lbServices, Auth.name, navbar.name, footer.name ])
   .value('$routerRootComponent', 'appCore')
   .config(coreConfig)
   .controller('CoreController', CoreController)

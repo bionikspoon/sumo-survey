@@ -1,6 +1,6 @@
-import pageHome from 'pages/home';
-import pageAbout from 'pages/about';
-import pageTodos from 'pages/todos';
+// import top level pages
+const context = require.context('./', true, /\.\/[^\/]+\/index\.js$/);
+const modules = context.keys().map(module => context(module).default);
 
 export default angular
-  .module('app.pages', [ pageHome.name, pageAbout.name, pageTodos.name ]);
+  .module('app.pages', [ ...modules.map(module => module.name) ]);

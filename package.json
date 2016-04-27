@@ -87,6 +87,7 @@
     "npm-install-webpack-plugin": "3.1.0",
     "nsp": "2.3.2",
     "null-loader": "0.1.1",
+    "pages": "0.0.16",
     "phantomjs-prebuilt": "2.1.7",
     "postcss-import": "8.1.0",
     "postcss-loader": "0.8.2",

@@ -2,6 +2,12 @@
 export default function CoreController($log, $rootScope, Auth) {
   const app = this;
 
+  app.routes = [
+    { name: 'home', title: 'Home' },
+    { name: 'login', title: 'Login' },
+    { name: 'admin', title: 'Admin' },
+  ];
+
   app.noun = 'turtles';
 
   app.currentUser = Auth.currentUser;

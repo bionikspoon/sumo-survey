@@ -1,0 +1,13 @@
+<div class="container">
+  <hr>
+  <footer>
+    <button class="btn btn-default" ng-click="$ctrl.app.login()" ng-disabled="$ctrl.app.isAuthenticated()">Login
+    </button>
+    <button class="btn btn-default" ng-click="$ctrl.app.logout()" ng-disabled="!$ctrl.app.isAuthenticated()">Logout
+    </button>
+    <div>
+      <pre><code>{{ $ctrl.app.currentUser | json }}</code></pre>
+    </div>
+    <p>&copy; {{ $ctrl.now | date:'yyyy' }} {{ $ctrl.copyright }} </p>
+  </footer>
+</div>
