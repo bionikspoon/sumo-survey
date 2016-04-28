@@ -6,7 +6,7 @@ export default angular
   .directive('appShowErrors', ShowErrorsDirective);
 
 /** @ngInject **/
-function ShowErrorsDirective() {
+function ShowErrorsDirective($timeout) {
   const directive = {
     bindToController: true,
     require: '^form',
@@ -22,7 +22,7 @@ function ShowErrorsDirective() {
     const inputEl = angular.element(element[ 0 ].querySelector('[id]'));
 
     inputEl.bind('blur', () => {
-      element.toggleClass('has-error', hasError(inputEl[ 0 ]));
+      $timeout(() => element.toggleClass('has-error', hasError(inputEl[ 0 ])), 1);
     });
   }
 }

@@ -14,8 +14,8 @@ function Auth($log, $q, Admin, LoopBackAuth) {
 
   ////////////////
 
-  function login({ email, password }) {
-    return Admin.login({ email, password }).$promise
+  function login({ email, password, rememberMe }) {
+    return Admin.login({ rememberMe }, { email, password }).$promise
       .finally(streamCurrentUser);
   }
 
