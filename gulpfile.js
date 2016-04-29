@@ -16,6 +16,10 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('./webpack.config.js');
 
 const PATHS = webpackConfig.PATHS;
+const HOST = webpackConfig.HOST;
+const PORT = webpackConfig.PORT;
+const PROXY_TARGET = { host: HOST, port: 3000 };
+PROXY_TARGET.url = `http://${PROXY_TARGET.host}:${PROXY_TARGET.port}`;
 
 gulp.task('default', [ 'start' ]);
 gulp.task('start', callback => {
@@ -39,10 +43,10 @@ gulp.task('build', callback => {
 gulp.task('clean', callback => fs.emptyDir(PATHS.dist(), callback));
 
 gulp.task('loopback-angular', () => gulp
-  .src('./server/server.js')
+  .src(PATHS.server('server.js'))
   .pipe(loopbackAngular())
   .pipe(rename('index.js'))
-  .pipe(gulp.dest('./client/loopbackServices'))
+  .pipe(gulp.dest(PATHS.src('loopbackServices')))
 );
 
 gulp.task('browser-sync', callback => {
@@ -61,8 +65,8 @@ gulp.task('browser-sync', callback => {
       webpackHotMiddleware(bundler),
     ],
 
-    proxy: 'http://localhost:3000',
-    port: 5000,
+    proxy: PROXY_TARGET.url,
+    port: PORT,
     open: false,
   }, callback);
 });

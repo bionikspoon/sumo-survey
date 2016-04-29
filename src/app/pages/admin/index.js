@@ -1,5 +1,5 @@
 import angular from 'angular';
-import clientLoopbackServices from 'client/loopbackServices';
+import clientLoopbackServices from 'src/loopbackServices';
 
 export default angular
   .module('app.page.admin', [ clientLoopbackServices ])
@@ -17,7 +17,7 @@ function routeConfig($stateProvider) {
 }
 
 /** @ngInject **/
-function AdminController($q, Question) {
+function AdminController($log, $q, Question) {
   const $ctrl = this;
 
   $ctrl.routes = [
@@ -39,14 +39,14 @@ function AdminController($q, Question) {
     Question.createWithChoices(question, question.choices)
       .$promise
       .then(results => {
-        console.log('results', results);
+        $log.debug('index results:', results);
         return results;
       })
       .catch(err => {
-        console.log('err', err);
+        $log.error('index err:', err);
         return $q.reject(err);
       });
-    console.log('Question', Question);
-    console.log('question', question);
+    $log.debug('index Question:', Question);
+    $log.debug('index question:', question);
   };
 }

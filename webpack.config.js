@@ -16,9 +16,11 @@ const autoprefixer = require('autoprefixer');
 // CONSTANTS
 // ===========================================================================
 const PATHS = {
-  src: unipath('client'),
-  app: unipath('client', 'app'),
-  dist: unipath('dist'),
+  src: unipath('src'),
+  app: unipath('src', 'app'),
+  dist: unipath('client'),
+  server: unipath('server'),
+  common: unipath('common'),
   modules: unipath('node_modules'),
   base: unipath(),
 };
@@ -77,6 +79,8 @@ module.exports = {
   noInfo: !VERBOSE,
   stats: getStatOptions(),
   PATHS,
+  HOST,
+  PORT,
 };
 
 // ===========================================================================
@@ -143,24 +147,12 @@ function getLoaders(env) {
       loader: `ngtemplate?relativeTo=${PATHS.src()}!html?interpolate`,
       include: LOADER_INCLUDES,
     },
-    {
-      test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff',
-    },
-    {
-      test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff',
-    },
-    {
-      test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream',
-    },
-    {
-      test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file',
-    },
-    {
-      test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml',
-    },
-    {
-      test: /\.(png|jpg|jpeg|gif)$/, loader: 'url?limit=10000',
-    },
+    { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
+    { test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
+    { test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/octet-stream' },
+    { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
+    { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
+    { test: /\.(png|jpg|jpeg|gif)$/, loader: 'url?limit=10000' },
   ];
   switch (env) {
     case DEVELOPMENT:
@@ -237,7 +229,7 @@ function getPlugins(env) {
       // plugins.push(
       //   new webpack.optimize.CommonsChunkPlugin({
       //     names: [
-      //       './client/app/pages/about', './client/app/pages/home',
+      //       './src/app/pages/about', './src/app/pages/home',
       //     ],
       //   })
       // );
