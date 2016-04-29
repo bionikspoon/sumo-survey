@@ -5,5 +5,5 @@ export default angular
   .module('app.component.navbar', [ bootstrapCollapse ])
   .component('appNavbar', {
     templateUrl: require('./navbar.html'),
-    bindings: { routes: '<', brand: '@' },
+    bindings: { routes: '<', brand: '@', brandLink: '@' },
   });

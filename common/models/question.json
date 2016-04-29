@@ -25,5 +25,35 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+    "createWithChoices": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "Question",
+          "required": true,
+          "description": "Question to create",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "question",
+          "type": "Question",
+          "root": true,
+          "description": "Created Question"
+        }
+      ],
+      "description": "Create a new Question instance with Choices and persist it into the data source.",
+      "http": [
+        {
+          "path": "/",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }
