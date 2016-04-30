@@ -42,7 +42,7 @@
   },
   "files": {
     "serve-static": {
-      "params": "$!../client"
+      "params": "$!../dist"
     }
   },
   "final": {

@@ -16,9 +16,9 @@ const autoprefixer = require('autoprefixer');
 // CONSTANTS
 // ===========================================================================
 const PATHS = {
-  src: unipath('src'),
-  app: unipath('src', 'app'),
-  dist: unipath('client'),
+  src: unipath('client'),
+  app: unipath('client', 'app'),
+  dist: unipath('dist'),
   server: unipath('server'),
   common: unipath('common'),
   modules: unipath('node_modules'),
@@ -229,7 +229,7 @@ function getPlugins(env) {
       // plugins.push(
       //   new webpack.optimize.CommonsChunkPlugin({
       //     names: [
-      //       './src/app/pages/about', './src/app/pages/home',
+      //       './client/app/pages/about', './client/app/pages/home',
       //     ],
       //   })
       // );

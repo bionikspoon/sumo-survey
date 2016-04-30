@@ -1,5 +1,5 @@
 import angular from 'angular';
-import clientLoopbackServices from 'src/loopbackServices';
+import clientLoopbackServices from 'client/loopbackServices';
 
 export default angular
   .module('app.page.admin', [ clientLoopbackServices ])

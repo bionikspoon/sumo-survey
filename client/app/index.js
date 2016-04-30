@@ -6,7 +6,7 @@ import uiRouter from 'angular-ui-router';
 
 import appCore from 'core';
 import appPages from 'pages';
-import lbServices from 'src/loopbackServices';
+import lbServices from 'client/loopbackServices';
 
 export default angular
   .module('app', [

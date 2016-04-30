@@ -1,9 +1,9 @@
 # node_modules are ignored by default
 
 # Ignore build folder
-/client
+/dist
 /node_modules
 /coverage
 /common
 /server
-/src/loopbackServices
+/client/loopbackServices

@@ -1,6 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import lbServices from 'src/loopbackServices';
+import lbServices from 'client/loopbackServices';
 
 import Auth from 'services/Auth';
 import Fingerprint from 'services/Fingerprint';

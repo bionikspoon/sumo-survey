@@ -1,5 +1,5 @@
 import angular from 'angular';
-import srcLoopbackServices from 'src/loopbackServices';
+import srcLoopbackServices from 'client/loopbackServices';
 
 export default angular
   .module('app.page.survey', [ srcLoopbackServices ])
