@@ -1,5 +1,5 @@
 /** @ngInject **/
-export default function CoreController($log, $rootScope, Auth) {
+export default function CoreController($log, $rootScope, Auth, Fingerprint) {
   const app = this;
 
   app.routes = [
@@ -12,6 +12,12 @@ export default function CoreController($log, $rootScope, Auth) {
 
   app.currentUser = Auth.currentUser;
   Auth.streamCurrentUser();
+
+  app.fingerprint = Fingerprint.ensure()
+    .then(fingerprint => {
+      app.fingerprint = fingerprint;
+      return fingerprint;
+    });
 
   app.isAuthenticated = () => Auth.isAuthenticated();
 
