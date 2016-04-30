@@ -7,6 +7,17 @@ export default angular
 /** @ngInject **/
 function routeConfig($stateProvider) {
   $stateProvider
-    .state('home', { url: '/', templateUrl: require('./home.html') });
+    .state('home', {
+      url: '/',
+      templateUrl: require('./home.html'),
+      controller: HomeController,
+      controllerAs: '$ctrl',
+    });
+}
+
+function HomeController(Auth) {
+  const $ctrl = this;
+
+  $ctrl.logout = () => Auth.logout();
 }
 

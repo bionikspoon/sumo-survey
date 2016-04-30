@@ -1,11 +1,17 @@
 <main id="page-home" class="home">
-  <div class="home__text-vertical-center container">
-    <h1>Sumo Survey</h1>
-    <h3>Premier data collection &amp; survey machine</h3>
-    <br>
-    <a href="#about" class="btn btn-dark btn-lg">Get Started</a>
-  </div>
+   <div class="home__text-vertical-center container">
+      <h1>Sumo Survey</h1>
+      <h3>Premier data collection &amp; survey machine</h3>
+      <br>
+      <a ui-sref="survey" class="btn btn-dark btn-lg">Get Started</a>
+   </div>
 </main>
-<a class="btn btn-dark" id="page-home-menu" ui-sref='login'>
-  <i class="material-icons">trending_up</i>
-</a>
+<div id="page-home-menu">
+   <a class="btn btn-dark" title="Logout" ng-if="app.isAuthenticated()" ng-click="app.logout()">
+      <i class="material-icons">stop</i>
+   </a>
+   <a class="btn btn-dark" title="Go to admin dashboard" ui-sref='admin'>
+      <i class="material-icons">trending_up</i>
+   </a>
+
+</div>

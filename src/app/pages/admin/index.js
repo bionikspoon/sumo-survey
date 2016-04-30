@@ -13,6 +13,7 @@ function routeConfig($stateProvider) {
       templateUrl: require('./admin.html'),
       controller: AdminController,
       controllerAs: '$ctrl',
+      authenticate: true,
     });
 }
 

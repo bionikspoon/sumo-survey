@@ -11,22 +11,24 @@ export default angular
 function routeConfig($stateProvider) {
   $stateProvider
     .state('login', {
-      url: '/login/',
+      url: '/login/?next',
       templateUrl: require('./login.html'),
       controller: LoginController,
       controllerAs: '$ctrl',
+      authenticate: false,
     });
 }
 
 /** @ngInject **/
-function LoginController($state, Auth) {
+function LoginController($state, $stateParams, Auth) {
   const $ctrl = this;
+  const next = $stateParams.next || 'admin';
 
   $ctrl.login = form => {
     if (form.$invalid) return;
     Auth.login(form)
       .then(result => {
-        $state.go('admin');
+        $state.go(next);
         return result;
       });
   };

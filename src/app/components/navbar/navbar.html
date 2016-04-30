@@ -23,7 +23,7 @@
       <div class="navbar-collapse" uib-collapse="isCollapsed">
          <ul class='nav navbar-nav'>
             <li ui-sref-active='active' ng-repeat="route in $ctrl.routes">
-               <a ui-sref='{{route.name}}'>{{route.title}}</a>
+               <a ui-sref='{{route.name}}' title="{{route.title}}">{{route.title}}</a>
             </li>
          </ul>
       </div><!-- /.navbar-collapse -->
