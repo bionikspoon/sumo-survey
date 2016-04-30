@@ -11,49 +11,25 @@
       "required": true
     }
   },
-  "validations": [],
+  "validations": [ ],
   "relations": {
-    "choices": {
-      "type": "hasMany",
-      "model": "QuestionChoice",
-      "foreignKey": "questionId"
-    },
     "creator": {
       "type": "belongsTo",
       "model": "Admin",
       "foreignKey": "creatorId"
+    },
+    "choices": {
+      "type": "hasMany",
+      "model": "Choice",
+      "foreignKey": "questionId"
+    },
+    "responses": {
+      "type": "hasMany",
+      "model": "Response",
+      "foreignKey": "questionId"
     }
   },
-  "acls": [],
+  "acls": [ ],
   "methods": {
-    "createWithChoices": {
-      "isStatic": true,
-      "accepts": [
-        {
-          "arg": "data",
-          "type": "Question",
-          "required": true,
-          "description": "Question to create",
-          "http": {
-            "source": "body"
-          }
-        }
-      ],
-      "returns": [
-        {
-          "arg": "question",
-          "type": "Question",
-          "root": true,
-          "description": "Created Question"
-        }
-      ],
-      "description": "Create a new Question instance with Choices and persist it into the data source.",
-      "http": [
-        {
-          "path": "/",
-          "verb": "post"
-        }
-      ]
-    }
   }
 }

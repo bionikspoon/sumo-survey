@@ -8,17 +8,22 @@
   "properties": {},
   "validations": [],
   "relations": {
+    "responses": {
+      "type": "hasMany",
+      "model": "Response",
+      "foreignKey": ""
+    },
     "questions": {
       "type": "hasMany",
       "model": "Question",
       "foreignKey": "",
-      "through": "QuestionAnswer"
+      "through": "Response"
     },
-    "answers": {
+    "choices": {
       "type": "hasMany",
-      "model": "QuestionChoice",
+      "model": "Choice",
       "foreignKey": "",
-      "through": "QuestionAnswer"
+      "through": "Response"
     }
   },
   "acls": [],

@@ -29,19 +29,19 @@
     "dataSource": "sql",
     "public": false
   },
+  "Admin": {
+    "dataSource": "sql",
+    "public": true
+  },
   "Question": {
     "dataSource": "sql",
     "public": true
   },
-  "QuestionChoice": {
+  "Choice": {
     "dataSource": "sql",
     "public": true
   },
-  "QuestionAnswer": {
-    "dataSource": "sql",
-    "public": true
-  },
-  "Admin": {
+  "Response": {
     "dataSource": "sql",
     "public": true
   },

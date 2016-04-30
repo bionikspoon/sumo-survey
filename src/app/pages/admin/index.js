@@ -29,24 +29,26 @@ function AdminController($log, $q, Question) {
     if (!choice) return;
     if (question.choices.includes(choice)) return;
 
-    question.choices.push(choice);
-    question.addChoice = ''; // eslint-disable-line no-param-reassign
+    question.choices.push(angular.copy(choice));
+    question.addChoice.text = ''; // eslint-disable-line no-param-reassign
   };
 
   $ctrl.addQuestion = question => {
-    if (question.$invalid || question.addChoice.length || !question.choices.length) return;
+    if (question.$invalid || question.addChoice.text.length || !question.choices.length) return;
+    const { text, choices } = question;
 
-    Question.createWithChoices(question, question.choices)
+    Question.create({ text, choices })
       .$promise
       .then(results => {
-        $log.debug('index results:', results);
+        question.text = ''; // eslint-disable-line no-param-reassign
+        question.choices = []; // eslint-disable-line no-param-reassign
+        question.$setPristine();
+        question.$setUntouched();
         return results;
       })
       .catch(err => {
-        $log.error('index err:', err);
+        $log.error('Admin/index.js err:', err);
         return $q.reject(err);
       });
-    $log.debug('index Question:', Question);
-    $log.debug('index question:', question);
   };
 }

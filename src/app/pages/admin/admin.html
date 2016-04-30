@@ -20,7 +20,7 @@
             class="form-control"
             id="choice-{{$index}}"
             placeholder="Choice #{{$index}}"
-            ng-model="choice"
+            ng-model="choice.text"
             required>
       </div>
 
@@ -33,18 +33,18 @@
             class="form-control"
             id="Add Choice"
             placeholder="Add Choice"
-            ng-model="question.addChoice">
+            ng-model="question.addChoice.text">
       </div>
 
       <button
          class="btn btn-default"
          ng-click="$ctrl.addChoice(question.addChoice, question)"
-         ng-disabled="!question.addChoice.length">Add Choice
+         ng-disabled="!question.addChoice.text.length">Add Choice
       </button>
       <button
          type="submit"
          class="btn btn-default"
-         ng-disabled="question.$invalid || question.addChoice.length || !question.choices.length">Add Question
+         ng-disabled="question.$invalid || question.addChoice.text.length || !question.choices.length">Add Question
       </button>
    </form>
 

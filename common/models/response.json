@@ -1,5 +1,5 @@
 {
-  "name": "QuestionAnswer",
+  "name": "Response",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -15,7 +15,7 @@
     },
     "choice": {
       "type": "belongsTo",
-      "model": "QuestionChoice",
+      "model": "Choice",
       "foreignKey": "choiceId"
     },
     "guest": {
