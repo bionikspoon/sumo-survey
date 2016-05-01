@@ -5,7 +5,15 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
+  "properties": {
+    "fingerprint": {
+      "type": "string",
+      "required": true
+    },
+    "ip": {
+      "type": "string"
+    }
+  },
   "validations": [],
   "relations": {
     "responses": {
@@ -27,5 +35,111 @@
     }
   },
   "acls": [],
-  "methods": {}
+  "methods": {
+    "createResponse": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "fingerprint",
+          "type": "string",
+          "required": true,
+          "description": "Guest fingerprint",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "data",
+          "type": "Response",
+          "required": true,
+          "description": "Response data",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "response",
+          "type": "Response",
+          "root": true,
+          "description": "Created response"
+        }
+      ],
+      "description": "Create a guest response.",
+      "http": [
+        {
+          "path": "/:fingerprint/responses",
+          "verb": "post"
+        }
+      ]
+    },
+    "getUnanswered": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "fingerprint",
+          "type": "string",
+          "required": true,
+          "description": "Guest fingerprint",
+          "http": {
+            "source": "path"
+          }
+        },
+        {
+          "arg": "filter",
+          "type": "object",
+          "required": false,
+          "description": "Filter results",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "questions",
+          "type": "array",
+          "root": true,
+          "description": "Unanswered questions for quest"
+        }
+      ],
+      "description": "Get unanswered questions",
+      "http": [
+        {
+          "path": "/:fingerprint/questions/unanswered",
+          "verb": "get"
+        }
+      ]
+    },
+    "getUnansweredFindOne": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "fingerprint",
+          "type": "string",
+          "required": true,
+          "description": "Guest fingerprint",
+          "http": {
+            "source": "path"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "data",
+          "type": "object",
+          "root": true,
+          "description": "Unanswered question"
+        }
+      ],
+      "description": "Get one unanswered question",
+      "http": [
+        {
+          "path": "/:fingerprint/questions/unanswered/findOne",
+          "verb": "get"
+        }
+      ]
+    }
+  }
 }

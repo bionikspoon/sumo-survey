@@ -12,14 +12,24 @@ export default angular
 /** @ngInject **/
 function FingerprintService($log, $q, LocalStorage) {
   const service = {
-    ensure, id: '',
+    getFingerprint, stream, fingerprint: {},
   };
   return service;
 
   ////////////////
 
-  function ensure() {
-    return getFingerprint();
+  function stream() {
+    return getFingerprint()
+      .then(id => {
+        angular.copy({ id }, service.fingerprint);
+        return id;
+      })
+      .catch(error => {
+        angular.copy({}, service.fingerprint);
+        $log.error('Fingerprint error:', error);
+
+        return $q.reject(error);
+      });
   }
 
   ////////////////
@@ -29,7 +39,6 @@ function FingerprintService($log, $q, LocalStorage) {
 
     const defer = $q.defer();
     new Fingerprint().get(result => {
-      console.log('result', result);
       LocalStorage.set(KEY, result);
       return defer.resolve(result);
     });

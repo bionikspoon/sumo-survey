@@ -13,11 +13,8 @@ export default function CoreController($log, $rootScope, Auth, Fingerprint) {
   app.currentUser = Auth.currentUser;
   Auth.streamCurrentUser();
 
-  app.fingerprint = Fingerprint.ensure()
-    .then(fingerprint => {
-      app.fingerprint = fingerprint;
-      return fingerprint;
-    });
+  app.fingerprint = Fingerprint.fingerprint;
+  Fingerprint.stream();
 
   app.isAuthenticated = () => Auth.isAuthenticated();
 

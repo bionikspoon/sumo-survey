@@ -37,6 +37,7 @@ function AdminController($log, $q, Question) {
   $ctrl.addQuestion = question => {
     if (question.$invalid || question.addChoice.text.length || !question.choices.length) return;
     const { text, choices } = question;
+    console.log('choices', choices);
 
     Question.create({ text, choices })
       .$promise
@@ -47,9 +48,9 @@ function AdminController($log, $q, Question) {
         question.$setUntouched();
         return results;
       })
-      .catch(err => {
-        $log.error('Admin/index.js err:', err);
-        return $q.reject(err);
+      .catch(error => {
+        $log.error('AdminController error: %s\n', error.data.error.message, error);
+        return $q.reject(error);
       });
   };
 }

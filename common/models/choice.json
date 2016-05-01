@@ -9,6 +9,11 @@
     "text": {
       "type": "string",
       "required": true
+    },
+    "order": {
+      "type": "number",
+      "required": true,
+      "default": "50"
     }
   },
   "validations": [],

@@ -2320,6 +2320,60 @@ module.factory(
           method: "PUT"
         },
 
+        // INTERNAL. Use Question.guests.findById() instead.
+        "prototype$__findById__guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Question.guests.destroyById() instead.
+        "prototype$__destroyById__guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Question.guests.updateById() instead.
+        "prototype$__updateById__guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Question.guests.link() instead.
+        "prototype$__link__guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Question.guests.unlink() instead.
+        "prototype$__unlink__guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Question.guests.exists() instead.
+        "prototype$__exists__guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/rel/:fk",
+          method: "HEAD"
+        },
+
         // INTERNAL. Use Question.choices() instead.
         "prototype$__get__choices": {
           isArray: true,
@@ -2367,6 +2421,31 @@ module.factory(
         // INTERNAL. Use Question.responses.count() instead.
         "prototype$__count__responses": {
           url: urlBase + "/Questions/:id/responses/count",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Question.guests() instead.
+        "prototype$__get__guests": {
+          isArray: true,
+          url: urlBase + "/Questions/:id/guests",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Question.guests.create() instead.
+        "prototype$__create__guests": {
+          url: urlBase + "/Questions/:id/guests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Question.guests.destroyAll() instead.
+        "prototype$__delete__guests": {
+          url: urlBase + "/Questions/:id/guests",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Question.guests.count() instead.
+        "prototype$__count__guests": {
+          url: urlBase + "/Questions/:id/guests/count",
           method: "GET"
         },
 
@@ -3726,6 +3805,416 @@ module.factory(
         R.responses.updateById = function() {
           var TargetResource = $injector.get("Response");
           var action = TargetResource["::updateById::Question::responses"];
+          return action.apply(R, arguments);
+        };
+    /**
+     * @ngdoc object
+     * @name lbServices.Question.guests
+     * @header lbServices.Question.guests
+     * @object
+     * @description
+     *
+     * The object `Question.guests` groups methods
+     * manipulating `Guest` instances related to `Question`.
+     *
+     * Call {@link lbServices.Question#guests Question.guests()}
+     * to query all related instances.
+     */
+
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question#guests
+         * @methodOf lbServices.Question
+         *
+         * @description
+         *
+         * Queries guests of Question.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `filter` – `{object=}` - 
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Guest` object.)
+         * </em>
+         */
+        R.guests = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::get::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#count
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Counts guests of Question.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `where` – `{object=}` - Criteria to match model instances
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Data properties:
+         *
+         *  - `count` – `{number=}` - 
+         */
+        R.guests.count = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::count::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#create
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Creates a new instance in guests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Guest` object.)
+         * </em>
+         */
+        R.guests.create = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::create::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#createMany
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Creates a new instance in guests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Guest` object.)
+         * </em>
+         */
+        R.guests.createMany = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::createMany::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#destroyAll
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Deletes all guests of this model.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.guests.destroyAll = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::delete::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#destroyById
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Delete a related item by id for guests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for guests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.guests.destroyById = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::destroyById::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#exists
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Check the existence of guests relation to an item by id.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for guests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Guest` object.)
+         * </em>
+         */
+        R.guests.exists = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::exists::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#findById
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Find a related item by id for guests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for guests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Guest` object.)
+         * </em>
+         */
+        R.guests.findById = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::findById::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#link
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Add a related item by id for guests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for guests
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Guest` object.)
+         * </em>
+         */
+        R.guests.link = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::link::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#unlink
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Remove the guests relation to an item by id.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for guests
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        R.guests.unlink = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::unlink::Question::guests"];
+          return action.apply(R, arguments);
+        };
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question.guests#updateById
+         * @methodOf lbServices.Question.guests
+         *
+         * @description
+         *
+         * Update a related item by id for guests.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `id` – `{*}` - PersistedModel id
+         *
+         *  - `fk` – `{*}` - Foreign key for guests
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * <em>
+         * (The remote method definition does not provide any description.
+         * This usually means the response is a `Guest` object.)
+         * </em>
+         */
+        R.guests.updateById = function() {
+          var TargetResource = $injector.get("Guest");
+          var action = TargetResource["::updateById::Question::guests"];
           return action.apply(R, arguments);
         };
 
@@ -6008,6 +6497,189 @@ module.factory(
         "createChangeStream": {
           url: urlBase + "/Guests/change-stream",
           method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Guest#createResponse
+         * @methodOf lbServices.Guest
+         *
+         * @description
+         *
+         * Create a guest response.
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `fingerprint` – `{string}` - Guest fingerprint
+         *
+         * @param {Object} postData Request data.
+         *
+         * This method expects a subset of model properties as request parameters.
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Created response
+         */
+        "createResponse": {
+          url: urlBase + "/Guests/:fingerprint/responses",
+          method: "POST"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Guest#getUnanswered
+         * @methodOf lbServices.Guest
+         *
+         * @description
+         *
+         * Get unanswered questions
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `fingerprint` – `{string}` - Guest fingerprint
+         *
+         *  - `filter` – `{object=}` - Filter results
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Unanswered questions for quest
+         */
+        "getUnanswered": {
+          isArray: true,
+          url: urlBase + "/Guests/:fingerprint/questions/unanswered",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Guest#getUnansweredFindOne
+         * @methodOf lbServices.Guest
+         *
+         * @description
+         *
+         * Get one unanswered question
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `fingerprint` – `{string}` - Guest fingerprint
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Unanswered question
+         */
+        "getUnansweredFindOne": {
+          url: urlBase + "/Guests/:fingerprint/questions/unanswered/findOne",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Question.guests.findById() instead.
+        "::findById::Question::guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/:fk",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Question.guests.destroyById() instead.
+        "::destroyById::Question::guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Question.guests.updateById() instead.
+        "::updateById::Question::guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Question.guests.link() instead.
+        "::link::Question::guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/rel/:fk",
+          method: "PUT"
+        },
+
+        // INTERNAL. Use Question.guests.unlink() instead.
+        "::unlink::Question::guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/rel/:fk",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Question.guests.exists() instead.
+        "::exists::Question::guests": {
+          params: {
+          'fk': '@fk'
+          },
+          url: urlBase + "/Questions/:id/guests/rel/:fk",
+          method: "HEAD"
+        },
+
+        // INTERNAL. Use Question.guests() instead.
+        "::get::Question::guests": {
+          isArray: true,
+          url: urlBase + "/Questions/:id/guests",
+          method: "GET"
+        },
+
+        // INTERNAL. Use Question.guests.create() instead.
+        "::create::Question::guests": {
+          url: urlBase + "/Questions/:id/guests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Question.guests.createMany() instead.
+        "::createMany::Question::guests": {
+          isArray: true,
+          url: urlBase + "/Questions/:id/guests",
+          method: "POST"
+        },
+
+        // INTERNAL. Use Question.guests.destroyAll() instead.
+        "::delete::Question::guests": {
+          url: urlBase + "/Questions/:id/guests",
+          method: "DELETE"
+        },
+
+        // INTERNAL. Use Question.guests.count() instead.
+        "::count::Question::guests": {
+          url: urlBase + "/Questions/:id/guests/count",
+          method: "GET"
         },
 
         // INTERNAL. Use Response.guest() instead.

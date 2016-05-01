@@ -26,9 +26,9 @@ function Auth($log, $q, Admin, LoopBackAuth) {
 
   function streamCurrentUser() {
     return getCurrentUser()
-      .then(results => {
-        angular.copy(results, service.currentUser);
-        return results;
+      .then(currentUser => {
+        angular.copy(currentUser, service.currentUser);
+        return currentUser;
       })
       .catch(() => {
         angular.copy({}, service.currentUser);

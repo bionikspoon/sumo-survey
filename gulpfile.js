@@ -78,6 +78,7 @@ gulp.task('browser-sync-reload', [ 'loopback-angular' ], callback => {
 
 gulp.task('nodemon', callback => {
   let started;
+  process.env.STARTED = 'FALSE';
   nodemon({
     script: './',
     watch: [ 'server/**/*', 'common/**/*' ],
@@ -85,6 +86,7 @@ gulp.task('nodemon', callback => {
     .on('start', () => {
       if (!started) {
         started = true;
+        process.env.STARTED = 'TRUE';
         callback();
       }
     })

@@ -1,3 +1,20 @@
-<pre><code>{{$ctrl.question.text}}</code></pre>
+<form name="question" ng-submit="$ctrl.setResponse(question)" novalidate>
+   <h3>{{$ctrl.question.text}}</h3>
+   <div class="radio" ng-repeat="choice in $ctrl.question.choices | orderBy:'order'">
+      <label for="choice-{{$index}}">
+         <input
+            ng-model="question.choiceId"
+            value="{{choice.id}}"
+            type="radio"
+            id="choice-{{$index}}"
+            ng-required="!question.choiceId">
+         {{choice.text}}
+      </label>
+   </div>
+   <button class="btn btn-default" type="submit" ng-disabled="question.$invalid">Submit</button>
+</form>
 
-<pre ng-repeat="choice in $ctrl.question.choices"><code>{{choice.text}}</code></pre>
+<button class="btn btn-primary" ng-click="$ctrl.update()">update</button>
+<pre ng-repeat="question in $ctrl.unanswered"><code>{{question}}</code></pre>
+<!--<pre><code>{{$ctrl.unanswered}}</code></pre>-->
+
