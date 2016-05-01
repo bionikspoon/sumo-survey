@@ -1,6 +1,6 @@
 const loopback = require('loopback');
 
-module.exports = function (app) {
+module.exports = function useIpContext(app) {
   app.use(loopback.context());
   app.use(loopback.token());
   app.use((req, res, next) => {

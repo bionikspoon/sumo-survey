@@ -1,25 +1,24 @@
 {
+  "root": true,
   "env": {
-    "browser": true,
     "es6": true
   },
-  "globals": { "__PRODUCTION__": true },
-  "extends": [ "airbnb-base", "angular" ],
+  "extends": [ "airbnb-base" ],
   "parserOptions": { "sourceType": "module" },
   "settings": {
     "import/resolver": "webpack"
   },
   "rules": {
     "no-use-before-define": [ 2, { "functions": false } ],
-    "array-bracket-spacing": [ 2, "always" ],
+    "no-param-reassign": [ 2, { "props": false } ],
     "no-unused-vars": 1,
+    "no-underscore-dangle": 0,
+    "array-bracket-spacing": [ 2, "always" ],
     "max-len": [ 1, 120 ],
     "computed-property-spacing": [ 2, "always" ],
     "global-require": 0,
     "spaced-comment": [
       2, "always", { "line": { "exceptions": [ "/" ] }, "block": { "exceptions": [ "*" ] } }
-    ],
-    "angular/no-service-method": 0,
-    "angular/log": 1
+    ]
   }
 }

@@ -1,15 +1,16 @@
 const loopback = require('loopback');
 
-module.exports = function (Guest) {
+module.exports = function setupGuest(Guest) {
   /**
    * Find or create a guest with IP meta data.
    * @param {string} fingerprint
    * @param {function(Error, guest)} callback
    * @return {*|Promise.<T>}
    */
-  Guest.findOrCreateWithIp = function (fingerprint, callback) {
-    callback = _callback.bind(null, callback);
+  Guest.findOrCreateWithIp = function findOrCreateWithIp(fingerprint, callback) {
+    callback = _callback.bind(null, callback); // eslint-disable-line no-param-reassign
     const ctx = loopback.getCurrentContext();
+    // noinspection JSAccessibilityCheck
     const ip = ctx ? ctx.get('clientIp') : null;
 
     return Guest.findOrCreate({ fingerprint, ip })
@@ -24,13 +25,13 @@ module.exports = function (Guest) {
    * @param {response} response Response data
    * @param {function(Error, response)} callback
    */
-  Guest.createResponse = function (fingerprint, response, callback) {
-    callback = _callback.bind(null, callback);
+  Guest.createResponse = function createResponse(fingerprint, response, callback) {
+    callback = _callback.bind(null, callback); // eslint-disable-line no-param-reassign
     const { choiceId, questionId } = response;
 
     return Guest.findOrCreateWithIp(fingerprint)
       .then(guest => guest.responses.create({ choiceId, questionId }))
-      .then(response => callback(null, response))
+      .then(data => callback(null, data))
       .catch(callback);
   };
 };
@@ -44,6 +45,7 @@ module.exports = function (Guest) {
  * @private
  */
 function _callback(callback, error, data) {
+  // eslint-disable-next-line no-console
   if (error) console.error('Guest.createResponse ', error);
 
   if (callback) callback(error, data);

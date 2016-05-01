@@ -1,3 +1,3 @@
-module.exports = function(Admin) {
+module.exports = function (Admin) {
 
 };

@@ -1,11 +1,12 @@
-module.exports = function (app, callback) {
+/* eslint no-console:0 */
+module.exports = function createAdmin(app, callback) {
   if (process.env.STARTED === 'TRUE') return callback();
 
   console.log('Creating an Admin...');
 
   const Admin = app.models.Admin;
 
-  Admin
+  return Admin
     .create({ email: 'admin@example.com', password: 'secret' })
     .then(admin => _callback(null, admin))
     .catch(_callback);

@@ -16,7 +16,7 @@
       "default": "50"
     }
   },
-  "validations": [],
+  "validations": [ ],
   "relations": {
     "question": {
       "type": "belongsTo",
@@ -24,6 +24,6 @@
       "foreignKey": "questionId"
     }
   },
-  "acls": [],
-  "methods": {}
+  "acls": [ ],
+  "methods": { }
 }

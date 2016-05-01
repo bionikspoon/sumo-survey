@@ -14,7 +14,7 @@
       "type": "string"
     }
   },
-  "validations": [],
+  "validations": [ ],
   "relations": {
     "responses": {
       "type": "hasMany",
@@ -34,7 +34,7 @@
       "through": "Response"
     }
   },
-  "acls": [],
+  "acls": [ ],
   "methods": {
     "createResponse": {
       "isStatic": true,

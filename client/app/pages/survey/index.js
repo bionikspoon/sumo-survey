@@ -24,7 +24,7 @@ function routeConfig($stateProvider) {
 function SurveyController($log, Guest, Question, question, fingerprint) {
   const $ctrl = this;
   $ctrl.question = question;
-  console.log('fingerprint', fingerprint);
+  $log.debug('SurveyController fingerprint:', fingerprint);
   // $ctrl.unanswered = Guest.getUnanswered({ fingerprint });
 
   $ctrl.update = () => {
@@ -33,7 +33,7 @@ function SurveyController($log, Guest, Question, question, fingerprint) {
 
   $ctrl.setResponse = response => {
     if (response.$invalid) return;
-    response.questionId = question.id; // eslint-disable-line no-param-reassign
+    response.questionId = question.id;
     $log.debug('SurveyController response:', response);
 
     Guest

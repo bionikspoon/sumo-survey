@@ -5,8 +5,8 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
-  "validations": [],
+  "properties": { },
+  "validations": [ ],
   "relations": {
     "questions": {
       "type": "hasMany",
@@ -14,6 +14,6 @@
       "foreignKey": "creatorId"
     }
   },
-  "acls": [],
-  "methods": {}
+  "acls": [ ],
+  "methods": { }
 }

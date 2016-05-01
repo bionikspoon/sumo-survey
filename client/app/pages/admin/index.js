@@ -26,24 +26,24 @@ function AdminController($log, $q, Question) {
   ];
 
   $ctrl.addChoice = (choice, question) => {
-    if (!question.choices) question.choices = []; // eslint-disable-line no-param-reassign
+    if (!question.choices) question.choices = [];
     if (!choice) return;
     if (question.choices.includes(choice)) return;
 
     question.choices.push(angular.copy(choice));
-    question.addChoice.text = ''; // eslint-disable-line no-param-reassign
+    question.addChoice.text = '';
   };
 
   $ctrl.addQuestion = question => {
     if (question.$invalid || question.addChoice.text.length || !question.choices.length) return;
     const { text, choices } = question;
-    console.log('choices', choices);
+    $log.debug('AdminController choices:', choices);
 
     Question.create({ text, choices })
       .$promise
       .then(results => {
-        question.text = ''; // eslint-disable-line no-param-reassign
-        question.choices = []; // eslint-disable-line no-param-reassign
+        question.text = '';
+        question.choices = [];
         question.$setPristine();
         question.$setUntouched();
         return results;

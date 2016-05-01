@@ -11,7 +11,7 @@
       "required": true
     }
   },
-  "validations": [],
+  "validations": [ ],
   "relations": {
     "creator": {
       "type": "belongsTo",
@@ -35,6 +35,6 @@
       "through": "Response"
     }
   },
-  "acls": [],
-  "methods": {}
+  "acls": [ ],
+  "methods": { }
 }

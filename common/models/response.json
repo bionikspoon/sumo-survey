@@ -5,8 +5,8 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": {},
-  "validations": [],
+  "properties": { },
+  "validations": [ ],
   "relations": {
     "question": {
       "type": "belongsTo",
@@ -24,6 +24,6 @@
       "foreignKey": "guestId"
     }
   },
-  "acls": [],
-  "methods": {}
+  "acls": [ ],
+  "methods": { }
 }

@@ -1,9 +1,6 @@
-const loopback = require('loopback');
-
-module.exports = function (app) {
+module.exports = function setupQuestion(app) {
   const Question = app.models.Question;
-  //noinspection JSDuplicatedDeclaration
-  const create = Question.create.bind(Question);
+  const createQuestion = Question.create.bind(Question);
 
   /**
    * Create a new instance of the model and persist it into the data source.
@@ -11,8 +8,8 @@ module.exports = function (app) {
    * @param {function(Error, question)} callback
    */
   Question.create = (data, callback) => {
-    callback = _callback.bind(null, callback);
-    return create(data)
+    callback = _callback.bind(null, callback); // eslint-disable-line no-param-reassign
+    return createQuestion(data)
       .then(question => {
         if (!data.choices) return question;
         return Promise.all(data.choices.map(choice => question.choices.create(choice)))
@@ -20,7 +17,6 @@ module.exports = function (app) {
       })
       .then(question => callback(null, question))
       .catch(callback);
-
   };
 };
 
@@ -33,6 +29,7 @@ module.exports = function (app) {
  * @private
  */
 function _callback(callback, error, data) {
+  // eslint-disable-next-line no-console
   if (error) console.error('Question.create error', error);
 
   if (callback) callback(error, data);

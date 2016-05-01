@@ -4,6 +4,4 @@
 /dist
 /node_modules
 /coverage
-/common
-/server
 /client/loopbackServices

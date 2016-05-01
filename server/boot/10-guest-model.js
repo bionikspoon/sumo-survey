@@ -1,6 +1,6 @@
 const _ = require('lodash/fp');
 
-module.exports = function (app) {
+module.exports = function setupGuest(app) {
   const { Guest, Question } = app.models;
 
   /**
@@ -10,35 +10,33 @@ module.exports = function (app) {
    * @param {function(Error, [question])} callback
    */
 
-  Guest.getUnanswered = function (fingerprint, filter, callback) {
-    callback = _callback.bind(null, callback);
-    let guestId;
+  Guest.getUnanswered = function getUnanswered(fingerprint, filter, callback) {
+    callback = _callback.bind(null, callback); // eslint-disable-line no-param-reassign
 
     return Guest.findOrCreateWithIp(fingerprint)
 
       // get guest id
       .then(guest => {
-        guestId = guest.id;
-        return guest;
-      })
+        const guestId = guest.id;
 
-      // get questions, include responses by guest
-      .then(guest => Question.find(
-        {
-          include: [
-            {
-              relation: 'responses',
-              scope: {
-                where: { guestId },
-                fields: [ 'guestId' ]
-              }
-            },
-            {
-              relation: 'choices'
-            }
-          ]
-        }
-      ))
+        // get questions, include responses by guest
+        return Question.find(
+          {
+            include: [
+              {
+                relation: 'responses',
+                scope: {
+                  where: { guestId },
+                  fields: [ 'guestId' ],
+                },
+              },
+              {
+                relation: 'choices',
+              },
+            ],
+          }
+        );
+      })
 
       // filter questions answered by guest
       .then(questions =>
@@ -46,7 +44,7 @@ module.exports = function (app) {
         Promise.all(questions.map(question =>
             question.responses.count()
               // return question if unanswered else null
-              .then(count => count === 0 ? question : null)
+              .then(count => (count === 0 ? question : null))
           ))
           // remove null values
           .then(_.filter(_.identity))
@@ -63,14 +61,13 @@ module.exports = function (app) {
    * @param {function(Error, question)} callback
    */
 
-  Guest.getUnansweredFindOne = function (fingerprint, callback) {
-    callback = _callback.bind(null, callback);
+  Guest.getUnansweredFindOne = function getUnansweredFindOne(fingerprint, callback) {
+    callback = _callback.bind(null, callback); // eslint-disable-line no-param-reassign
     return Guest.getUnanswered(fingerprint)
-      .then(questions => questions.length ? questions[ 0 ] : {})
+      .then(questions => (questions.length ? questions[ 0 ] : {}))
       .then(response => callback(null, response))
       .catch(callback);
   };
-
 };
 
 /**
@@ -82,6 +79,7 @@ module.exports = function (app) {
  * @private
  */
 function _callback(callback, error, data) {
+  // eslint-disable-next-line no-console
   if (error) console.error('Guest.createResponse ', error);
 
   if (callback) callback(error, data);

@@ -1,4 +1,6 @@
-module.exports = function (app, callback) {
+/* eslint no-console:0 */
+
+module.exports = function createQuestions(app, callback) {
   if (process.env.STARTED === 'TRUE') return callback();
 
   console.log('Creating Questions...');
@@ -25,7 +27,7 @@ module.exports = function (app, callback) {
     'Strongly Agree',
   ];
 
-  Admin.findOne({})
+  return Admin.findOne({})
     .then(admin => {
       const survey = surveyQuestions.map(question => ({
         text: question,
