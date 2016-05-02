@@ -63,7 +63,7 @@ module.exports = function setupGuest(app) {
    */
   Guest.getOneUnanswered = function getOneUnanswered(fingerprint, callback) {
     return Guest.getAllUnanswered(fingerprint)
-      .then(questions => (questions.length ? questions[ 0 ] : {}))
+      .then(questions => (questions.length ? _.sample(questions) : {}))
       .then(promisify(callback, true))
       .catch(promisify(callback));
   };
@@ -71,7 +71,7 @@ module.exports = function setupGuest(app) {
   /**
    * Find or create a guest with IP meta data.
    * @param {string} fingerprint
-   * @param {function(Error, guest)} [callback]
+   * @param {function(Error, *)} [callback]
    * @return {*|Promise.<T>}
    */
   Guest.findOrCreateWithIp = function findOrCreateWithIp(fingerprint, callback) {

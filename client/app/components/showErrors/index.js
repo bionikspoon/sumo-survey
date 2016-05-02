@@ -22,7 +22,7 @@ function ShowErrorsDirective($timeout) {
     const inputEl = angular.element(element[ 0 ].querySelector('[id]'));
 
     inputEl.bind('blur', () => {
-      $timeout(() => element.toggleClass('has-error', hasError(inputEl[ 0 ])), 1);
+      $timeout(() => element.toggleClass('has-error', hasError(inputEl[ 0 ])), 25);
     });
   }
 }

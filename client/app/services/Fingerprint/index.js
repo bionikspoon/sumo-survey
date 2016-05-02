@@ -34,14 +34,12 @@ function FingerprintService($log, $q, LocalStorage) {
 
   ////////////////
   function getFingerprint() {
-    const fingerprint = LocalStorage.get(KEY);
+    // const fingerprint = LocalStorage.get(KEY);
+    const fingerprint = service.fingerprint.id;
     if (fingerprint) return $q.resolve(fingerprint);
 
     const defer = $q.defer();
-    new Fingerprint().get(result => {
-      LocalStorage.set(KEY, result);
-      return defer.resolve(result);
-    });
+    new Fingerprint().get(defer.resolve);
 
     return defer.promise;
   }

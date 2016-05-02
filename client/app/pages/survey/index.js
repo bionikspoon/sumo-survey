@@ -16,31 +16,34 @@ function routeConfig($stateProvider) {
       controllerAs: '$ctrl',
       resolve: {
         fingerprint: /** @ngInject **/Fingerprint => Fingerprint.stream(),
-        question: /** @ngInject **/Question => Question.findOne({ 'filter[include]': 'choices' }).$promise,
       },
     });
 }
 
-function SurveyController($log, Guest, Question, question, fingerprint) {
+function SurveyController($log, $state, Guest, Question, fingerprint) {
   const $ctrl = this;
-  $ctrl.question = question;
-  $log.debug('SurveyController fingerprint:', fingerprint);
-  // $ctrl.unanswered = Guest.getAllUnanswered({ fingerprint });
+  $ctrl.question = Guest.getOneUnanswered({ fingerprint });
+  $ctrl.question.$promise
+    .then(data => {
+      $log.debug('SurveyController data:', data);
+      return data;
+    })
+    .catch(error => {
+      $log.error('SurveyController error:', error);
+    });
 
-  $ctrl.update = () => {
-    $ctrl.unanswered = Guest.getAllUnanswered({ fingerprint });
-  };
+  $ctrl.showForm = () => !angular.equals({}, $ctrl.question);
 
   $ctrl.setResponse = response => {
     if (response.$invalid) return;
-    response.questionId = question.id;
-    $log.debug('SurveyController response:', response);
+    response.questionId = $ctrl.question.id;
 
     Guest
       .createResponse({ fingerprint }, response)
       .$promise
       .then(data => {
         $log.debug('SurveyController data:', data);
+        $state.reload();
         return data;
       })
       .catch(error => {

@@ -1,4 +1,4 @@
-<form name="question" ng-submit="$ctrl.setResponse(question)" novalidate>
+<form name="question" ng-submit="$ctrl.setResponse(question)" ng-show="$ctrl.showForm()" novalidate>
    <h3>{{$ctrl.question.text}}</h3>
    <div class="radio" ng-repeat="choice in $ctrl.question.choices | orderBy:'order'">
       <label for="choice-{{$index}}">
@@ -14,7 +14,7 @@
    <button class="btn btn-default" type="submit" ng-disabled="question.$invalid">Submit</button>
 </form>
 
-<button class="btn btn-primary" ng-click="$ctrl.update()">update</button>
-<pre ng-repeat="question in $ctrl.unanswered"><code>{{question}}</code></pre>
-<!--<pre><code>{{$ctrl.unanswered}}</code></pre>-->
-
+<div ng-hide="$ctrl.showForm()">
+   <h2>You answered all the questions.</h2>
+   <a ui-sref="home" class="btn btn-default">Go Home</a>
+</div>
