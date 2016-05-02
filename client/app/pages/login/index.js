@@ -1,10 +1,10 @@
 import angular from 'angular';
-import wellFocus from 'components/wellFocus';
+import well from 'components/well';
 import showErrors from 'components/showErrors';
 import servicesAuth from 'services/Auth';
 
 export default angular
-  .module('app.page.login', [ wellFocus.name, showErrors.name, servicesAuth.name ])
+  .module('app.page.login', [ well.name, showErrors.name, servicesAuth.name ])
   .config(routeConfig);
 
 /** @ngInject **/

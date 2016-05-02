@@ -1,10 +1,12 @@
-<a title='Home' class="btn btn-dark" id="page-login-home" ui-sref='home'>
-   <i class="material-icons">home</i>
-</a>
+<nav id="page-login-home">
+   <a title='Home' class="btn btn-dark" ui-sref='home'>
+      <i class="material-icons">home</i>
+   </a>
+</nav>
 
 
-<main id="page-login" class="login">
-   <app-well-focus class="login__container container">
+<div id="page-login">
+   <main app-well class="login__container container">
       <h1 class="page-header">Login</h1>
 
       <form name="login" ng-submit="$ctrl.login(login)" novalidate>
@@ -38,5 +40,5 @@
 
          <button type="submit" class="btn btn-dark" ng-disabled="login.$invalid">Login</button>
       </form>
-   </app-well-focus>
-</main>
+   </main>
+</div>

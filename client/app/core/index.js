@@ -6,13 +6,12 @@ import Auth from 'services/Auth';
 import Fingerprint from 'services/Fingerprint';
 
 import navbar from 'components/navbar';
-import footer from 'components/footer';
 import coreConfig from './core.config';
 import CoreController from './core.controller';
 import coreRun from './core.run';
 
 export default angular
-  .module('app.core', [ uiRouter, lbServices, Auth.name, Fingerprint.name, navbar.name, footer.name ])
+  .module('app.core', [ uiRouter, lbServices, Auth.name, Fingerprint.name, navbar.name ])
   .value('$routerRootComponent', 'appCore')
   .run(coreRun)
   .config(coreConfig)

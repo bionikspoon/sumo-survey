@@ -1,17 +1,16 @@
-<main id="page-home" class="home">
-   <div class="home__text-vertical-center container">
+<div id="page-home">
+   <main>
       <h1>Sumo Survey</h1>
       <h3>Premier data collection &amp; survey machine</h3>
       <br>
       <a ui-sref="survey" class="btn btn-dark btn-lg">Get Started</a>
-   </div>
-</main>
-<div id="page-home-menu">
+   </main>
+</div>
+<nav id="page-home-nav">
    <a class="btn btn-dark" title="Logout" ng-if="app.isAuthenticated()" ng-click="app.logout()">
       <i class="material-icons">stop</i>
    </a>
    <a class="btn btn-dark" title="Go to admin dashboard" ui-sref='admin'>
       <i class="material-icons">trending_up</i>
    </a>
-
-</div>
+</nav>

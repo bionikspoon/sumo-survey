@@ -1,40 +1,20 @@
 @import "../../variables";
+@import "../../mixins";
 
 #page-home {
-}
+  @include full-page;
+  background-color: #9c27b0;
 
-.home {
-  height:          100%;
-  min-height:      100%;
-  width:           100%;
-  display:         table;
-  box-shadow:      inset 0 0 100px rgba(0, 0, 0, 0.3);
-  position:        relative;
-  background:      #9c27b0 no-repeat center center scroll;
-  background-size: cover;
-
-  @media (max-width: $screen-xs-max) {
-    box-shadow: none;
-  }
-
-  & &__text-vertical-center {
-    display:        table-cell;
-    text-align:     center;
-    vertical-align: middle;
-    color:          rgba(255, 255, 255, .87);
-    padding:        15px;
-
-    @media (max-width: $screen-xs-max) {
-      padding: 10px;
-    }
+  > main {
+    color: rgba(255, 255, 255, .87);
 
     > h1 {
       margin:         0;
       padding:        0;
-      font-size:      3.75em;
-      letter-spacing: -2px;
       font-weight:    900;
       color:          #ffffff;
+      font-size:      3.75em;
+      letter-spacing: -2px;
 
       @media (max-width: $screen-xs-max) {
         font-size:      3.75em * 0.85;
@@ -43,8 +23,8 @@
     }
 
     > h3 {
-      font-size:  1.75em;
       font-style: italic;
+      font-size:  1.75em;
 
       @media (max-width: $screen-xs-max) {
         font-size: 1.75em * .85;
@@ -53,14 +33,16 @@
   }
 }
 
-#page-home-menu {
+#page-home-nav {
   position: fixed;
   right:    15px;
   bottom:   15px;
-  padding:  3px 6px 1px;
 
   @media (max-width: $screen-xs-max) {
     right:  10px;
     bottom: 10px;
+  }
+  > a {
+    padding: 3px 6px 1px;
   }
 }

@@ -1,16 +1,12 @@
 import angular from 'angular';
 import Fingerprint from 'fingerprintjs2';
 
-import servicesLocalStorage from 'services/LocalStorage';
-
-const KEY = 'fingerprint';
-
 export default angular
-  .module('app.services.Fingerprint', [ servicesLocalStorage.name ])
+  .module('app.services.Fingerprint', [])
   .factory('Fingerprint', FingerprintService);
 
 /** @ngInject **/
-function FingerprintService($log, $q, LocalStorage) {
+function FingerprintService($log, $q) {
   const service = {
     getFingerprint, stream, fingerprint: {},
   };
