@@ -1,8 +1,8 @@
 import angular from 'angular';
-import navAdmin from 'components/navAdmin';
+import NavAdmin from 'components/navAdmin';
 
 export default angular
-  .module('app.page.home', [ navAdmin.name ])
+  .module('app.pages.home', [ NavAdmin.name ])
   .config(routeConfig);
 
 /** @ngInject **/

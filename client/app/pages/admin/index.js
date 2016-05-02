@@ -1,12 +1,13 @@
 import angular from 'angular';
-import clientLoopbackServices from 'client/loopbackServices';
+import pageAdminAdd from './add';
 
 export default angular
-  .module('app.page.admin', [ clientLoopbackServices ])
+  .module('app.pages.admin', [ pageAdminAdd.name ])
   .config(routeConfig);
 
 /** @ngInject **/
-function routeConfig($stateProvider) {
+function routeConfig($stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.when('/admin/', '/admin/add/');
   $stateProvider
     .state('admin', {
       url: '/admin/',
@@ -14,43 +15,15 @@ function routeConfig($stateProvider) {
       controller: AdminController,
       controllerAs: '$ctrl',
       authenticate: true,
+      abstract: true,
     });
 }
 
 /** @ngInject **/
-function AdminController($log, $q, Question) {
+function AdminController() {
   const $ctrl = this;
 
   $ctrl.routes = [
-    { name: 'admin', title: 'Admin' },
+    { name: 'admin.add', title: 'Add Question' },
   ];
-
-  $ctrl.addChoice = (choice, question) => {
-    if (!question.choices) question.choices = [];
-    if (!choice) return;
-    if (question.choices.includes(choice)) return;
-
-    question.choices.push(angular.copy(choice));
-    question.addChoice.text = '';
-  };
-
-  $ctrl.addQuestion = question => {
-    if (question.$invalid || question.addChoice.text.length || !question.choices.length) return;
-    const { text, choices } = question;
-    $log.debug('AdminController choices:', choices);
-
-    Question.create({ text, choices })
-      .$promise
-      .then(results => {
-        question.text = '';
-        question.choices = [];
-        question.$setPristine();
-        question.$setUntouched();
-        return results;
-      })
-      .catch(error => {
-        $log.error('AdminController error: %s\n', error.data.error.message, error);
-        return $q.reject(error);
-      });
-  };
 }

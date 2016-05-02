@@ -1,8 +1,9 @@
 import angular from 'angular';
-import servicesSurvey from 'services/Survey';
+import SurveyServices from 'services/Survey';
+import NavHome from 'components/navHome';
 
 export default angular
-  .module('app.page.survey', [ servicesSurvey.name ])
+  .module('app.pages.survey', [ SurveyServices.name, NavHome.name ])
   .config(routeConfig);
 
 /** @ngInject **/
