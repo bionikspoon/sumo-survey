@@ -1,22 +1,22 @@
+import angular from 'angular';
+import AuthService from 'services/Auth';
+import FingerprintService from 'services/Fingerprint';
+
+export default angular
+  .module('app.core.controller', [ AuthService.name, FingerprintService.name ])
+  .controller('CoreController', CoreController);
+
 /** @ngInject **/
-export default function CoreController(Auth, Fingerprint) {
-  // const app = this;
+function CoreController(Auth, Fingerprint) {
+  const app = this; // eslint-disable-line angular/controller-as-vm
+  app.title = 'CoreController';
 
-  // app.currentUser = Auth.currentUser;
-  Auth.streamCurrentUser();
+  activate();
 
-  // app.fingerprint = Fingerprint.fingerprint;
-  Fingerprint.stream();
+  ////////////////
 
-  // app.isAuthenticated = () => Auth.isAuthenticated();
-
-  // app.login = () =>
-  //   Auth
-  //     .login({ email: 'admin@example.com', password: 'secret' })
-  //     .catch($log.error);
-  //
-  // app.logout = () =>
-  //   Auth
-  //     .logout()
-  //     .catch($log.error);
+  function activate() {
+    Auth.streamCurrentUser();
+    Fingerprint.stream();
+  }
 }

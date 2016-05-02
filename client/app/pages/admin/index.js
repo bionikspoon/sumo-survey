@@ -1,8 +1,9 @@
 import angular from 'angular';
 import pageAdminAdd from './add';
+import navbar from 'components/navbar';
 
 export default angular
-  .module('app.pages.admin', [ pageAdminAdd.name ])
+  .module('app.pages.admin', [ pageAdminAdd.name, navbar.name ])
   .config(routeConfig);
 
 /** @ngInject **/
@@ -23,7 +24,13 @@ function routeConfig($stateProvider, $urlRouterProvider) {
 function AdminController() {
   const $ctrl = this;
 
-  $ctrl.routes = [
-    { name: 'admin.add', title: 'Add Question' },
-  ];
+  activate();
+
+  ////////////////
+
+  function activate() {
+    $ctrl.routes = [
+      { name: 'admin', title: 'Admin' },
+    ];
+  }
 }

@@ -1,7 +1,13 @@
 import angular from 'angular';
+import AuthService from 'services/Auth';
+import uiRouter from 'angular-ui-router';
+
+export default angular
+  .module('app.core.run', [ uiRouter, AuthService.name ])
+  .run(coreRun);
 
 /** @ngInject **/
-export default function coreRun($rootScope, $state, Auth) {
+function coreRun($rootScope, $state, Auth) {
   const unregister = $rootScope.$on('$stateChangeStart', guardRoute);
   $rootScope.$on('$destroy', () => unregister());
 
