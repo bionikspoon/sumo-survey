@@ -23,6 +23,12 @@ function routeConfig($stateProvider) {
 
 /** @ngInject **/
 function DoneController($state, question) {
-  if (angular.isDefined(question.text)) return $state.go('survey');
+  activate();
+
+  ////////////////
+
+  function activate() {
+    if (angular.isDefined(question.text)) $state.go('survey');
+  }
 }
 

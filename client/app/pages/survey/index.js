@@ -22,10 +22,18 @@ function routeConfig($stateProvider) {
 }
 
 function SurveyController($log, $state, Survey, question) {
-  if (angular.isUndefined(question.text)) return $state.transitionTo('done');
-
   const $ctrl = this;
   $ctrl.question = question;
+
+  activate();
+
+  ////////////////
+
+  function activate() {
+    if (angular.isUndefined($ctrl.question.text)) $state.transitionTo('done');
+  }
+
+  ////////////////
 
   $ctrl.setResponse = response => {
     if (response.$invalid) return;
