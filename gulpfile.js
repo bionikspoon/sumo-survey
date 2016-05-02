@@ -46,7 +46,7 @@ gulp.task('loopback-angular', () => gulp
   .src(PATHS.server('server.js'))
   .pipe(loopbackAngular())
   .pipe(rename('index.js'))
-  .pipe(gulp.dest(PATHS.src('loopbackServices')))
+  .pipe(gulp.dest(PATHS.src('lbServices')))
 );
 
 gulp.task('browser-sync', callback => {

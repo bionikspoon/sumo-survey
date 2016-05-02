@@ -3,10 +3,9 @@ import ngAnimate from 'angular-animate';
 import ngTouch from 'angular-touch';
 import ngResource from 'angular-resource';
 import uiRouter from 'angular-ui-router';
-
 import appCore from 'core';
 import appPages from 'pages';
-import lbServices from 'client/loopbackServices';
+import lbServices from 'client/lbServices';
 
 export default angular
   .module('app', [

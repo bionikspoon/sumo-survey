@@ -1,6 +1,5 @@
 import angular from 'angular';
-
-import lbServices from 'client/loopbackServices';
+import lbServices from 'client/lbServices';
 
 export default angular
   .module('app.services.auth', [ lbServices ])

@@ -1,9 +1,9 @@
 import angular from 'angular';
-import lbServices from 'client/loopbackServices';
-import servicesFingerprint from 'services/Fingerprint';
+import lbServices from 'client/lbServices';
+import FingerprintService from 'services/Fingerprint';
 
 export default angular
-  .module('app.services.survey', [ lbServices, servicesFingerprint.name ])
+  .module('app.services.survey', [ lbServices, FingerprintService.name ])
   .factory('Survey', Survey);
 
 /** @ngInject **/
@@ -15,17 +15,13 @@ function Survey($log, Guest, Fingerprint) {
 
   function question() {
     return Fingerprint.stream()
-      .then(fingerprint => {
-        return Guest.getOneUnanswered({ fingerprint }).$promise;
-      });
+      .then(fingerprint => Guest.getOneUnanswered({ fingerprint }).$promise);
   }
 
   function answer(response) {
     return Fingerprint.stream()
-      .then(fingerprint => {
-        return Guest
-          .createResponse({ fingerprint }, response)
-          .$promise;
-      });
+      .then(fingerprint => Guest
+        .createResponse({ fingerprint }, response)
+        .$promise);
   }
 }

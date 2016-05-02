@@ -2,7 +2,7 @@ import angular from 'angular';
 
 // well
 export default angular
-  .module('app.component.well', [])
+  .module('app.components.well', [])
   .directive('appWell', WellDirective);
 
 /** @ngInject **/

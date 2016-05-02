@@ -1,3 +1,5 @@
+import angular from 'angular';
+
 /** @ngInject **/
 export default function coreRun($rootScope, $state, Auth) {
   const unregister = $rootScope.$on('$stateChangeStart', guardRoute);

@@ -1,8 +1,8 @@
 import angular from 'angular';
-import NavAdmin from 'components/navAdmin';
+import navAdmin from 'components/navAdmin';
 
 export default angular
-  .module('app.pages.home', [ NavAdmin.name ])
+  .module('app.pages.home', [ navAdmin.name ])
   .config(routeConfig);
 
 /** @ngInject **/
@@ -17,8 +17,6 @@ function routeConfig($stateProvider) {
 }
 
 function HomeController(Auth) {
-  const $ctrl = this;
-
-  $ctrl.logout = () => Auth.logout();
+  // const $ctrl = this;
 }
 

@@ -1,17 +1,14 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import lbServices from 'client/loopbackServices';
-
-import Auth from 'services/Auth';
-import Fingerprint from 'services/Fingerprint';
-
-import navbar from 'components/navbar';
-import coreConfig from './core.config';
+import lbServices from 'client/lbServices';
+import AuthService from 'services/Auth';
+import FingerprintService from 'services/Fingerprint';
 import CoreController from './core.controller';
+import coreConfig from './core.config';
 import coreRun from './core.run';
 
 export default angular
-  .module('app.core', [ uiRouter, lbServices, Auth.name, Fingerprint.name, navbar.name ])
+  .module('app.core', [ uiRouter, lbServices, AuthService.name, FingerprintService.name ])
   .value('$routerRootComponent', 'appCore')
   .run(coreRun)
   .config(coreConfig)

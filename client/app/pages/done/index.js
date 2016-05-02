@@ -1,9 +1,9 @@
 import angular from 'angular';
 import SurveyServices from 'services/Survey';
-import NavAdmin from 'components/navAdmin';
+import navAdmin from 'components/navAdmin';
 
 export default angular
-  .module('app.pages.done', [ SurveyServices.name, NavAdmin.name ])
+  .module('app.pages.done', [ SurveyServices.name, navAdmin.name ])
   .config(routeConfig);
 
 /** @ngInject **/
