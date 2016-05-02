@@ -9,7 +9,7 @@ export default angular
 /** @ngInject **/
 function CoreController(Auth, Fingerprint) {
   const app = this; // eslint-disable-line angular/controller-as-vm
-  app.title = 'CoreController';
+  app.name = 'CoreController';
 
   activate();
 

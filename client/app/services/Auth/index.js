@@ -14,12 +14,14 @@ function Auth($log, $q, Admin, LoopBackAuth) {
   ////////////////
 
   function login({ email, password, rememberMe }) {
-    return Admin.login({ rememberMe }, { email, password }).$promise
+    return Admin.login({ rememberMe }, { email, password })
+      .$promise
       .finally(streamCurrentUser);
   }
 
   function logout() {
-    return Admin.logout().$promise
+    return Admin.logout()
+      .$promise
       .finally(streamCurrentUser);
   }
 
@@ -27,11 +29,11 @@ function Auth($log, $q, Admin, LoopBackAuth) {
     return getCurrentUser()
       .then(currentUser => {
         angular.copy(currentUser, service.currentUser);
-        return currentUser;
+        return service.currentUser;
       })
       .catch(() => {
         angular.copy({}, service.currentUser);
-        return {};
+        return service.currentUser;
       });
   }
 

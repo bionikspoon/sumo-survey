@@ -1,9 +1,10 @@
 import angular from 'angular';
+import uiRouter from 'angular-ui-router';
 import SurveyServices from 'services/Survey';
 import navHome from 'components/navHome';
 
 export default angular
-  .module('app.pages.survey', [ SurveyServices.name, navHome.name ])
+  .module('app.pages.survey', [ uiRouter, SurveyServices.name, navHome.name ])
   .config(routeConfig);
 
 /** @ngInject **/
@@ -33,7 +34,6 @@ function SurveyController($log, $state, Survey, question) {
     Survey
       .answer(response)
       .then(data => {
-        $log.debug('SurveyController data:', data);
         $state.reload();
         return data;
       })

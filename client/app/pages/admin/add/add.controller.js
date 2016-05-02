@@ -1,15 +1,14 @@
 import angular from 'angular';
+import uiRouter from 'angular-ui-router';
 import lbServices from 'client/lbServices';
 
 export default angular
-  .module('app.pages.admin.add.controller', [ lbServices ])
+  .module('app.pages.admin.add.controller', [ uiRouter, lbServices ])
   .controller('AddController', AddController);
 
 /** @ngInject **/
 function AddController($log, $state, $q, Question) {
   const $ctrl = this;
-  $ctrl.title = 'AddController';
-
 
   ////////////////
 
