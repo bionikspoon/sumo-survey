@@ -25,10 +25,10 @@ function SurveyController($log, Guest, Question, question, fingerprint) {
   const $ctrl = this;
   $ctrl.question = question;
   $log.debug('SurveyController fingerprint:', fingerprint);
-  // $ctrl.unanswered = Guest.getUnanswered({ fingerprint });
+  // $ctrl.unanswered = Guest.getAllUnanswered({ fingerprint });
 
   $ctrl.update = () => {
-    $ctrl.unanswered = Guest.getUnanswered({ fingerprint });
+    $ctrl.unanswered = Guest.getAllUnanswered({ fingerprint });
   };
 
   $ctrl.setResponse = response => {

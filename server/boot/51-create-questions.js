@@ -1,4 +1,5 @@
 /* eslint no-console:0 */
+const promisify = require('../utils/promisify');
 
 module.exports = function createQuestions(app, callback) {
   if (process.env.STARTED === 'TRUE') return callback();
@@ -8,6 +9,21 @@ module.exports = function createQuestions(app, callback) {
   const Question = app.models.Question;
   const Admin = app.models.Admin;
 
+  return Admin.findOne({})
+    .then(admin => Promise.all(
+      getSurvey(admin).map(question => Question.create(question))
+    ))
+    .then(logResults)
+    .then(promisify(callback, true))
+    .catch(promisify(callback));
+};
+
+function logResults(questions) {
+  console.log('Created %d Questions', questions.length);
+  return questions;
+}
+
+function getSurvey(admin) {
   // Satisfaction with life survey
   // credit: https://ppc.sas.upenn.edu/sites/ppc.sas.upenn.edu/files/lifesatisfactionscale.pdf
   const surveyQuestions = [
@@ -27,24 +43,10 @@ module.exports = function createQuestions(app, callback) {
     'Strongly Agree',
   ];
 
-  return Admin.findOne({})
-    .then(admin => {
-      const survey = surveyQuestions.map(question => ({
-        text: question,
-        choices: surveyAnswers.map((text, order) => ({ text, order })),
-        creator: admin,
-      }));
-      return Promise.all(survey.map(question => Question.create(question)));
-    })
-    .then(data => _callback(null, data))
-    .catch(_callback);
+  return surveyQuestions.map(question => ({
+    text: question,
+    choices: surveyAnswers.map((text, order) => ({ text, order })),
+    creator: admin,
+  }));
+}
 
-  function _callback(error, data) {
-    if (error) console.error('create-surveyQuestions error', error);
-
-    console.log('Created %d Questions', data.length);
-
-    if (callback) callback(error, data);
-    return error ? Promise.reject(error) : Promise.resolve(data);
-  }
-};

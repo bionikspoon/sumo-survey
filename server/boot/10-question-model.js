@@ -1,3 +1,5 @@
+const promisify = require('../utils/promisify');
+
 module.exports = function setupQuestion(app) {
   const Question = app.models.Question;
   const createQuestion = Question.create.bind(Question);
@@ -8,30 +10,13 @@ module.exports = function setupQuestion(app) {
    * @param {function(Error, question)} callback
    */
   Question.create = (data, callback) => {
-    callback = _callback.bind(null, callback); // eslint-disable-line no-param-reassign
     return createQuestion(data)
       .then(question => {
         if (!data.choices) return question;
         return Promise.all(data.choices.map(choice => question.choices.create(choice)))
           .then(() => question);
       })
-      .then(question => callback(null, question))
-      .catch(callback);
+      .then(promisify(callback, true))
+      .catch(promisify(callback));
   };
 };
-
-/**
- * Promisify callback.
- * @param callback
- * @param {Error} error
- * @param {question} data
- * @returns {Promise}
- * @private
- */
-function _callback(callback, error, data) {
-  // eslint-disable-next-line no-console
-  if (error) console.error('Question.create error', error);
-
-  if (callback) callback(error, data);
-  return error ? Promise.reject(error) : Promise.resolve(data);
-}

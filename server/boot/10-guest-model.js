@@ -1,4 +1,6 @@
+const loopback = require('loopback');
 const _ = require('lodash/fp');
+const promisify = require('../utils/promisify');
 
 module.exports = function setupGuest(app) {
   const { Guest, Question } = app.models;
@@ -9,10 +11,7 @@ module.exports = function setupGuest(app) {
    * @param {object} filter Filter results
    * @param {function(Error, [question])} callback
    */
-
-  Guest.getUnanswered = function getUnanswered(fingerprint, filter, callback) {
-    callback = _callback.bind(null, callback); // eslint-disable-line no-param-reassign
-
+  Guest.getAllUnanswered = function getAllUnanswered(fingerprint, filter, callback) {
     return Guest.findOrCreateWithIp(fingerprint)
 
       // get guest id
@@ -51,8 +50,8 @@ module.exports = function setupGuest(app) {
       )
 
       // return unanswered questions
-      .then(response => callback(null, response))
-      .catch(callback);
+      .then(promisify(callback, true))
+      .catch(promisify(callback));
   };
 
   /**
@@ -61,27 +60,42 @@ module.exports = function setupGuest(app) {
    * @param {function(Error, question)} callback
    */
 
-  Guest.getUnansweredFindOne = function getUnansweredFindOne(fingerprint, callback) {
-    callback = _callback.bind(null, callback); // eslint-disable-line no-param-reassign
-    return Guest.getUnanswered(fingerprint)
+  Guest.getOneUnanswered = function getOneUnanswered(fingerprint, callback) {
+    return Guest.getAllUnanswered(fingerprint)
       .then(questions => (questions.length ? questions[ 0 ] : {}))
-      .then(response => callback(null, response))
-      .catch(callback);
+      .then(promisify(callback, true))
+      .catch(promisify(callback));
+  };
+
+  /**
+   * Find or create a guest with IP meta data.
+   * @param {string} fingerprint
+   * @param {function(Error, guest)} callback
+   * @return {*|Promise.<T>}
+   */
+  Guest.findOrCreateWithIp = function findOrCreateWithIp(fingerprint, callback) {
+    const ctx = loopback.getCurrentContext();
+    // noinspection JSAccessibilityCheck
+    const ip = ctx ? ctx.get('clientIp') : null;
+
+    return Guest.findOrCreate({ fingerprint, ip })
+      .then(data => data[ 0 ])
+      .then(promisify(callback, true))
+      .catch(promisify(callback));
+  };
+
+  /**
+   * Create a guest response.
+   * @param {string} fingerprint
+   * @param {response} response Response data
+   * @param {function(Error, response)} callback
+   */
+  Guest.createResponse = function createResponse(fingerprint, response, callback) {
+    const { choiceId, questionId } = response;
+
+    return Guest.findOrCreateWithIp(fingerprint)
+      .then(guest => guest.responses.create({ choiceId, questionId }))
+      .then(promisify(callback, true))
+      .catch(promisify(callback));
   };
 };
-
-/**
- * Promisify callback.
- * @param {function(Error, *)}callback
- * @param {Error} error
- * @param {*} data
- * @returns {Promise}
- * @private
- */
-function _callback(callback, error, data) {
-  // eslint-disable-next-line no-console
-  if (error) console.error('Guest.createResponse ', error);
-
-  if (callback) callback(error, data);
-  return error ? Promise.reject(error) : Promise.resolve(data);
-}

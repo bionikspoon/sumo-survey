@@ -6535,7 +6535,7 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Guest#getUnanswered
+         * @name lbServices.Guest#getAllUnanswered
          * @methodOf lbServices.Guest
          *
          * @description
@@ -6545,8 +6545,6 @@ module.factory(
          * @param {Object=} parameters Request parameters.
          *
          *  - `fingerprint` – `{string}` - Guest fingerprint
-         *
-         *  - `filter` – `{object=}` - Filter results
          *
          * @param {function(Array.<Object>,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -6560,7 +6558,7 @@ module.factory(
          *
          * Unanswered questions for quest
          */
-        "getUnanswered": {
+        "getAllUnanswered": {
           isArray: true,
           url: urlBase + "/Guests/:fingerprint/questions/unanswered",
           method: "GET"
@@ -6568,7 +6566,7 @@ module.factory(
 
         /**
          * @ngdoc method
-         * @name lbServices.Guest#getUnansweredFindOne
+         * @name lbServices.Guest#getOneUnanswered
          * @methodOf lbServices.Guest
          *
          * @description
@@ -6591,7 +6589,7 @@ module.factory(
          *
          * Unanswered question
          */
-        "getUnansweredFindOne": {
+        "getOneUnanswered": {
           url: urlBase + "/Guests/:fingerprint/questions/unanswered/findOne",
           method: "GET"
         },

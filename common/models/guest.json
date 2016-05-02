@@ -74,7 +74,7 @@
         }
       ]
     },
-    "getUnanswered": {
+    "getAllUnanswered": {
       "isStatic": true,
       "accepts": [
         {
@@ -84,15 +84,6 @@
           "description": "Guest fingerprint",
           "http": {
             "source": "path"
-          }
-        },
-        {
-          "arg": "filter",
-          "type": "object",
-          "required": false,
-          "description": "Filter results",
-          "http": {
-            "source": "query"
           }
         }
       ],
@@ -112,7 +103,7 @@
         }
       ]
     },
-    "getUnansweredFindOne": {
+    "getOneUnanswered": {
       "isStatic": true,
       "accepts": [
         {
