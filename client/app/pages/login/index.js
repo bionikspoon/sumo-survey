@@ -1,10 +1,11 @@
 import angular from 'angular';
 import well from 'components/well';
 import showErrors from 'components/showErrors';
+import navHome from 'components/navHome';
 import servicesAuth from 'services/Auth';
 
 export default angular
-  .module('app.page.login', [ well.name, showErrors.name, servicesAuth.name ])
+  .module('app.page.login', [ well.name, showErrors.name, servicesAuth.name, navHome.name ])
   .config(routeConfig);
 
 /** @ngInject **/

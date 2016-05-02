@@ -1,20 +1,20 @@
-<form name="question" ng-submit="$ctrl.setResponse(question)" ng-show="$ctrl.showForm()" novalidate>
-   <h3>{{$ctrl.question.text}}</h3>
-   <div class="radio" ng-repeat="choice in $ctrl.question.choices | orderBy:'order'">
-      <label for="choice-{{$index}}">
-         <input
-            ng-model="question.choiceId"
-            value="{{choice.id}}"
-            type="radio"
-            id="choice-{{$index}}"
-            ng-required="!question.choiceId">
-         {{choice.text}}
-      </label>
-   </div>
-   <button class="btn btn-default" type="submit" ng-disabled="question.$invalid">Submit</button>
-</form>
-
-<div ng-hide="$ctrl.showForm()">
-   <h2>You answered all the questions.</h2>
-   <a ui-sref="home" class="btn btn-default">Go Home</a>
+<div id="page-survey">
+   <main app-well class="container">
+      <form name="question" ng-submit="$ctrl.setResponse(question)" ng-show="$ctrl.question.text" novalidate>
+         <h2>{{$ctrl.question.text}}</h2>
+         <div class="radio" ng-repeat="choice in $ctrl.question.choices | orderBy:'order'">
+            <label for="choice-{{$index}}">
+               <input
+                  ng-model="question.choiceId"
+                  value="{{choice.id}}"
+                  type="radio"
+                  id="choice-{{$index}}"
+                  ng-required="!question.choiceId">
+               {{choice.text}}
+            </label>
+         </div>
+         <button class="btn btn-default" type="submit" ng-disabled="question.$invalid">Submit</button>
+      </form>
+   </main>
 </div>
+

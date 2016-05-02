@@ -211,7 +211,7 @@ function getPlugins(env) {
 
   switch (env) {
     case DEVELOPMENT:
-      plugins.push(new NpmInstallPlugin({ saveDev: true }));
+      // plugins.push(new NpmInstallPlugin({ saveDev: true }));
       plugins.push(new webpack.HotModuleReplacementPlugin());
       plugins.push(new webpack.NoErrorsPlugin());
       plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] }));

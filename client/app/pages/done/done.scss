@@ -1,0 +1,14 @@
+@import "../../variables";
+@import "../../mixins";
+
+#page-done {
+  @include full-page;
+  background-color: #ff9800;
+  > main {
+    color:      #ffffff;
+    text-align: center;
+
+    > h1 { @include title; }
+    > h2 { @include sub-title; }
+  }
+}

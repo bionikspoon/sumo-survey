@@ -1,0 +1,18 @@
+@import "../../mixins";
+
+#page-survey {
+  @include full-page;
+  background-color: #607d8b;
+  > main {
+    color: rgba(255, 255, 255, .87);
+    form {
+      > h2 {
+        @include sub-title;
+        font-size: 24px;
+      }
+      .radio > label {
+        font-size: 18px;
+      }
+    }
+  }
+}

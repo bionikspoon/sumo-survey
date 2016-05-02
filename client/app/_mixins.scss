@@ -14,7 +14,6 @@
 
   > main  {
     display:        table-cell;
-    text-align:     center;
     vertical-align: middle;
     padding:        15px;
 
@@ -22,5 +21,27 @@
       padding: 10px;
     }
   }
+}
 
+@mixin title {
+  margin:         0;
+  padding:        0;
+  font-weight:    900;
+  color:          #ffffff;
+  font-size:      3.75em;
+  letter-spacing: -2px;
+
+  @media (max-width: $screen-xs-max) {
+    font-size:      3.75em * 0.85;
+    letter-spacing: -2px * 0.85;
+  }
+}
+
+@mixin sub-title {
+  font-style: italic;
+  font-size:  1.75em;
+
+  @media (max-width: $screen-xs-max) {
+    font-size: 1.75em * .85;
+  }
 }

@@ -6,43 +6,15 @@
   background-color: #9c27b0;
 
   > main {
-    color: rgba(255, 255, 255, .87);
+    color:      rgba(255, 255, 255, .87);
+    text-align: center;
 
     > h1 {
-      margin:         0;
-      padding:        0;
-      font-weight:    900;
-      color:          #ffffff;
-      font-size:      3.75em;
-      letter-spacing: -2px;
-
-      @media (max-width: $screen-xs-max) {
-        font-size:      3.75em * 0.85;
-        letter-spacing: -2px * 0.85;
-      }
+      @include title;
     }
 
-    > h3 {
-      font-style: italic;
-      font-size:  1.75em;
-
-      @media (max-width: $screen-xs-max) {
-        font-size: 1.75em * .85;
-      }
+    > h2 {
+      @include sub-title;
     }
-  }
-}
-
-#page-home-nav {
-  position: fixed;
-  right:    15px;
-  bottom:   15px;
-
-  @media (max-width: $screen-xs-max) {
-    right:  10px;
-    bottom: 10px;
-  }
-  > a {
-    padding: 3px 6px 1px;
   }
 }

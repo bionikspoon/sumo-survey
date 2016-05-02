@@ -1,9 +1,8 @@
 import angular from 'angular';
-import srcLoopbackServices from 'client/loopbackServices';
-import servicesFingerprint from 'services/Fingerprint';
+import servicesSurvey from 'services/Survey';
 
 export default angular
-  .module('app.page.survey', [ srcLoopbackServices, servicesFingerprint.name ])
+  .module('app.page.survey', [ servicesSurvey.name ])
   .config(routeConfig);
 
 /** @ngInject **/
@@ -15,32 +14,23 @@ function routeConfig($stateProvider) {
       controller: SurveyController,
       controllerAs: '$ctrl',
       resolve: {
-        fingerprint: /** @ngInject **/Fingerprint => Fingerprint.stream(),
+        question: /** @ngInject **/Survey => Survey.question(),
       },
     });
 }
 
-function SurveyController($log, $state, Guest, Question, fingerprint) {
-  const $ctrl = this;
-  $ctrl.question = Guest.getOneUnanswered({ fingerprint });
-  $ctrl.question.$promise
-    .then(data => {
-      $log.debug('SurveyController data:', data);
-      return data;
-    })
-    .catch(error => {
-      $log.error('SurveyController error:', error);
-    });
+function SurveyController($log, $state, Survey, question) {
+  if (angular.isUndefined(question.text)) return $state.transitionTo('done');
 
-  $ctrl.showForm = () => !angular.equals({}, $ctrl.question);
+  const $ctrl = this;
+  $ctrl.question = question;
 
   $ctrl.setResponse = response => {
     if (response.$invalid) return;
     response.questionId = $ctrl.question.id;
 
-    Guest
-      .createResponse({ fingerprint }, response)
-      .$promise
+    Survey
+      .answer(response)
       .then(data => {
         $log.debug('SurveyController data:', data);
         $state.reload();

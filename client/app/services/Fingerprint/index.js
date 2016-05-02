@@ -2,13 +2,13 @@ import angular from 'angular';
 import Fingerprint from 'fingerprintjs2';
 
 export default angular
-  .module('app.services.Fingerprint', [])
+  .module('app.services.fingerprint', [])
   .factory('Fingerprint', FingerprintService);
 
 /** @ngInject **/
 function FingerprintService($log, $q) {
   const service = {
-    getFingerprint, stream, fingerprint: {},
+    stream, fingerprint: {},
   };
   return service;
 

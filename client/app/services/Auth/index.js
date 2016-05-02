@@ -3,7 +3,7 @@ import angular from 'angular';
 import lbServices from 'client/loopbackServices';
 
 export default angular
-  .module('app.Auth', [ lbServices ])
+  .module('app.services.auth', [ lbServices ])
   .factory('Auth', Auth);
 
 /** @ngInject **/
