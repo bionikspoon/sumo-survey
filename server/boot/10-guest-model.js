@@ -8,8 +8,9 @@ module.exports = function setupGuest(app) {
   /**
    * Get unanswered questions
    * @param {string} fingerprint Guest fingerprint
-   * @param {object} filter Filter results
-   * @param {function(Error, [question])} callback
+   * @param {object} [filter] Filter results
+   * @param {function(Error, [question])} [callback]
+   * @returns {*|Promise.<T>}
    */
   Guest.getAllUnanswered = function getAllUnanswered(fingerprint, filter, callback) {
     return Guest.findOrCreateWithIp(fingerprint)
@@ -57,9 +58,9 @@ module.exports = function setupGuest(app) {
   /**
    * Get one unanswered question
    * @param {string} fingerprint Guest fingerprint
-   * @param {function(Error, question)} callback
+   * @param {function(Error, question)} [callback]
+   * @returns {*}
    */
-
   Guest.getOneUnanswered = function getOneUnanswered(fingerprint, callback) {
     return Guest.getAllUnanswered(fingerprint)
       .then(questions => (questions.length ? questions[ 0 ] : {}))
@@ -70,7 +71,7 @@ module.exports = function setupGuest(app) {
   /**
    * Find or create a guest with IP meta data.
    * @param {string} fingerprint
-   * @param {function(Error, guest)} callback
+   * @param {function(Error, guest)} [callback]
    * @return {*|Promise.<T>}
    */
   Guest.findOrCreateWithIp = function findOrCreateWithIp(fingerprint, callback) {
@@ -88,7 +89,8 @@ module.exports = function setupGuest(app) {
    * Create a guest response.
    * @param {string} fingerprint
    * @param {response} response Response data
-   * @param {function(Error, response)} callback
+   * @param {function(Error, response)} [callback]
+   * @return {*}
    */
   Guest.createResponse = function createResponse(fingerprint, response, callback) {
     const { choiceId, questionId } = response;

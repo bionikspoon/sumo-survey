@@ -7,9 +7,10 @@ module.exports = function setupQuestion(app) {
   /**
    * Create a new instance of the model and persist it into the data source.
    * @param {question} data Model instance data
-   * @param {function(Error, question)} callback
+   * @param {function(Error, question)} [callback]
+   * @return {*|Promise.<T>}
    */
-  Question.create = (data, callback) => {
+  Question.create = function create(data, callback) {
     return createQuestion(data)
       .then(question => {
         if (!data.choices) return question;
