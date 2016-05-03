@@ -1,24 +1,54 @@
 const loopback = require('loopback');
 const _ = require('lodash/fp');
-const promisify = require('../../utils/promisify');
 const app = require('../../server/server');
 
 module.exports = function setup(Guest) {
-  const { Question } = app.models;
+  Guest.observe('access', includeClientIp);
+  Guest.createResponse = createResponse;
+  Guest.getAllUnanswered = getAllUnanswered;
+  Guest.getOneUnanswered = getOneUnanswered;
+
+  /**
+   * Include client ip in query
+   * @param {object} context
+   * @param {function} next
+   * @returns {null}
+   */
+  function includeClientIp(context, next) {
+    if (!context.query.where || context.query.where.ip !== undefined) return next();
+
+    Object.assign(context.query.where, { ip: getClientIp() });
+    return next();
+  }
+
+  /**
+   * Create a guest response.
+   * @param {string} fingerprint
+   * @param {response} response Response data
+   * @return {*}
+   */
+  function createResponse(fingerprint, response) {
+    const { choiceId, questionId } = response;
+
+    return Guest.findOrCreate({ fingerprint })
+      .then(data => data[ 0 ])
+      .then(guest => guest.responses.create({ choiceId, questionId }));
+  }
 
   /**
    * Get unanswered questions
    * @param {string} fingerprint Guest fingerprint
    * @param {object} [filter] Filter results
-   * @param {function(Error, [question])} [callback]
    * @returns {*|Promise.<T>}
    */
-  Guest.getAllUnanswered = function getAllUnanswered(fingerprint, filter, callback) {
-    return Guest.findOrCreateWithIp(fingerprint)
+  function getAllUnanswered(fingerprint, filter) {
+    const { Question } = app.models;
+    return Guest.findOrCreate({ fingerprint })
+      .then(data => data[ 0 ])
 
       // get guest id
       .then(guest => {
-        const guestId = guest.id;
+        const guestId = guest.id.fingerprint;
 
         // get questions, include responses by guest
         return Question.find(
@@ -36,56 +66,26 @@ module.exports = function setup(Guest) {
         );
       })
       // filter questions answered by guest
-      .then(questions => questions.filter(question => !question.responses().length))
-
-      // return unanswered questions
-      .then(promisify(callback, true))
-      .catch(promisify(callback));
-  };
+      .then(questions => questions.filter(question => !question.responses().length));
+  }
 
   /**
    * Get one unanswered question
    * @param {string} fingerprint Guest fingerprint
-   * @param {function(Error, question)} [callback]
    * @returns {*}
    */
-  Guest.getOneUnanswered = function getOneUnanswered(fingerprint, callback) {
+  function getOneUnanswered(fingerprint) {
     return Guest.getAllUnanswered(fingerprint)
-      .then(questions => (questions.length ? _.sample(questions) : {}))
-      .then(promisify(callback, true))
-      .catch(promisify(callback));
-  };
-
-  /**
-   * Find or create a guest with IP meta data.
-   * @param {string} fingerprint
-   * @param {function(Error, *)} [callback]
-   * @return {*|Promise.<T>}
-   */
-  Guest.findOrCreateWithIp = function findOrCreateWithIp(fingerprint, callback) {
-    const ctx = loopback.getCurrentContext();
-    // noinspection JSAccessibilityCheck
-    const ip = ctx ? ctx.get('clientIp') : null;
-
-    return Guest.findOrCreate({ fingerprint, ip })
-      .then(data => data[ 0 ])
-      .then(promisify(callback, true))
-      .catch(promisify(callback));
-  };
-
-  /**
-   * Create a guest response.
-   * @param {string} fingerprint
-   * @param {response} response Response data
-   * @param {function(Error, response)} [callback]
-   * @return {*}
-   */
-  Guest.createResponse = function createResponse(fingerprint, response, callback) {
-    const { choiceId, questionId } = response;
-
-    return Guest.findOrCreateWithIp(fingerprint)
-      .then(guest => guest.responses.create({ choiceId, questionId }))
-      .then(promisify(callback, true))
-      .catch(promisify(callback));
-  };
+      .then(questions => (questions.length ? _.sample(questions) : {}));
+  }
 };
+
+/**
+ * Get current request client ip
+ * @returns {string} client ip
+ */
+function getClientIp() {
+  const ctx = loopback.getCurrentContext();
+  // noinspection JSAccessibilityCheck
+  return ctx ? ctx.get('clientIp') : '0.0.0.0';
+}

@@ -10,9 +10,10 @@ module.exports = function createQuestions(app, callback) {
   const Admin = app.models.Admin;
 
   return Admin.findOne({})
-    .then(admin => Promise.all(
-      getSurvey(admin).map(question => Question.create(question))
-    ))
+    .then(admin => getSurvey(admin))
+    .then(questions => Promise.all(questions.map(
+      question => Question.createWithChoices(question)
+    )))
     .then(logResults)
     .then(promisify(callback, true))
     .catch(promisify(callback));
@@ -20,6 +21,11 @@ module.exports = function createQuestions(app, callback) {
 
 function logResults(questions) {
   console.log('Created %d Questions', questions.length);
+  console.log(
+    'Created %d Choices',
+    questions.reduce((count, question) => count + question.choices().length, 0)
+  );
+
   return questions;
 }
 

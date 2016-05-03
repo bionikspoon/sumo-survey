@@ -36,5 +36,35 @@
     }
   },
   "acls": [ ],
-  "methods": { }
+  "methods": {
+    "createWithChoices": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "Question",
+          "required": true,
+          "description": "Model instance data",
+          "http": {
+            "source": "body"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "question",
+          "type": "Question",
+          "root": true,
+          "description": "Question model"
+        }
+      ],
+      "description": "Create a new Question model with Choices and persist it into the data source.",
+      "http": [
+        {
+          "path": "/",
+          "verb": "post"
+        }
+      ]
+    }
+  }
 }

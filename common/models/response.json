@@ -2,11 +2,12 @@
   "name": "Response",
   "base": "PersistedModel",
   "idInjection": true,
+  "indexes": {},
   "options": {
     "validateUpsert": true
   },
-  "properties": { },
-  "validations": [ ],
+  "properties": {},
+  "validations": [],
   "relations": {
     "question": {
       "type": "belongsTo",
@@ -24,7 +25,6 @@
       "foreignKey": "guestId"
     }
   },
-  "indexes": {  },
-  "acls": [ ],
-  "methods": { }
+  "acls": [],
+  "methods": {}
 }

@@ -1,22 +1,20 @@
-const promisify = require('../../utils/promisify');
-
 module.exports = function setup(Question) {
-  const createQuestion = Question.create.bind(Question);
-
+  Question.createWithChoices = createWithChoices;
   /**
-   * Create a new instance of the model and persist it into the data source.
+   * Create a new Question model with Choices and persist it into the data source.
    * @param {question} data Model instance data
-   * @param {function(Error, question)} [callback]
-   * @return {*|Promise.<T>}
+   * @return {*|Promise.<[question]>}
    */
-  Question.create = function create(data, callback) {
-    return createQuestion(data)
+  function createWithChoices(data) {
+    const choices = typeof data.choices === 'function' ? data.choices() : data.choices;
+    delete data.choices;
+    return Question.create(data)
       .then(question => {
-        if (!data.choices) return question;
-        return Promise.all(data.choices.map(choice => question.choices.create(choice)))
+        if (!choices || !choices.length) return question;
+
+        // eslint-disable-next-line no-shadow
+        return Promise.all(choices.map(choice => question.choices.create(choice)))
           .then(() => question);
-      })
-      .then(promisify(callback, true))
-      .catch(promisify(callback));
-  };
+      });
+  }
 };

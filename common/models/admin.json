@@ -5,8 +5,34 @@
   "options": {
     "validateUpsert": true
   },
-  "properties": { },
-  "validations": [ ],
+  "scope": {
+    "where": {
+      "status": "active"
+    }
+  },
+  "hidden": [
+    "credentials",
+    "challenges",
+    "password",
+    "email",
+    "emailVerified"
+  ],
+  "properties": {
+    "email": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": true,
+      "default": "active"
+    },
+    "username": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
   "relations": {
     "questions": {
       "type": "hasMany",
@@ -14,6 +40,6 @@
       "foreignKey": "creatorId"
     }
   },
-  "acls": [ ],
-  "methods": { }
+  "acls": [],
+  "methods": {}
 }

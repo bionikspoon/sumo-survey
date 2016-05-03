@@ -9,7 +9,7 @@ module.exports = function createAdmin(app, callback) {
   const Admin = app.models.Admin;
 
   return Admin
-    .create({ email: 'admin@example.com', password: 'secret' })
+    .create({ username: 'admin', email: 'admin@example.com', password: 'secret' })
     .then(logResults)
     .then(promisify(callback, true))
     .catch(promisify(callback));

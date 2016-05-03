@@ -1,20 +1,27 @@
 {
   "name": "Guest",
   "base": "PersistedModel",
+  "strict": true,
   "idInjection": true,
+  "indexes": {},
   "options": {
     "validateUpsert": true
   },
+  "hidden": [
+    "ip"
+  ],
   "properties": {
     "fingerprint": {
       "type": "string",
+      "id": 1,
       "required": true
     },
     "ip": {
-      "type": "string"
+      "type": "string",
+      "id": 2
     }
   },
-  "validations": [ ],
+  "validations": [],
   "relations": {
     "responses": {
       "type": "hasMany",
@@ -34,8 +41,7 @@
       "through": "Response"
     }
   },
-  "indexes": { },
-  "acls": [ ],
+  "acls": [],
   "methods": {
     "createResponse": {
       "isStatic": true,
