@@ -25,10 +25,7 @@ module.exports = function setupGuest(app) {
             include: [
               {
                 relation: 'responses',
-                scope: {
-                  where: { guestId },
-                  fields: [ 'guestId' ],
-                },
+                scope: { where: { guestId }, fields: [ 'guestId' ] },
               },
               {
                 relation: 'choices',
@@ -37,18 +34,15 @@ module.exports = function setupGuest(app) {
           }
         );
       })
-
       // filter questions answered by guest
-      .then(questions =>
-        // for each question ...
-        Promise.all(questions.map(question =>
-            question.responses.count()
-              // return question if unanswered else null
-              .then(count => (count === 0 ? question : null))
-          ))
-          // remove null values
-          .then(_.filter(_.identity))
-      )
+      .then(questions => questions.filter(question => !question.responses().length))
+
+      .then(questions => {
+        questions.forEach(question => {
+          console.log('question', question);
+        });
+        return questions;
+      })
 
       // return unanswered questions
       .then(promisify(callback, true))

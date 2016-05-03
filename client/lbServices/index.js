@@ -6546,20 +6546,19 @@ module.factory(
          *
          *  - `fingerprint` – `{string}` - Guest fingerprint
          *
-         * @param {function(Array.<Object>,Object)=} successCb
+         * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
          *
          * @param {function(Object)=} errorCb Error callback with one argument:
          *   `httpResponse`.
          *
-         * @returns {Array.<Object>} An empty reference that will be
+         * @returns {Object} An empty reference that will be
          *   populated with the actual data once the response is returned
          *   from the server.
          *
          * Unanswered questions for quest
          */
         "getAllUnanswered": {
-          isArray: true,
           url: urlBase + "/Guests/:fingerprint/questions/unanswered",
           method: "GET"
         },

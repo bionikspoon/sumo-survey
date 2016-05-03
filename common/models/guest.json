@@ -34,6 +34,12 @@
       "through": "Response"
     }
   },
+  "indexes": {
+    "ip_fingerprint_index": {
+      "columns": [ "fingerprint", "ip" ],
+      "kind": "unique"
+    }
+  },
   "acls": [ ],
   "methods": {
     "createResponse": {
@@ -90,7 +96,7 @@
       "returns": [
         {
           "arg": "questions",
-          "type": "array",
+          "type": "[Question]",
           "root": true,
           "description": "Unanswered questions for quest"
         }
