@@ -6581,6 +6581,10 @@ module.factory(
          *
          *  - `fingerprint` – `{string}` - Guest fingerprint
          *
+         *  - `ip` – `{string=}` - Guest ip
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, order, offset, and limit
+         *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
          *
@@ -6610,6 +6614,10 @@ module.factory(
          * @param {Object=} parameters Request parameters.
          *
          *  - `fingerprint` – `{string}` - Guest fingerprint
+         *
+         *  - `ip` – `{string=}` - Guest ip
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, order, offset, and limit
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.

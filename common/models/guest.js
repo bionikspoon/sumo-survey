@@ -4,6 +4,7 @@ const app = require('../../server/server');
 
 module.exports = function setup(Guest) {
   Guest.observe('access', includeClientIp);
+  Guest.observe('before save', includeClientIp);
   Guest.createResponse = createResponse;
   Guest.getAllUnanswered = getAllUnanswered;
   Guest.getOneUnanswered = getOneUnanswered;
@@ -15,9 +16,10 @@ module.exports = function setup(Guest) {
    * @returns {null}
    */
   function includeClientIp(context, next) {
-    if (!context.query.where || context.query.where.ip !== undefined) return next();
+    const ip = getClientIp();
+    if (ipNotSet(context.query, 'where')) Object.assign(context.query.where, { ip });
+    if (ipNotSet(context.instance)) Object.assign(context.instance, { ip });
 
-    Object.assign(context.query.where, { ip: getClientIp() });
     return next();
   }
 
@@ -25,7 +27,7 @@ module.exports = function setup(Guest) {
    * Create a guest response.
    * @param {string} fingerprint
    * @param {response} response Response data
-   * @return {*}
+   * @returns {Promise.<T>}
    */
   function createResponse(fingerprint, response) {
     const { choiceId, questionId } = response;
@@ -38,32 +40,33 @@ module.exports = function setup(Guest) {
   /**
    * Get unanswered questions
    * @param {string} fingerprint Guest fingerprint
-   * @param {object} [filter] Filter results
-   * @returns {*|Promise.<T>}
+   * @param {string} [ip] Guest ip
+   * @param {object} [filter] filter results
+   * @returns {Promise.<T>}
    */
-  function getAllUnanswered(fingerprint, filter) {
+  function getAllUnanswered(fingerprint, ip, filter = {}) {
     const { Question } = app.models;
-    return Guest.findOrCreate({ fingerprint })
+
+    return Guest.findOrCreate({ fingerprint, ip })
       .then(data => data[ 0 ])
 
       // get guest id
       .then(guest => {
         const guestId = guest.id.fingerprint;
+        const guestFilter = {
+          include: [
+            {
+              relation: 'responses',
+              scope: { where: { guestId }, fields: [ 'guestId' ] },
+            },
+            {
+              relation: 'choices',
+            },
+          ],
+        };
 
         // get questions, include responses by guest
-        return Question.find(
-          {
-            include: [
-              {
-                relation: 'responses',
-                scope: { where: { guestId }, fields: [ 'guestId' ] },
-              },
-              {
-                relation: 'choices',
-              },
-            ],
-          }
-        );
+        return Question.find(Object.assign({}, filter, guestFilter));
       })
       // filter questions answered by guest
       .then(questions => questions.filter(question => !question.responses().length));
@@ -72,10 +75,12 @@ module.exports = function setup(Guest) {
   /**
    * Get one unanswered question
    * @param {string} fingerprint Guest fingerprint
-   * @returns {*}
+   * @param {string} [ip] Guest ip
+   * @param {object} [filter] filter results
+   * @returns {Promise.<T>}
    */
-  function getOneUnanswered(fingerprint) {
-    return Guest.getAllUnanswered(fingerprint)
+  function getOneUnanswered(fingerprint, ip, filter = {}) {
+    return Guest.getAllUnanswered(fingerprint, ip, filter)
       .then(questions => (questions.length ? _.sample(questions) : {}));
   }
 };
@@ -88,4 +93,16 @@ function getClientIp() {
   const ctx = loopback.getCurrentContext();
   // noinspection JSAccessibilityCheck
   return ctx ? ctx.get('clientIp') : '0.0.0.0';
+}
+
+/**
+ * Check if ip is set in query
+ * @param {object} obj
+ * @param {string} [field]
+ * @returns {boolean}
+ */
+function ipNotSet(obj, field) {
+  if (!obj) return false;
+  if (field) return obj[ field ] && obj[ field ].ip === undefined;
+  return obj.ip === undefined;
 }

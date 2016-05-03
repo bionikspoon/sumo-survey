@@ -92,6 +92,22 @@
           "http": {
             "source": "path"
           }
+        },
+        {
+          "arg": "ip",
+          "type": "string",
+          "description": "Guest ip",
+          "http": {
+            "source": "query"
+          }
+        },
+        {
+          "arg": "filter",
+          "type": "object",
+          "description": "Filter defining fields, where, order, offset, and limit",
+          "http": {
+            "source": "query"
+          }
         }
       ],
       "returns": [
@@ -121,12 +137,28 @@
           "http": {
             "source": "path"
           }
+        },
+        {
+          "arg": "ip",
+          "type": "string",
+          "description": "Guest ip",
+          "http": {
+            "source": "query"
+          }
+        },
+        {
+          "arg": "filter",
+          "type": "object",
+          "description": "Filter defining fields, where, order, offset, and limit",
+          "http": {
+            "source": "query"
+          }
         }
       ],
       "returns": [
         {
           "arg": "data",
-          "type": "object",
+          "type": "Question",
           "root": true,
           "description": "Unanswered question"
         }
