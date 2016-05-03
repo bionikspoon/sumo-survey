@@ -1,7 +1,6 @@
-const promisify = require('../utils/promisify');
+const promisify = require('../../utils/promisify');
 
-module.exports = function setupQuestion(app) {
-  const Question = app.models.Question;
+module.exports = function setup(Question) {
   const createQuestion = Question.create.bind(Question);
 
   /**

@@ -34,12 +34,7 @@
       "through": "Response"
     }
   },
-  "indexes": {
-    "ip_fingerprint_index": {
-      "columns": [ "fingerprint", "ip" ],
-      "kind": "unique"
-    }
-  },
+  "indexes": { },
   "acls": [ ],
   "methods": {
     "createResponse": {

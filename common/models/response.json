@@ -24,12 +24,7 @@
       "foreignKey": "guestId"
     }
   },
-  "indexes": {
-    "guest_question_index": {
-      "columns": [ "questionId", "guestId" ],
-      "kind": "unique"
-    }
-  },
+  "indexes": {  },
   "acls": [ ],
   "methods": { }
 }

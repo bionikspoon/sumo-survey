@@ -1,9 +1,10 @@
 const loopback = require('loopback');
 const _ = require('lodash/fp');
-const promisify = require('../utils/promisify');
+const promisify = require('../../utils/promisify');
+const app = require('../../server/server');
 
-module.exports = function setupGuest(app) {
-  const { Guest, Question } = app.models;
+module.exports = function setup(Guest) {
+  const { Question } = app.models;
 
   /**
    * Get unanswered questions
@@ -36,13 +37,6 @@ module.exports = function setupGuest(app) {
       })
       // filter questions answered by guest
       .then(questions => questions.filter(question => !question.responses().length))
-
-      .then(questions => {
-        questions.forEach(question => {
-          console.log('question', question);
-        });
-        return questions;
-      })
 
       // return unanswered questions
       .then(promisify(callback, true))

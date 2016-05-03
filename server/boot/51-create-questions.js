@@ -1,5 +1,5 @@
 /* eslint no-console:0 */
-const promisify = require('../utils/promisify');
+const promisify = require('../../utils/promisify');
 
 module.exports = function createQuestions(app, callback) {
   if (process.env.STARTED === 'TRUE') return callback();

@@ -1,5 +1,5 @@
 /* eslint no-console:0 */
-const promisify = require('../utils/promisify');
+const promisify = require('../../utils/promisify');
 const crypto = require('crypto');
 const _ = require('lodash/fp');
 
