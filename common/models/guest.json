@@ -21,6 +21,9 @@
       "id": 2
     }
   },
+  "mixins": {
+    "Timestamp": {}
+  },
   "validations": [],
   "relations": {
     "responses": {

@@ -24,6 +24,9 @@
       "foreignKey": "questionId"
     }
   },
+  "mixins": {
+    "Timestamp": {}
+  },
   "acls": [],
   "methods": {}
 }

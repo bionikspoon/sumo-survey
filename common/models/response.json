@@ -26,5 +26,8 @@
     }
   },
   "acls": [],
+  "mixins": {
+    "Timestamp": {}
+  },
   "methods": {}
 }

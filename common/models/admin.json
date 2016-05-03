@@ -17,6 +17,9 @@
     "email",
     "emailVerified"
   ],
+  "mixins": {
+    "Timestamp": {}
+  },
   "properties": {
     "email": {
       "type": "string",

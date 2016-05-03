@@ -36,6 +36,9 @@
     }
   },
   "acls": [],
+  "mixins": {
+    "Timestamp": {}
+  },
   "methods": {
     "createWithChoices": {
       "isStatic": true,
