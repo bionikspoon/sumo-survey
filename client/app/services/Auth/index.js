@@ -2,8 +2,11 @@ import angular from 'angular';
 import LoopbackService from 'services/Loopback';
 import uiRouter from 'angular-ui-router';
 
-export default angular
-  .module('app.services.auth', [ LoopbackService.name, uiRouter ])
+const MODULE_NAME = 'app.services.auth';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ LoopbackService, uiRouter ])
   .factory('Auth', Auth);
 
 /** @ngInject **/

@@ -1,8 +1,11 @@
 import angular from 'angular';
 import Fingerprint from 'fingerprintjs2';
 
-export default angular
-  .module('app.services.fingerprint', [])
+const MODULE_NAME = 'app.services.fingerprint';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [])
   .factory('Fingerprint', FingerprintService);
 
 /** @ngInject **/

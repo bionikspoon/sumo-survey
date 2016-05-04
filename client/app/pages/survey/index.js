@@ -3,8 +3,11 @@ import uiRouter from 'angular-ui-router';
 import SurveyServices from 'services/Survey';
 import navHome from 'components/navHome';
 
-export default angular
-  .module('app.pages.survey', [ uiRouter, SurveyServices.name, navHome.name ])
+const MODULE_NAME = 'app.pages.survey';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ uiRouter, SurveyServices, navHome ])
   .config(routeConfig);
 
 /** @ngInject **/

@@ -2,8 +2,11 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import navAdmin from 'components/navAdmin';
 
-export default angular
-  .module('app.pages.home', [ uiRouter, navAdmin.name ])
+const MODULE_NAME = 'app.pages.home';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ uiRouter, navAdmin ])
   .config(routeConfig);
 
 /** @ngInject **/

@@ -6,7 +6,7 @@ describe('showErrors Directive', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(ShowErrorsDirective.name)); // eslint-disable-line angular/window-service
+  beforeEach(window.module(ShowErrorsDirective)); // eslint-disable-line angular/window-service
 
   beforeEach(() => {
     let $compile;

@@ -2,5 +2,8 @@ import angular from 'angular';
 import lbServices from 'client/lbServices';
 import ngResource from 'angular-resource';
 
-export default angular
-  .module('app.services.loopback', [ ngResource, lbServices ]);
+const MODULE_NAME = 'app.services.loopback';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ ngResource, lbServices ]);

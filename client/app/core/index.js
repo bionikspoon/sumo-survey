@@ -3,6 +3,9 @@ import coreComponent from './core.component';
 import coreConfig from './core.config';
 import coreRun from './core.run';
 
-export default angular
-  .module('app.core', [ coreConfig.name, coreRun.name, coreComponent.name ])
+const MODULE_NAME = 'app.core';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ coreConfig, coreRun, coreComponent ])
   .value('$routerRootComponent', 'appCore');

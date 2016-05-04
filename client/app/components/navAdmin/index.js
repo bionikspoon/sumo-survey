@@ -1,8 +1,11 @@
 import angular from 'angular';
 import AuthService from 'services/Auth';
 
-export default angular
-  .module('app.components.navAdmin', [ AuthService.name ])
+const MODULE_NAME = 'app.components.navAdmin';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ AuthService ])
   .component('appNavAdmin', {
     templateUrl: require('./navAdmin.html'),
     controller: NavAdminController,

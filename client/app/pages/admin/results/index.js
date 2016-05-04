@@ -3,8 +3,11 @@ import uiRouter from 'angular-ui-router';
 import StatsService from 'services/Stats';
 import uiBootstrapAccordion from 'angular-ui-bootstrap/src/accordion';
 
-export default angular
-  .module('app.pages.admin.results', [ uiRouter, uiBootstrapAccordion, StatsService.name ])
+const MODULE_NAME = 'app.pages.admin.results';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ uiRouter, uiBootstrapAccordion, StatsService ])
   .config(routeConfig);
 
 /** @ngInject **/

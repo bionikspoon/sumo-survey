@@ -6,7 +6,7 @@ describe('Well Directive', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(WellDirective.name)); // eslint-disable-line angular/window-service
+  beforeEach(window.module(WellDirective)); // eslint-disable-line angular/window-service
 
   beforeEach(() => {
     let $compile;

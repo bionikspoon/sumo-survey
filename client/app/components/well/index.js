@@ -1,8 +1,10 @@
 import angular from 'angular';
 
-// well
-export default angular
-  .module('app.components.well', [])
+const MODULE_NAME = 'app.components.well';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [])
   .directive('appWell', WellDirective);
 
 /** @ngInject **/

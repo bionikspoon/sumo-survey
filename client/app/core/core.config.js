@@ -1,7 +1,10 @@
 import angular from 'angular';
 
-export default angular
-  .module('app.core.config', [])
+const MODULE_NAME = 'app.core.config';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [])
   .config(coreConfig);
 
 /** @ngInject **/

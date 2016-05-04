@@ -1,8 +1,11 @@
 import angular from 'angular';
 import coreController from './core.controller';
 
-export default angular
-  .module('app.core.component', [ coreController.name ])
+const MODULE_NAME = 'app.core.component';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ coreController ])
   .component('appCore', {
     templateUrl: require('./core.html'),
     controller: 'CoreController',

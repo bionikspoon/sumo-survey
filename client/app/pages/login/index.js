@@ -5,8 +5,11 @@ import showErrors from 'components/showErrors';
 import navHome from 'components/navHome';
 import AuthService from 'services/Auth';
 
-export default angular
-  .module('app.pages.login', [ uiRouter, well.name, showErrors.name, AuthService.name, navHome.name ])
+const MODULE_NAME = 'app.pages.login';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ uiRouter, well, showErrors, AuthService, navHome ])
   .config(routeConfig);
 
 /** @ngInject **/

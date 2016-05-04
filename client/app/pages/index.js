@@ -2,5 +2,8 @@
 const context = require.context('./', true, /\.\/[^\/]+\/index\.js$/);
 const modules = context.keys().map(module => context(module).default);
 
-export default angular
-  .module('app.pages', [ ...modules.map(module => module.name) ]);
+const MODULE_NAME = 'app.pages';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ ...modules ]);

@@ -6,7 +6,7 @@ describe('Add Controller', () => {
   let $ctrl;
   let $scope;
 
-  beforeEach(window.module(AddController.name)); // eslint-disable-line angular/window-service
+  beforeEach(window.module(AddController)); // eslint-disable-line angular/window-service
 
   beforeEach(() => {
     let $controller;

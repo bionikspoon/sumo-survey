@@ -1,7 +1,10 @@
 import angular from 'angular';
 
-export default angular
-  .module('app.components.navHome', [])
+const MODULE_NAME = 'app.components.navHome';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [])
   .component('appNavHome', {
     templateUrl: require('./navHome.html'),
   });

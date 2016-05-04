@@ -1,8 +1,11 @@
 import angular from 'angular';
 import addController from './add.controller';
 
-export default angular
-  .module('app.pages.admin.add', [ addController.name ])
+const MODULE_NAME = 'app.pages.admin.add';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ addController ])
   .config(routeConfig);
 
 /** @ngInject **/

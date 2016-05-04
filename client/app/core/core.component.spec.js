@@ -6,7 +6,7 @@ describe('Core Component', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(CoreComponent.name)); // eslint-disable-line angular/window-service
+  beforeEach(window.module(CoreComponent)); // eslint-disable-line angular/window-service
 
   beforeEach(() => {
     let $compile;

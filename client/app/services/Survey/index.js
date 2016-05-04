@@ -2,8 +2,11 @@ import angular from 'angular';
 import LoopbackService from 'services/Loopback';
 import FingerprintService from 'services/Fingerprint';
 
-export default angular
-  .module('app.services.survey', [ LoopbackService.name, FingerprintService.name ])
+const MODULE_NAME = 'app.services.survey';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ LoopbackService, FingerprintService ])
   .factory('Survey', Survey);
 
 /** @ngInject **/

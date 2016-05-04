@@ -6,8 +6,11 @@ import navbar from 'components/navbar';
 const context = require.context('./', true, /\.\/[^\/]+\/index\.js$/);
 const pages = context.keys().map(module => context(module).default);
 
-export default angular
-  .module('app.pages.admin', [ uiRouter, navbar.name, ...pages.map(module => module.name) ])
+const MODULE_NAME = 'app.pages.admin';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ uiRouter, navbar, ...pages ])
   .config(routeConfig);
 
 /** @ngInject **/

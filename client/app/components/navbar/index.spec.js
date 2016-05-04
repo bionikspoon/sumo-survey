@@ -6,7 +6,7 @@ describe('Navbar Component', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(NavbarComponent.name)); // eslint-disable-line angular/window-service
+  beforeEach(window.module(NavbarComponent)); // eslint-disable-line angular/window-service
 
   beforeEach(() => {
     let $compile;

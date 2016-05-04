@@ -2,8 +2,11 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import LoopbackService from 'services/Loopback';
 
-export default angular
-  .module('app.pages.admin.add.controller', [ uiRouter, LoopbackService.name ])
+const MODULE_NAME = 'app.pages.admin.add.controller';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ uiRouter, LoopbackService ])
   .controller('AddController', AddController);
 
 /** @ngInject **/

@@ -2,8 +2,11 @@ import angular from 'angular';
 import AuthService from 'services/Auth';
 import uiRouter from 'angular-ui-router';
 
-export default angular
-  .module('app.core.run', [ uiRouter, AuthService.name ])
+const MODULE_NAME = 'app.core.run';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ uiRouter, AuthService ])
   .run(coreRun);
 
 /** @ngInject **/

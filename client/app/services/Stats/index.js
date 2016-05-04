@@ -1,8 +1,11 @@
 import angular from 'angular';
 import LoopbackService from 'services/Loopback';
 
-export default angular
-  .module('app.services.Stats', [ LoopbackService.name ])
+const MODULE_NAME = 'app.services.Stats';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ LoopbackService ])
   .factory('Stats', Stats);
 
 /** @ngInject **/

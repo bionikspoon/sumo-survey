@@ -2,8 +2,11 @@ import angular from 'angular';
 import AuthService from 'services/Auth';
 import FingerprintService from 'services/Fingerprint';
 
-export default angular
-  .module('app.core.controller', [ AuthService.name, FingerprintService.name ])
+const MODULE_NAME = 'app.core.controller';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [ AuthService, FingerprintService ])
   .controller('CoreController', CoreController);
 
 /** @ngInject **/

@@ -1,8 +1,10 @@
 import angular from 'angular';
 
-// ShowErrors
-export default angular
-  .module('app.component.ShowErrors', [])
+const MODULE_NAME = 'app.component.ShowErrors';
+export default MODULE_NAME;
+
+angular
+  .module(MODULE_NAME, [])
   .directive('appShowErrors', ShowErrorsDirective);
 
 /** @ngInject **/

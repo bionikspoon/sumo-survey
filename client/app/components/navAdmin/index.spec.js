@@ -6,7 +6,7 @@ describe('NavAdmin Component', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(NavAdminComponent.name)); // eslint-disable-line angular/window-service
+  beforeEach(window.module(NavAdminComponent)); // eslint-disable-line angular/window-service
 
   beforeEach(() => {
     let $compile;
