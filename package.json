@@ -16,6 +16,7 @@
     "angular-touch",
     "angular-ui-router",
     "angular-ui-bootstrap/src/collapse",
+    "angular-ui-bootstrap/src/accordion",
     "lodash/sample",
     "fingerprintjs2",
     "webfontloader"

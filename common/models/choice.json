@@ -25,6 +25,11 @@
       "type": "belongsTo",
       "model": "Question",
       "foreignKey": "questionId"
+    },
+    "responses": {
+      "type": "hasMany",
+      "model": "Response",
+      "foreignKey": ""
     }
   },
   "acls": [],

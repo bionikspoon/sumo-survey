@@ -48,7 +48,8 @@ function Auth($log, $q, Admin, LoopBackAuth) {
 
     if (getCurrentUser.data) { return getCurrentUser.data; }
 
-    getCurrentUser.data = Admin.getCurrent().$promise
+    getCurrentUser.data = Admin.getCurrent()
+      .$promise
       .catch(err => {
         LoopBackAuth.clearUser();
         LoopBackAuth.clearStorage();
