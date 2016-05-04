@@ -1,12 +1,12 @@
 /* eslint-env angular/mocks, jasmine */
-import CoreController from './core.controller';
+import AddController from './add.controller';
 const { beforeEach } = global;
 
-describe('Core Controller', () => {
+describe('Add Controller', () => {
   let $ctrl;
   let $scope;
 
-  beforeEach(window.module(CoreController.name)); // eslint-disable-line angular/window-service
+  beforeEach(window.module(AddController.name)); // eslint-disable-line angular/window-service
 
   beforeEach(() => {
     let $controller;
@@ -17,7 +17,7 @@ describe('Core Controller', () => {
       $rootScope = _$rootScope_;
       $scope = $rootScope.$new(true);
 
-      $ctrl = $controller('CoreController', { $scope });
+      $ctrl = $controller('AddController', { $scope });
     });
   });
 
@@ -25,7 +25,7 @@ describe('Core Controller', () => {
     expect(typeof $ctrl).toBe('object');
   });
 
-  it('Should have name CoreController', () => {
-    expect($ctrl.name).toBe('CoreController');
+  it('Should have name AddController', () => {
+    expect($ctrl.name).toBe('AddController');
   });
 });

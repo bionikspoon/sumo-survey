@@ -1,14 +1,15 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import lbServices from 'client/lbServices';
+import LoopbackService from 'services/Loopback';
 
 export default angular
-  .module('app.pages.admin.add.controller', [ uiRouter, lbServices ])
+  .module('app.pages.admin.add.controller', [ uiRouter, LoopbackService.name ])
   .controller('AddController', AddController);
 
 /** @ngInject **/
 function AddController($log, $state, $q, Question) {
   const $ctrl = this;
+  $ctrl.name = 'AddController';
 
   ////////////////
 

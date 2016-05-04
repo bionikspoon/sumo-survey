@@ -8,6 +8,9 @@ export default angular
 
 /** @ngInject **/
 function CoreController(Auth, Fingerprint) {
+  const $ctrl = this;
+  $ctrl.name = 'CoreController';
+
   activate();
 
   ////////////////

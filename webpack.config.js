@@ -4,7 +4,6 @@ require('babel-polyfill');
 const _ = require('lodash');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const NpmInstallPlugin = require('npm-install-webpack-plugin');
 const HtmlPlugin = require('html-webpack-plugin');
 const WriteFilePlugin = require('write-file-webpack-plugin');
 const unipath = require('unipath');
@@ -41,7 +40,7 @@ const ENV_IS = {
 };
 const DEBUG = !process.argv.includes('--release');
 const VERBOSE = process.argv.includes('--verbose');
-const WATCH = ENV_IS.DEVELOPMENT || process.argv.includes('--auto-watch');
+const WATCH = ENV_IS.DEVELOPMENT || process.argv.includes('--auto-watch') || false;
 
 // ===========================================================================
 // CONFIG EXPORT
@@ -75,7 +74,7 @@ module.exports = {
   debug: DEBUG,
   target: 'web',
   progress: true,
-  watch: ENV_IS.DEVELOPMENT || WATCH,
+  watch: WATCH,
   noInfo: !VERBOSE,
   stats: getStatOptions(),
   PATHS,
@@ -89,19 +88,18 @@ module.exports = {
 function getEntry(env) {
   const entry = {};
   entry.main = [];
-  entry.vendor = [];
+
   switch (env) {
     case DEVELOPMENT:
       // enforce order
       entry.main.push(PATHS.src('app.bootstrap.js'));
       entry.main.push(`webpack-hot-middleware/client?http://${HOST}:${PORT}&reload=true`);
-      entry.vendor.push(...require('./package.json').vendor);
+      entry.vendor = require('./package.json').vendor;
       break;
 
     case PRODUCTION:
-      entry.vendor.push(...require('./package.json').vendor);
-
       entry.main.push(PATHS.src('app.bootstrap.js'));
+      entry.vendor = require('./package.json').vendor;
       break;
 
     case TEST:
@@ -211,7 +209,6 @@ function getPlugins(env) {
 
   switch (env) {
     case DEVELOPMENT:
-      // plugins.push(new NpmInstallPlugin({ saveDev: true }));
       plugins.push(new webpack.HotModuleReplacementPlugin());
       plugins.push(new webpack.NoErrorsPlugin());
       plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] }));
@@ -239,7 +236,6 @@ function getPlugins(env) {
       break;
 
     case TEST:
-      plugins.push(new NpmInstallPlugin({ saveDev: true }));
       break;
   }
   return plugins;

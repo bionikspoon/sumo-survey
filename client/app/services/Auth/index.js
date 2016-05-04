@@ -1,12 +1,13 @@
 import angular from 'angular';
-import lbServices from 'client/lbServices';
+import LoopbackService from 'services/Loopback';
+import uiRouter from 'angular-ui-router';
 
 export default angular
-  .module('app.services.auth', [ lbServices ])
+  .module('app.services.auth', [ LoopbackService.name, uiRouter ])
   .factory('Auth', Auth);
 
 /** @ngInject **/
-function Auth($log, $q, Admin, LoopBackAuth) {
+function Auth($log, $state, $q, Admin, LoopBackAuth) {
   getCurrentUser.data = null;
   const service = { login, logout, isAuthenticated, streamCurrentUser, currentUser: {} };
   return service;
@@ -53,6 +54,7 @@ function Auth($log, $q, Admin, LoopBackAuth) {
       .catch(err => {
         LoopBackAuth.clearUser();
         LoopBackAuth.clearStorage();
+        $state.reload();
         return $q.reject(err);
       })
       .finally(() => { getCurrentUser.data = null; });

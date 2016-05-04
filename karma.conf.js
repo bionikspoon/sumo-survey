@@ -38,7 +38,12 @@ module.exports = function karmaConfig(config) {
     colors: true,
 
     // level of logging
-    // possible values: coreConfig.LOG_DISABLE || coreConfig.LOG_ERROR || coreConfig.LOG_WARN || coreConfig.LOG_INFO || coreConfig.LOG_DEBUG
+    // possible values:
+    //    coreConfig.LOG_DISABLE
+    // || coreConfig.LOG_ERROR
+    // || coreConfig.LOG_WARN
+    // || coreConfig.LOG_INFO
+    // || coreConfig.LOG_DEBUG
     logLevel: config.LOG_INFO,
 
     // enable / disable watching file and executing tests whenever any file changes
