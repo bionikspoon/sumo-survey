@@ -5,6 +5,9 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "Timestamp": {}
+  },
   "properties": {
     "text": {
       "type": "string",
@@ -36,9 +39,6 @@
     }
   },
   "acls": [],
-  "mixins": {
-    "Timestamp": {}
-  },
   "methods": {
     "createWithChoices": {
       "isStatic": true,

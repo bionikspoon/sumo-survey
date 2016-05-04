@@ -5,6 +5,9 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "Timestamp": {}
+  },
   "properties": {
     "text": {
       "type": "string",
@@ -23,9 +26,6 @@
       "model": "Question",
       "foreignKey": "questionId"
     }
-  },
-  "mixins": {
-    "Timestamp": {}
   },
   "acls": [],
   "methods": {}

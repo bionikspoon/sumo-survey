@@ -5,7 +5,7 @@ module.exports = function timestamp(Model) {
 };
 
 /**
- * Set last updated time stamp.
+ * Set last updated timestamp
  * @param {object} ctx
  * @param {function} next
  * @returns {null}

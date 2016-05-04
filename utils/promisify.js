@@ -3,7 +3,7 @@ module.exports = promisify;
 /**
  * Create a promise from a callback
  * @param {function(Error, *)} [callback] Original callback
- * @param {bool} [success] Set true for then block.
+ * @param {boolean} [success] Set true for then block.
  * @returns {_callback}
  */
 function promisify(callback, success = false) {

@@ -12,11 +12,7 @@
       }
     },
     "helmet#xssFilter": {},
-    "helmet#frameguard": {
-      "params": [
-        "deny"
-      ]
-    },
+    "helmet#frameguard": {"params": ["deny"]},
     "helmet#hsts": {
       "params": {
         "maxAge": 0,
@@ -26,24 +22,23 @@
     "helmet#hidePoweredBy": {},
     "helmet#ieNoOpen": {},
     "helmet#noSniff": {},
-    "helmet#noCache": {
-      "enabled": false
-    }
+    "helmet#noCache": {"enabled": false}
   },
   "session": {},
-  "auth": {},
+  "auth": {
+    "loopback#token": {}
+  },
   "parse": {},
+  "routes:before": {
+    "loopback#logger": {"params": ["dev"]},
+    "loopback#context": {},
+    "./middleware/ip": {"paths": ["/api/Guests/"]}
+  },
   "routes": {
-    "loopback#rest": {
-      "paths": [
-        "${restApiRoot}"
-      ]
-    }
+    "loopback#rest": {"paths": ["${restApiRoot}"]}
   },
   "files": {
-    "serve-static": {
-      "params": "$!../dist"
-    }
+    "loopback#static": {"params": "$!../dist"}
   },
   "final": {
     "loopback#urlNotFound": {}

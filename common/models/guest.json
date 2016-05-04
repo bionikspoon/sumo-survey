@@ -10,6 +10,9 @@
   "hidden": [
     "ip"
   ],
+  "mixins": {
+    "Timestamp": {}
+  },
   "properties": {
     "fingerprint": {
       "type": "string",
@@ -20,9 +23,6 @@
       "type": "string",
       "id": 2
     }
-  },
-  "mixins": {
-    "Timestamp": {}
   },
   "validations": [],
   "relations": {
