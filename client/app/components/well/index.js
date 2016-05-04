@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-const MODULE_NAME = 'app.components.well';
+const MODULE_NAME = 'app.well.directive';
 export default MODULE_NAME;
 
 angular

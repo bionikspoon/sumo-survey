@@ -1,7 +1,7 @@
 import angular from 'angular';
 import addController from './add.controller';
 
-const MODULE_NAME = 'app.pages.admin.add';
+const MODULE_NAME = 'app.page.admin.add';
 export default MODULE_NAME;
 
 angular

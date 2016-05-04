@@ -6,7 +6,7 @@ import navbar from 'components/navbar';
 const context = require.context('./', true, /\.\/[^\/]+\/index\.js$/);
 const pages = context.keys().map(module => context(module).default);
 
-const MODULE_NAME = 'app.pages.admin';
+const MODULE_NAME = 'app.page.admin';
 export default MODULE_NAME;
 
 angular

@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-const MODULE_NAME = 'app.components.navHome';
+const MODULE_NAME = 'app.navHome.component';
 export default MODULE_NAME;
 
 angular

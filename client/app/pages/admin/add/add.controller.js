@@ -2,7 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import LoopbackService from 'services/Loopback';
 
-const MODULE_NAME = 'app.pages.admin.add.controller';
+const MODULE_NAME = 'app.page.admin.add.controller';
 export default MODULE_NAME;
 
 angular

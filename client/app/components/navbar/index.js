@@ -1,7 +1,7 @@
 import angular from 'angular';
 import bootstrapCollapse from 'angular-ui-bootstrap/src/collapse';
 
-const MODULE_NAME = 'app.component.navbar';
+const MODULE_NAME = 'app.navbar.component';
 export default MODULE_NAME;
 
 angular

@@ -5,7 +5,7 @@ import showErrors from 'components/showErrors';
 import navHome from 'components/navHome';
 import AuthService from 'services/Auth';
 
-const MODULE_NAME = 'app.pages.login';
+const MODULE_NAME = 'app.page.login';
 export default MODULE_NAME;
 
 angular

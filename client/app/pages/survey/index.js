@@ -3,7 +3,7 @@ import uiRouter from 'angular-ui-router';
 import SurveyServices from 'services/Survey';
 import navHome from 'components/navHome';
 
-const MODULE_NAME = 'app.pages.survey';
+const MODULE_NAME = 'app.page.survey';
 export default MODULE_NAME;
 
 angular

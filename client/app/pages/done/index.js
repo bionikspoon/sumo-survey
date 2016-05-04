@@ -3,7 +3,7 @@ import uiRouter from 'angular-ui-router';
 import SurveyServices from 'services/Survey';
 import navAdmin from 'components/navAdmin';
 
-const MODULE_NAME = 'app.pages.done';
+const MODULE_NAME = 'app.page.done';
 export default MODULE_NAME;
 
 angular

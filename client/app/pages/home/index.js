@@ -2,7 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import navAdmin from 'components/navAdmin';
 
-const MODULE_NAME = 'app.pages.home';
+const MODULE_NAME = 'app.page.home';
 export default MODULE_NAME;
 
 angular

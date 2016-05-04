@@ -1,7 +1,7 @@
 import angular from 'angular';
 import AuthService from 'services/Auth';
 
-const MODULE_NAME = 'app.components.navAdmin';
+const MODULE_NAME = 'app.navAdmin.component';
 export default MODULE_NAME;
 
 angular

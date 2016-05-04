@@ -3,7 +3,7 @@ import uiRouter from 'angular-ui-router';
 import StatsService from 'services/Stats';
 import uiBootstrapAccordion from 'angular-ui-bootstrap/src/accordion';
 
-const MODULE_NAME = 'app.pages.admin.results';
+const MODULE_NAME = 'app.page.admin.results';
 export default MODULE_NAME;
 
 angular
