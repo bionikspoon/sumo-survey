@@ -9,15 +9,31 @@ angular
   .factory('Stats', Stats);
 
 /** @ngInject **/
-function Stats($log, Question) {
-  const service = { summary };
+function Stats($log, $q, Question) {
+  const service = { summary, question };
   return service;
 
   ////////////////
 
   function summary() {
     return Question
-      .find({ filter: { include: [ 'responses', { choices: 'responses' } ] } })
-      .$promise;
+      .find({ filter: { include: [ 'responses' ] } })
+      .$promise
+      .then(questions => questions.map(_question =>
+        Object.assign(_question, { count: _question.responses.length })
+      ));
+  }
+
+  function question(id) {
+    return Question
+      .findOne({ filter: { where: { id }, include: { choices: 'responses' } } })
+      .$promise
+      .then(_question =>
+        Object.assign(_question, {
+          responses: _question.choices.map(choice =>
+            Object.assign(choice, { count: choice.responses.length })
+          ),
+        })
+      );
   }
 }

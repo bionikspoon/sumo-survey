@@ -1,0 +1,7 @@
+<div class="container">
+   <ui-view></ui-view>
+   <h2>Responses</h2>
+   <app-barchart
+      data="$ctrl.questions"
+      on-click="$ctrl.showQuestion(item)"></app-barchart>
+</div>

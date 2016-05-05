@@ -38,7 +38,7 @@ function AdminController() {
   function activate() {
     $ctrl.routes = [
       { name: 'admin.add', title: 'Add Question' },
-      { name: 'admin.results', title: 'Results' },
+      { name: 'admin.stats', title: 'Stats' },
     ];
   }
 }

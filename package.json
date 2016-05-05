@@ -28,6 +28,7 @@
     "angular-resource": "1.5.5",
     "angular-touch": "1.5.5",
     "angular-ui-router": "0.2.18",
+    "d3": "3.5.17",
     "fingerprintjs2": "1.1.4",
     "webfontloader": "1.6.24"
   },
