@@ -1,12 +1,12 @@
 /* eslint-env angular/mocks, jasmine */
-import WellDirective from './';
+import NavHomeComponent from './navHome.component';
 const { beforeEach } = global;
 
-describe('Well Directive', () => {
+describe('navHome Component', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(WellDirective)); // eslint-disable-line angular/window-service
+  beforeEach(window.module(NavHomeComponent)); // eslint-disable-line angular/window-service
 
   beforeEach(() => {
     let $compile;
@@ -17,12 +17,12 @@ describe('Well Directive', () => {
       $rootScope = _$rootScope_;
       $scope = $rootScope.$new(true);
 
-      element = $compile('<main app-well></main>')($scope);
+      element = $compile('<app-nav-home></app-nav-home>')($scope);
       $scope.$digest();
     });
   });
 
-  describe('Directive', () => {
+  describe('Component', () => {
     it('Should exist with class ng-scope', () => {
       expect(element[ 0 ].classList.contains('ng-scope')).toBeTruthy();
     });
@@ -36,7 +36,7 @@ describe('Well Directive', () => {
     let $ctrl;
 
     beforeEach(() => {
-      $ctrl = element.controller('appWell');
+      $ctrl = element.controller('appNavHome');
     });
 
     it('Should exist', () => {
