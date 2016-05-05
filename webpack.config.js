@@ -115,7 +115,6 @@ function getEntry(env) {
 function getPreLoaders(env) {
   const preLoaders = [
     { test: /\.js$/, include: LOADER_INCLUDES, loader: 'baggage?[dir].html&[dir].scss' },
-    { test: /index\.js$/, include: [ PATHS.app() ], loader: 'angular-autoload' },
   ];
 
   switch (env) {
@@ -137,6 +136,7 @@ function getPreLoaders(env) {
       );
       break;
   }
+  preLoaders.push({ test: /index\.js$/, include: [ PATHS.app() ], loader: 'angular-autoload' });
   return preLoaders;
 }
 

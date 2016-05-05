@@ -42,5 +42,13 @@ describe('navAdmin Component', () => {
     it('Should exist', () => {
       expect(typeof $ctrl).toBe('object');
     });
+
+    it('Should have method isAuthenticated', () => {
+      expect(typeof $ctrl.isAuthenticated).toBe('function');
+    });
+
+    it('Should have method logout', () => {
+      expect(typeof $ctrl.logout).toBe('function');
+    });
   });
 });

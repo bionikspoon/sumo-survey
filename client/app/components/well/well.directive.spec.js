@@ -17,7 +17,7 @@ describe('well Directive', () => {
       $rootScope = _$rootScope_;
       $scope = $rootScope.$new(true);
 
-      element = $compile('<app-well></app-well>')($scope);
+      element = $compile('<main app-well></main>')($scope);
       $scope.$digest();
     });
   });

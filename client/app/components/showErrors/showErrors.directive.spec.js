@@ -17,7 +17,7 @@ describe('showErrors Directive', () => {
       $rootScope = _$rootScope_;
       $scope = $rootScope.$new(true);
 
-      element = $compile('<app-show-errors></app-show-errors>')($scope);
+      element = $compile('<form><div app-show-errors></div></form>')($scope);
       $scope.$digest();
     });
   });
