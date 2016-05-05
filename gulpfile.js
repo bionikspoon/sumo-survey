@@ -59,7 +59,7 @@ gulp.task('browser-sync', callback => {
       webpackDevMiddleware(bundler, {
         publicPath: webpackConfig.output.publicPath,
         stats: webpackConfig.stats,
-        noInfo: webpackConfig.stats,
+        noInfo: webpackConfig.noInfo,
       }),
 
       webpackHotMiddleware(bundler),

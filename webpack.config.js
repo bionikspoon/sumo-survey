@@ -68,6 +68,9 @@ module.exports = {
     root: [ PATHS.base(), PATHS.app() ],
     extensions: [ '', '.js' ],
   },
+  resolveLoader: {
+    modulesDirectories: [ 'node_modules', PATHS.base() ],
+  },
   devtool: ENV_IS.PRODUCTION ? 'source-map' : 'inline-source-map',
   postcss: getPostcss,
   cache: DEBUG,
@@ -112,6 +115,7 @@ function getEntry(env) {
 function getPreLoaders(env) {
   const preLoaders = [
     { test: /\.js$/, include: LOADER_INCLUDES, loader: 'baggage?[dir].html&[dir].scss' },
+    { test: /index\.js$/, include: [ PATHS.app() ], loader: 'angular-autoload' },
   ];
 
   switch (env) {

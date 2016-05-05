@@ -1,8 +1,8 @@
 /* eslint-env angular/mocks, jasmine */
-import NavbarComponent from './';
+import NavbarComponent from './navbar.component';
 const { beforeEach } = global;
 
-describe('Navbar Component', () => {
+describe('navbar Component', () => {
   let element;
   let $scope;
 
