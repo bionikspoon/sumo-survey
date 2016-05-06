@@ -1,7 +1,7 @@
 import angular from 'angular';
 import LoopbackService from 'services/Loopback';
 
-const MODULE_NAME = 'app.stats.factory';
+const MODULE_NAME = 'app.service.stats.factory';
 export default MODULE_NAME;
 
 angular

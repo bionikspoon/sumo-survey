@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 const { blocks } = global;
-const MODULE_NAME = 'app.showErrors';
+const MODULE_NAME = 'app.component.showErrors';
 
 export default MODULE_NAME;
 

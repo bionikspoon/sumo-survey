@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 const { blocks } = global;
-const MODULE_NAME = 'app.fingerprint';
+const MODULE_NAME = 'app.service.fingerprint';
 
 export default MODULE_NAME;
 

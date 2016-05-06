@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 const { blocks } = global;
-const MODULE_NAME = 'app.stats';
+const MODULE_NAME = 'app.service.stats';
 
 export default MODULE_NAME;
 

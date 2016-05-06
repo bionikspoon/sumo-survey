@@ -2,7 +2,7 @@ import angular from 'angular';
 import lbServices from 'client/lbServices';
 import ngResource from 'angular-resource';
 
-const MODULE_NAME = 'app.loopback.factory';
+const MODULE_NAME = 'app.service.loopback';
 export default MODULE_NAME;
 
 angular

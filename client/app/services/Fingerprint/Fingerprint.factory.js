@@ -1,7 +1,7 @@
 import angular from 'angular';
 import Fingerprint from 'fingerprintjs2';
 
-const MODULE_NAME = 'app.fingerprint.factory';
+const MODULE_NAME = 'app.service.fingerprint.factory';
 export default MODULE_NAME;
 
 angular

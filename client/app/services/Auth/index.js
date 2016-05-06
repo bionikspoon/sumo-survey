@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 const { blocks } = global;
-const MODULE_NAME = 'app.auth';
+const MODULE_NAME = 'app.service.auth';
 
 export default MODULE_NAME;
 

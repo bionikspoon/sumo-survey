@@ -2,7 +2,7 @@ import angular from 'angular';
 import d3 from 'd3';
 
 // barchart
-const MODULE_NAME = 'app.barchart.directive';
+const MODULE_NAME = 'app.component.barchart.directive';
 export default MODULE_NAME;
 
 angular

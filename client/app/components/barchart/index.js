@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 const { blocks } = global;
-const MODULE_NAME = 'app.barchart';
+const MODULE_NAME = 'app.component.barchart';
 
 export default MODULE_NAME;
 

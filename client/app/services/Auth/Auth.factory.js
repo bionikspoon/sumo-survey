@@ -2,7 +2,7 @@ import angular from 'angular';
 import LoopbackService from 'services/Loopback';
 import uiRouter from 'angular-ui-router';
 
-const MODULE_NAME = 'app.auth.factory';
+const MODULE_NAME = 'app.service.auth.factory';
 export default MODULE_NAME;
 
 angular

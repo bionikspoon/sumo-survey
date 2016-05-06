@@ -2,7 +2,7 @@ import angular from 'angular';
 import LoopbackService from 'services/Loopback';
 import FingerprintService from 'services/Fingerprint';
 
-const MODULE_NAME = 'app.survey.factory';
+const MODULE_NAME = 'app.service.survey.factory';
 export default MODULE_NAME;
 
 angular

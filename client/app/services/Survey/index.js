@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 const { blocks } = global;
-const MODULE_NAME = 'app.survey';
+const MODULE_NAME = 'app.service.survey';
 
 export default MODULE_NAME;
 

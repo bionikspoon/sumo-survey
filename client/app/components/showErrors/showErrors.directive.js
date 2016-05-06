@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-const MODULE_NAME = 'app.showErrors.directive';
+const MODULE_NAME = 'app.component.showErrors.directive';
 export default MODULE_NAME;
 
 angular
