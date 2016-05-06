@@ -20,6 +20,7 @@ function routeConfig($stateProvider) {
       templateUrl: require('./stats.html'),
       controller: ResultsController,
       controllerAs: '$ctrl',
+      authenticate: true,
       resolve: {
         questions: /** @ngInject **/Stats => Stats.summary(),
       },

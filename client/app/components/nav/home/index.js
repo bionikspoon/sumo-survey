@@ -1,7 +1,7 @@
 import angular from 'angular';
 
 const { blocks } = global;
-const MODULE_NAME = 'app.navbar';
+const MODULE_NAME = 'app.component.nav.home';
 
 export default MODULE_NAME;
 

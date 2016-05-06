@@ -18,6 +18,7 @@ function routeConfig($stateProvider) {
       templateUrl: require('./question.html'),
       controller: QuestionController,
       controllerAs: '$ctrl',
+      authenticate: true,
       resolve: {
         question: /** @ngInject **/(Stats, $stateParams) => Stats.question($stateParams.id),
       },

@@ -1,7 +1,12 @@
-<div class="container">
-   <ui-view></ui-view>
-   <h2>Responses</h2>
-   <app-barchart
-      data="$ctrl.questions"
-      on-click="$ctrl.showQuestion(item)"></app-barchart>
+<div id="page-admin-stats" class="container">
+   <div class="row">
+      <div class="col-xs-12">
+         <ui-view></ui-view>
+         <h2>Responses</h2>
+         <hr>
+         <app-barchart
+            data="$ctrl.questions"
+            on-click="$ctrl.showQuestion(item)"></app-barchart>
+      </div>
+   </div>
 </div>

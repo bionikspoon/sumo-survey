@@ -1,4 +1,13 @@
-<main id="page-admin">
-   <app-navbar brand-link="home" brand="Sumo Survey" routes="$ctrl.routes"></app-navbar>
-   <ui-view ></ui-view>
-</main>
+<div id="page-admin">
+   <main ui-view></main>
+</div>
+
+<app-nav class="top left">
+   <app-nav-home></app-nav-home>
+   <app-nav-stats></app-nav-stats>
+   <app-nav-add></app-nav-add>
+</app-nav>
+
+<app-nav class="bottom right">
+   <app-nav-logout></app-nav-logout>
+</app-nav>

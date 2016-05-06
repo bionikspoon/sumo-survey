@@ -1,6 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import navbar from 'components/navbar';
+import componentsNav from 'components/nav';
 
 // import top level pages
 const context = require.context('./', true, /\.\/[^\/]+\/index\.js$/);
@@ -10,7 +10,7 @@ const MODULE_NAME = 'app.page.admin';
 export default MODULE_NAME;
 
 angular
-  .module(MODULE_NAME, [ uiRouter, navbar, ...pages ])
+  .module(MODULE_NAME, [ uiRouter, componentsNav, ...pages ])
   .config(routeConfig);
 
 /** @ngInject **/

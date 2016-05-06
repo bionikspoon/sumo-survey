@@ -1,0 +1,48 @@
+@import "../../mixins";
+
+app-nav {
+  > nav {
+    position: fixed;
+
+    a.btn {
+      padding: 3px 6px 1px;
+    }
+
+  }
+
+  &.bottom {
+    > nav {
+      bottom: 15px;
+      @media (max-width: $screen-xs-max) {
+        bottom: 10px;
+      }
+    }
+  }
+
+  &.right {
+    > nav {
+      right: 15px;
+      @media (max-width: $screen-xs-max) {
+        right: 10px;
+      }
+    }
+  }
+
+  &.left {
+    > nav {
+      left: 15px;
+      @media (max-width: $screen-xs-max) {
+        left: 10px;
+      }
+    }
+  }
+
+  &.top {
+    > nav {
+      top: 15px;
+      @media (max-width: $screen-xs-max) {
+        top: 10px;
+      }
+    }
+  }
+}

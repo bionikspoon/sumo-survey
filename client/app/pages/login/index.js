@@ -2,14 +2,14 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import well from 'components/well';
 import showErrors from 'components/showErrors';
-import navHome from 'components/navHome';
+import componentsNav from 'components/nav';
 import AuthService from 'services/Auth';
 
 const MODULE_NAME = 'app.page.login';
 export default MODULE_NAME;
 
 angular
-  .module(MODULE_NAME, [ uiRouter, well, showErrors, AuthService, navHome ])
+  .module(MODULE_NAME, [ uiRouter, well, showErrors, AuthService, componentsNav ])
   .config(routeConfig);
 
 /** @ngInject **/

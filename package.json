@@ -16,8 +16,6 @@
     "angular-resource",
     "angular-touch",
     "angular-ui-router",
-    "angular-ui-bootstrap/src/collapse",
-    "angular-ui-bootstrap/src/accordion",
     "d3",
     "fingerprintjs2",
     "lodash/sample",
