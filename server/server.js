@@ -1,6 +1,5 @@
 /* eslint no-console:0 */
 require('babel-register');
-require('babel-polyfill');
 
 const loopback = require('loopback');
 const boot = require('loopback-boot');

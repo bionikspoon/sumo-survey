@@ -38,7 +38,7 @@ const ENV_IS = {
   PRODUCTION: ENV === PRODUCTION,
   TEST: ENV === TEST,
 };
-const DEBUG = !process.argv.includes('--release');
+const DEBUG = process.argv.includes('--debug');
 const VERBOSE = process.argv.includes('--verbose');
 const WATCH = ENV_IS.DEVELOPMENT || process.argv.includes('--auto-watch') || false;
 

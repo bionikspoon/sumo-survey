@@ -99,6 +99,6 @@ gulp.task('bundle', callback => {
 
     gulpUtil.log('[webpack]', stats.toString(webpackConfig.stats));
 
-    callback();
+    return callback();
   });
 });
