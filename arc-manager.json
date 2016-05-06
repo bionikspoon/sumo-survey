@@ -1,0 +1,12 @@
+{
+  "ids": {
+    "ManagerHost": 2,
+    "LoadBalancer": 1
+  },
+  "models": {
+    "ManagerHost": {
+      "f249ec38-7698-4122-a472-8dacac1adc13": "{\"id\":\"f249ec38-7698-4122-a472-8dacac1adc13\",\"host\":\"manuphatak.com\",\"port\":8701,\"actions\":[\"delete\",\"edit\"],\"protocol\":\"http\",\"created\":1462572774412,\"$$hashKey\":\"object:782\",\"isHostProblem\":true,\"error\":{\"message\":\"connect ETIMEDOUT 104.27.186.189:8701\"},\"errorType\":\"unknown\",\"app\":null,\"processes\":null}"
+    },
+    "LoadBalancer": {}
+  }
+}
