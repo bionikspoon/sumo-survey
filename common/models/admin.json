@@ -1,10 +1,17 @@
 {
-  "": {"include": ["responses", {"choices": "responses"}]},
   "name": "Admin",
   "base": "User",
   "idInjection": true,
   "options": {
     "validateUpsert": true
+  },
+  "": {
+    "include": [
+      "responses",
+      {
+        "choices": "responses"
+      }
+    ]
   },
   "scope": {
     "where": {

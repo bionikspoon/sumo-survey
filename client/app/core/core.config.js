@@ -11,5 +11,5 @@ angular
 function coreConfig($urlRouterProvider, $locationProvider) {
   $urlRouterProvider.otherwise('/');
 
-  $locationProvider.html5Mode(__PRODUCTION__);
+  $locationProvider.html5Mode(true);
 }

@@ -55,11 +55,15 @@
       ]
     }
   },
+  "files:before": {
+    "connect-history-api-fallback": {}
+  },
   "files": {
     "loopback#static": {
       "params": "$!../dist"
     }
   },
+
   "final": {
     "loopback#urlNotFound": {}
   },

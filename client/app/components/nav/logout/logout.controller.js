@@ -9,8 +9,12 @@ angular
   .controller('NavLogoutController', NavLogoutController);
 
 /** @ngInject **/
-function NavLogoutController(Auth) {
+function NavLogoutController($state, Auth) {
   const $ctrl = this;
   $ctrl.isAuthenticated = () => Auth.isAuthenticated();
-  $ctrl.logout = () => Auth.logout();
+  $ctrl.logout = () => Auth.logout()
+    .then(data => {
+      $state.go('home');
+      return data;
+    });
 }

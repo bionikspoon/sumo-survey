@@ -68,7 +68,7 @@ function BarchartDirective($log, $window) {
         .attr('fill', '#ffffff')
         .on('click', item => scope.onClick({ item }))
         .attr('x', Math.round(margin / 2) + labelPadding)
-        .attr('y', (d, i) => i * (barHeight + barPadding) + barHeight * 0.5 + barPadding)
+        .attr('y', (d, i) => (i + 0.5) * barHeight + (i + 1) * barPadding)
         .text(d => `${d.text} (${d.count})`);
     };
   }

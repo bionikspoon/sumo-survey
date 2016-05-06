@@ -24,17 +24,11 @@ function routeConfig($stateProvider) {
     });
 }
 
-function SurveyController($log, $state, Survey, question) {
+function SurveyController($log, $state, $q, Survey, question) {
+  if (angular.isUndefined(question.text)) return $state.transitionTo('done');
+
   const $ctrl = this;
   $ctrl.question = question;
-
-  activate();
-
-  ////////////////
-
-  function activate() {
-    if (angular.isUndefined($ctrl.question.text)) $state.transitionTo('done');
-  }
 
   ////////////////
 
@@ -50,6 +44,7 @@ function SurveyController($log, $state, Survey, question) {
       })
       .catch(error => {
         $log.error('SurveyController error: %s\n', error.data.error.message, error);
+        return $q.reject(error);
       });
   };
 }

@@ -10,7 +10,7 @@ angular
   .factory('Auth', Auth);
 
 /** @ngInject **/
-function Auth($log, $state, $q, Admin, LoopBackAuth) {
+function Auth($log, $q, Admin, LoopBackAuth) {
   getCurrentUser.data = null;
   const service = { login, logout, isAuthenticated, streamCurrentUser, currentUser: {} };
   return service;
@@ -31,13 +31,11 @@ function Auth($log, $state, $q, Admin, LoopBackAuth) {
 
   function streamCurrentUser() {
     return getCurrentUser()
-      .then(currentUser => {
-        angular.copy(currentUser, service.currentUser);
-        return service.currentUser;
-      })
+      .then(currentUser => angular.copy(currentUser, service.currentUser))
       .catch(() => {
-        angular.copy({}, service.currentUser);
-        return service.currentUser;
+        LoopBackAuth.clearUser();
+        LoopBackAuth.clearStorage();
+        return angular.copy({}, service.currentUser);
       });
   }
 
@@ -52,16 +50,9 @@ function Auth($log, $state, $q, Admin, LoopBackAuth) {
 
     if (getCurrentUser.data) { return getCurrentUser.data; }
 
-    getCurrentUser.data = Admin.getCurrent()
-      .$promise
-      .catch(err => {
-        LoopBackAuth.clearUser();
-        LoopBackAuth.clearStorage();
-        $state.reload();
-        return $q.reject(err);
-      })
-      .finally(() => { getCurrentUser.data = null; });
+    getCurrentUser.data = Admin.getCurrent().$promise;
 
-    return getCurrentUser.data;
+    return getCurrentUser.data
+      .finally(() => { getCurrentUser.data = null; });
   }
 }
