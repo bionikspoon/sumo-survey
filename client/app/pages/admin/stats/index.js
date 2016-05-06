@@ -1,7 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import StatsService from 'services/Stats';
-import uiBootstrapAccordion from 'angular-ui-bootstrap/src/accordion';
 import barchart from 'components/barchart';
 import question from './question';
 
@@ -9,7 +8,7 @@ const MODULE_NAME = 'app.page.admin.results';
 export default MODULE_NAME;
 
 angular
-  .module(MODULE_NAME, [ uiRouter, uiBootstrapAccordion, barchart, question, StatsService ])
+  .module(MODULE_NAME, [ uiRouter, barchart, question, StatsService ])
   .config(routeConfig);
 
 /** @ngInject **/

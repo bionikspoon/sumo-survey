@@ -12,14 +12,12 @@
   },
   "vendor": [
     "angular",
-    "angular-animate",
     "angular-resource",
-    "angular-touch",
     "angular-ui-router",
     "d3",
     "fingerprintjs2",
-    "lodash/sample",
-    "webfontloader"
+    "webfontloader",
+    "client/lbServices"
   ],
   "dependencies": {
     "angular": "1.5.5",

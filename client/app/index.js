@@ -1,11 +1,8 @@
 import angular from 'angular';
-import ngAnimate from 'angular-animate';
-import ngTouch from 'angular-touch';
 import appCore from './core';
 import appPages from './pages';
 
 const MODULE_NAME = 'app';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [ ngAnimate, ngTouch, appCore, appPages ]);
+angular.module(MODULE_NAME, [ appCore, appPages ]);

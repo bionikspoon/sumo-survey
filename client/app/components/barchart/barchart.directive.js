@@ -12,10 +12,7 @@ angular
 /** @ngInject **/
 function BarchartDirective($log, $window) {
   const directive = {
-    // bindToController: true,
-    // controller: BarchartController,
-    // controllerAs: '$ctrl',
-    restrict: 'EA',
+    restrict: 'E',
     scope: { data: '<', onClick: '&' },
     link,
   };
@@ -48,6 +45,7 @@ function BarchartDirective($log, $window) {
         .range([ 0, width ]);
 
       svg.attr('height', height);
+
       svg
         .selectAll('rect')
         .data(data)
@@ -62,6 +60,7 @@ function BarchartDirective($log, $window) {
         .transition()
         .duration(1000)
         .attr('width', d => xScale(d.count));
+
       svg.selectAll('categoryLabel')
         .data(data)
         .enter()
@@ -72,18 +71,5 @@ function BarchartDirective($log, $window) {
         .attr('y', (d, i) => i * (barHeight + barPadding) + barHeight * 0.5 + barPadding)
         .text(d => `${d.text} (${d.count})`);
     };
-  }
-}
-
-/** @ngInject **/
-function BarchartController($log) {
-  const $ctrl = this;
-
-  activate();
-
-  ////////////////
-
-  function activate() {
-
   }
 }

@@ -195,7 +195,7 @@ function getPlugins(env) {
       inject: false,
       template: PATHS.src('index.ejs'),
       filename: 'index.html',
-      title: 'Angular Webpack',
+      title: 'Sumo Survey',
       mobile: true,
       unsupportedBrowser: true,
       appMountDirective: 'app-core',
@@ -230,7 +230,11 @@ function getPlugins(env) {
       // plugins.push(
       //   new webpack.optimize.CommonsChunkPlugin({
       //     names: [
-      //       './client/app/pages/about', './client/app/pages/home',
+      //       './client/app/pages/admin',
+      //       './client/app/pages/done',
+      //       './client/app/pages/home',
+      //       './client/app/pages/login',
+      //       './client/app/pages/survey',
       //     ],
       //   })
       // );

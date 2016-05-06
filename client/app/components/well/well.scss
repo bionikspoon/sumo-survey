@@ -1,5 +1,22 @@
 [app-well] {
   .well {
     margin-bottom: 0;
+    border:        none;
+
+    .form-group, .checkbox {
+      color: rgba(255, 255, 255, .87);
+    }
+
+    h1 {
+      color: rgba(255, 255, 255, 1);
+    }
+
+    .page-header {
+      margin-top: 10px;
+    }
+
+    .btn-dark {
+      border: 2px solid #ffffff;
+    }
   }
 }
