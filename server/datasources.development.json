@@ -6,6 +6,7 @@
     "password": "secret",
     "name": "sql",
     "user": "sumo-survey",
-    "connector": "mysql"
+    "connector": "mysql",
+    "debug": true
   }
 }
