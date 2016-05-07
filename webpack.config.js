@@ -298,7 +298,7 @@ function getEnv(target) {
   switch (target) {
     case 'test':
       return TEST;
-    case 'start':
+    case 'dev':
       return DEVELOPMENT;
     case 'build':
       return PRODUCTION;

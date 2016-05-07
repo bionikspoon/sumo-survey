@@ -21,8 +21,8 @@ const PORT = webpackConfig.PORT;
 const PROXY_TARGET = { host: HOST, port: 3000 };
 PROXY_TARGET.url = `http://${PROXY_TARGET.host}:${PROXY_TARGET.port}`;
 
-gulp.task('default', [ 'start' ]);
-gulp.task('start', callback => {
+gulp.task('default', [ 'dev' ]);
+gulp.task('dev', callback => {
   runSequence(
     'clean',
     'loopback-angular',
