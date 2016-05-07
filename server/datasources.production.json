@@ -1,0 +1,7 @@
+{
+  "sql": {
+    "name": "sql",
+    "connector": "mysql",
+    "url": "${JAWSDB_MARIA_URL}"
+  }
+}
