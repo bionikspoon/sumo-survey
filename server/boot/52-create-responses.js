@@ -3,7 +3,7 @@ const promisify = require('../../utils/promisify');
 const _ = require('lodash');
 
 module.exports = function createResponses(app, callback) {
-  if (process.env.STARTED === 'TRUE') return callback();
+  if (global.STARTED === true) return callback();
 
   const { Question, Guest, Response } = app.models;
   console.log('Creating Guests...');

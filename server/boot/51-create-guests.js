@@ -4,7 +4,7 @@ const crypto = require('crypto');
 const _ = require('lodash/fp');
 
 module.exports = function createGuests(app, callback) {
-  if (process.env.STARTED === 'TRUE') return callback();
+  if (global.STARTED === true) return callback();
 
   const { Guest } = app.models;
   console.log('Creating Guests...');

@@ -25,7 +25,7 @@ gulp.task('default', [ 'dev' ]);
 gulp.task('dev', callback => {
   runSequence(
     'clean',
-    'loopback-angular',
+    [ 'copy', 'loopback-angular' ],
     'nodemon',
     [ 'browser-sync' ],
     callback
@@ -34,13 +34,18 @@ gulp.task('dev', callback => {
 gulp.task('build', callback => {
   runSequence(
     'clean',
-    'loopback-angular',
+    [ 'copy', 'loopback-angular' ],
     'bundle',
     callback
   );
 });
 
 gulp.task('clean', callback => fs.emptyDir(PATHS.dist(), callback));
+
+gulp.task('copy', () => {
+  gulp.src('./static/**/*')
+    .pipe(gulp.dest('./dist'))
+});
 
 gulp.task('loopback-angular', () => gulp
   .src(PATHS.server('server.js'))
