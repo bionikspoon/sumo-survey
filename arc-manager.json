@@ -1,11 +1,11 @@
 {
   "ids": {
-    "ManagerHost": 2,
+    "ManagerHost": 8,
     "LoadBalancer": 1
   },
   "models": {
     "ManagerHost": {
-      "f249ec38-7698-4122-a472-8dacac1adc13": "{\"id\":\"f249ec38-7698-4122-a472-8dacac1adc13\",\"host\":\"manuphatak.com\",\"port\":8701,\"actions\":[\"delete\",\"edit\"],\"protocol\":\"http\",\"created\":1462572774412,\"$$hashKey\":\"object:782\",\"isHostProblem\":true,\"error\":{\"message\":\"connect ETIMEDOUT 104.27.186.189:8701\"},\"errorType\":\"unknown\",\"app\":null,\"processes\":null}"
+      "324215af-05a4-4ba7-9711-bfbc7a4ce9c4": "{\"id\":\"324215af-05a4-4ba7-9711-bfbc7a4ce9c4\",\"host\":\"loopback.manuphatak.com\",\"port\":80,\"actions\":[\"delete\",\"edit\"],\"protocol\":\"http\",\"created\":1462587316217,\"error\":{\"message\":\"Hostname/IP doesn't match certificate's altnames: \\\"Host: loopback.manuphatak.com. is not in the cert's altnames: DNS:admin.manuphatak.com, DNS:content.manuphatak.com, DNS:interview-challenge.manuphatak.com, DNS:manuphatak.com, DNS:www.manuphatak.com\\\"\"},\"errorType\":\"unknown\",\"app\":null,\"processes\":null,\"$$hashKey\":\"object:195\",\"isHostProblem\":true}"
     },
     "LoadBalancer": {}
   }

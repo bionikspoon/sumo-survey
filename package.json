@@ -10,6 +10,9 @@
     "test:watch": "npm run test -- --auto-watch --no-single-run",
     "posttest": "nsp check"
   },
+  "engines": {
+    "node": "5.11.x"
+  },
   "vendor": [
     "angular",
     "angular-resource",
