@@ -1,18 +1,12 @@
 /* eslint no-console:0 */
-const promisify = require('../../utils/promisify');
-
-module.exports = function createAdmin(app, callback) {
-  if (global.STARTED === true) return callback();
-
+module.exports = function createAdmin(app) {
   console.log('Creating an Admin...');
 
-  const Admin = app.models.Admin;
+  const { Admin } = app.models;
 
   return Admin
     .create({ username: 'admin', email: 'admin@example.com', password: 'secret' })
     .then(logResults)
-    .then(promisify(callback, true))
-    .catch(promisify(callback));
 };
 
 function logResults(admin) {

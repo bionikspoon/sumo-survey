@@ -1,18 +1,14 @@
 /* eslint no-console:0 */
-const promisify = require('../../utils/promisify');
 const crypto = require('crypto');
-const _ = require('lodash/fp');
+const _ = require('lodash');
 
-module.exports = function createGuests(app, callback) {
-  if (global.STARTED === true) return callback();
-
+module.exports = function createGuests(app) {
+  
   const { Guest } = app.models;
   console.log('Creating Guests...');
 
   return Promise.all(_.range(0, 15).map(() => Guest.create({ fingerprint: getFingerprint(), ip: getIp() })))
-    .then(logResults)
-    .then(promisify(callback, true))
-    .catch(promisify(callback));
+    .then(logResults);
 };
 
 function logResults(guests) {

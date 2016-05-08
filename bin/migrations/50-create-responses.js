@@ -1,10 +1,7 @@
 /* eslint no-console:0 */
-const promisify = require('../../utils/promisify');
 const _ = require('lodash');
 
-module.exports = function createResponses(app, callback) {
-  if (global.STARTED === true) return callback();
-
+module.exports = function createResponses(app) {
   const { Question, Guest, Response } = app.models;
   console.log('Creating Guests...');
 
@@ -30,9 +27,7 @@ module.exports = function createResponses(app, callback) {
     // persist responses
     .then(responses => Promise.all(responses.map(response => Response.create(response))))
 
-    .then(logResults)
-    .then(promisify(callback, true))
-    .catch(promisify(callback));
+    .then(logResults);
 };
 
 function logResults(responses) {

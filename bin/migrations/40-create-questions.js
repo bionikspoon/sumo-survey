@@ -1,22 +1,15 @@
 /* eslint no-console:0 */
-const promisify = require('../../utils/promisify');
-
 module.exports = function createQuestions(app, callback) {
-  if (global.STARTED === true) return callback();
-
   console.log('Creating Questions...');
 
-  const Question = app.models.Question;
-  const Admin = app.models.Admin;
+  const { Question, Admin } = app.models;
 
   return Admin.findOne({})
     .then(admin => getSurvey(admin))
     .then(questions => Promise.all(questions.map(
       question => Question.createWithChoices(question)
     )))
-    .then(logResults)
-    .then(promisify(callback, true))
-    .catch(promisify(callback));
+    .then(logResults);
 };
 
 function logResults(questions) {
