@@ -1,14 +1,12 @@
 module.exports = function automigrate(app, callback) {
+  if (process.env.NODE_ENV !== 'development') return callback();
+
   // process.env.STARTED = 'FALSE';
   const sql = app.datasources.sql;
   const method = process.env.STARTED === 'TRUE' ? 'autoupdate' : 'automigrate';
 
-  sql[ method ](_callback);
+  console.log('Preparing "sql" datasource with %s', method);
 
-  function _callback(err) {
-    if (err) throw err;
-    
-    sql.disconnect();
-    return callback();
-  }
+  sql[ method ](callback);
+
 };
