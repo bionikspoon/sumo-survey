@@ -3,34 +3,38 @@ const _ = require('lodash');
 
 module.exports = function createResponses(app) {
   const { Question, Guest, Response } = app.models;
-  console.log('Creating Guests...');
+  console.log('Creating Responses...');
+
+  let questions;
 
   // create responses
-  // get Questions
-  return Question.find({ include: 'choices' })
-    // get Guests
-    .then(questions => Guest.find({})
-      .then(guests =>
-        // build responses
-        // for each guest...
-        guests.map(guest =>
-          questions
-            .filter(() => Math.random() > 0.2) // randomly skip a question
-            // for each question...
-            .map(question =>
-              // set response with randomly selected choice
-              ({ guest, question, choice: _.sample(question.choices()) })
-            )
-        )
-      )
-    )
-    // persist responses
-    .then(responses => Promise.all(responses.map(response => Response.create(response))))
+  return Question.find({ include: 'choices' })  // get Questions
+    .then(data => questions = data) // save questions for later
+    .then(() => Guest.find()) // get Guests
 
+    // prepare responses ...
+    .then(guests =>
+      // for each guest ...
+      guests.map(guest => {
+        // respond to several questions
+        return questions
+          .filter(() => Math.random() > 0.2) // randomly skip a question
+          .map(question => ({ guest, question, choice: _.sample(question.choices()) })); // randomly pick a choice
+      }) // flatten to get list of responses
+    )
+
+    // persist responses
+    .then(responses => Response.create(responses))
+
+    // log results
     .then(logResults);
+
+  function logResults(responses) {
+    return Response.count()
+      .then(count => {
+        console.log('Created %s Responses.', count);
+        return responses;
+      });
+  }
 };
 
-function logResults(responses) {
-  console.log('Created %s Responses.', _.flatten(responses).length);
-  return responses;
-}

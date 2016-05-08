@@ -3,24 +3,34 @@ const crypto = require('crypto');
 const _ = require('lodash');
 
 module.exports = function createGuests(app) {
-  
+
   const { Guest } = app.models;
   console.log('Creating Guests...');
 
-  return Promise.all(_.range(0, 15).map(() => Guest.create({ fingerprint: getFingerprint(), ip: getIp() })))
+  // prepare 15 random guests
+  const guests = _.range(15).map(() => ({ fingerprint: getRandomFingerprint(), ip: getRandomIp() }));
+
+  // persist Guests, promisify result
+  const guestsPromise = new Promise((resolve, reject) =>
+    Guest.create(guests, (err, data) => err ? reject(err) : resolve(data))
+  );
+
+  // return promise
+  return guestsPromise
     .then(logResults);
+
+  function logResults(data) {
+    return Guest.count({ ip: '*' })
+      .then(guestCount => console.log('Created %d Guests.', guestCount))
+      .then(() => data);
+  }
 };
 
-function logResults(guests) {
-  console.log('Created %d Guests.', guests.length);
-  return guests;
-}
-
-function getFingerprint() {
+function getRandomFingerprint() {
   return crypto.randomBytes(16).toString('hex');
 }
 
-function getIp() {
-  const digit = () => _.random(0, 127);
-  return _.range(0, 4).map(digit).join('.');
+function getRandomIp() {
+  const digit = () => _.random(127);
+  return _.range(4).map(digit).join('.');
 }

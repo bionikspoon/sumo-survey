@@ -2,7 +2,6 @@
   "name": "Response",
   "base": "PersistedModel",
   "idInjection": true,
-  "indexes": {},
   "options": {
     "validateUpsert": true
   },

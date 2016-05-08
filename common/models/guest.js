@@ -16,10 +16,21 @@ module.exports = function setup(Guest) {
    * @returns {null}
    */
   function includeClientIp(context, next) {
-    const ip = getClientIp();
-    if (ipNotSet(context.query, 'where')) Object.assign(context.query.where, { ip });
-    if (ipNotSet(context.instance)) Object.assign(context.instance, { ip });
+    let target;
 
+    // setup, get target object
+    if (context.query) { // is 'access'
+      target = context.query.where = context.query.where || { ip: '*' };
+    }
+    if (context.instance) { // is 'before save'
+      target = context.instance;
+    }
+
+    //include ip
+    if (!hasIp(target)) setIp(target);
+
+    //cleanup
+    if (target.ip === '*') delete target.ip; // allow wildcard to override behavior
     return next();
   }
 
@@ -48,7 +59,7 @@ module.exports = function setup(Guest) {
     const { Question } = app.models;
 
     return Guest.findOrCreate({ fingerprint, ip })
-      .then(data => data[ 0 ])
+      .then(data => data[ 0 ]) // data = [instance, isNew]
 
       // get guest id
       .then(guest => {
@@ -90,19 +101,15 @@ module.exports = function setup(Guest) {
  * @returns {string} client ip
  */
 function getClientIp() {
-  const ctx = loopback.getCurrentContext();
+  const context = loopback.getCurrentContext();
   // noinspection JSAccessibilityCheck
-  return ctx ? ctx.get('clientIp') : '0.0.0.0';
+  return context ? context.get('clientIp') : '0.0.0.0';
 }
 
-/**
- * Check if ip is set in query
- * @param {object} obj
- * @param {string} [field]
- * @returns {boolean}
- */
-function ipNotSet(obj, field) {
-  if (!obj) return false;
-  if (field) return obj[ field ] && obj[ field ].ip === undefined;
-  return obj.ip === undefined;
+function hasIp(obj) {
+  return _.isObject(obj) && !!obj.ip;
+}
+
+function setIp(obj) {
+  return Object.assign(obj, { ip: getClientIp() })
 }

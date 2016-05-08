@@ -1,26 +1,22 @@
 /* eslint no-console:0 */
-module.exports = function createQuestions(app, callback) {
+module.exports = function createQuestions(app) {
   console.log('Creating Questions...');
 
-  const { Question, Admin } = app.models;
+  const { Question, Admin, Choice } = app.models;
 
   return Admin.findOne({})
     .then(admin => getSurvey(admin))
-    .then(questions => Promise.all(questions.map(
-      question => Question.createWithChoices(question)
-    )))
+    .then(questions => Question.createWithChoices(questions))
     .then(logResults);
+
+  function logResults(questions) {
+    return Question.count()
+      .then(questionCount => console.log('Created %d Questions', questionCount))
+      .then(() => Choice.count())
+      .then(choiceCount => console.log('Created %d Choices', choiceCount))
+      .then(() => questions);
+  }
 };
-
-function logResults(questions) {
-  console.log('Created %d Questions', questions.length);
-  console.log(
-    'Created %d Choices',
-    questions.reduce((count, question) => count + question.choices().length, 0)
-  );
-
-  return questions;
-}
 
 function getSurvey(admin) {
   // Satisfaction with life survey
