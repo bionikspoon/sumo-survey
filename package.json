@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "main": "server/server.js",
   "scripts": {
-    "start": "node .",
-    "dev": "gulp",
+    "prestart": "npm run migrate",
+    "start": "slc run",
+    "dev": "gulp dev --debug",
     "build": "gulp build",
     "build:debug": "npm run build -- --debug",
-    "test": "karma start",
-    "test:watch": "npm run test -- --auto-watch --no-single-run",
-    "posttest": "nsp check"
+    "test": "karma start -- --debug",
+    "test:watch": "npm run test -- --debug --auto-watch --no-single-run",
+    "posttest": "nsp check",
+    "migrate": "./bin/migrate"
   },
   "engines": {
     "node": "5.11.x"
