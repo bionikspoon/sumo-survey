@@ -25,16 +25,18 @@ gulp.task('default', [ 'dev' ]);
 gulp.task('dev', callback => {
   runSequence(
     'clean',
-    [ 'copy', 'loopback-angular' ],
+    'copy',
+    'loopback-angular',
     'nodemon',
-    [ 'browser-sync' ],
+    'browser-sync',
     callback
   );
 });
 gulp.task('build', callback => {
   runSequence(
     'clean',
-    [ 'copy', 'loopback-angular' ],
+    'copy',
+    'loopback-angular',
     'bundle',
     callback
   );

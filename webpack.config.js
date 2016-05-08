@@ -201,6 +201,7 @@ function getPlugins(env) {
       appMountDirective: 'app-core',
       baseHref: ENV_IS.PRODUCTION ? '/' : `http://${HOST}:${PORT}/`,
       minify: DEBUG ? false : getHtmlMinifyOptions(),
+      favicon: './static/favicon.ico',
     }),
 
     new webpack.DefinePlugin({
