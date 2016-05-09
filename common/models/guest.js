@@ -3,7 +3,7 @@ const _ = require('lodash/fp');
 const app = require('../../server/server');
 
 module.exports = function setup(Guest) {
-  Guest.observe('access', includeClientIp);
+  // Guest.observe('access', includeClientIp);
   Guest.observe('before save', includeClientIp);
   Guest.createResponse = createResponse;
   Guest.getAllUnanswered = getAllUnanswered;
@@ -26,10 +26,10 @@ module.exports = function setup(Guest) {
       target = context.instance;
     }
 
-    //include ip
+    // include ip
     if (!hasIp(target)) setIp(target);
 
-    //cleanup
+    // cleanup
     if (target.ip === '*') delete target.ip; // allow wildcard to override behavior
     return next();
   }
@@ -38,7 +38,7 @@ module.exports = function setup(Guest) {
    * Create a guest response.
    * @param {string} fingerprint
    * @param {response} response Response data
-   * @returns {Promise.<T>}
+   * @returns {Promise.<response>}
    */
   function createResponse(fingerprint, response) {
     const { choiceId, questionId } = response;
@@ -53,7 +53,7 @@ module.exports = function setup(Guest) {
    * @param {string} fingerprint Guest fingerprint
    * @param {string} [ip] Guest ip
    * @param {object} [filter] filter results
-   * @returns {Promise.<T>}
+   * @returns {Promise.<[question]>}
    */
   function getAllUnanswered(fingerprint, ip, filter = {}) {
     const { Question } = app.models;
@@ -88,7 +88,7 @@ module.exports = function setup(Guest) {
    * @param {string} fingerprint Guest fingerprint
    * @param {string} [ip] Guest ip
    * @param {object} [filter] filter results
-   * @returns {Promise.<T>}
+   * @returns {Promise.<question>}
    */
   function getOneUnanswered(fingerprint, ip, filter = {}) {
     return Guest.getAllUnanswered(fingerprint, ip, filter)
@@ -111,5 +111,5 @@ function hasIp(obj) {
 }
 
 function setIp(obj) {
-  return Object.assign(obj, { ip: getClientIp() })
+  return Object.assign(obj, { ip: getClientIp() });
 }

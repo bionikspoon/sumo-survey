@@ -12,7 +12,7 @@ module.exports = function setup(Question) {
 
     function createMany(dataItems) {
       // for each data item ...
-      return Promise.all(dataItems.map(createOne))
+      return Promise.all(dataItems.map(createOne));
     }
 
     function createOne(dataItem) {

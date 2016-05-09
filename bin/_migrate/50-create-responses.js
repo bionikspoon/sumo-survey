@@ -9,18 +9,18 @@ module.exports = function createResponses(app) {
 
   // create responses
   return Question.find({ include: 'choices' })  // get Questions
-    .then(data => questions = data) // save questions for later
+    .then(data => { questions = data; }) // save questions for later
     .then(() => Guest.find()) // get Guests
 
     // prepare responses ...
     .then(guests =>
       // for each guest ...
-      guests.map(guest => {
+      guests.map(guest =>
         // respond to several questions
-        return questions
+        questions
           .filter(() => Math.random() > 0.2) // randomly skip a question
-          .map(question => ({ guest, question, choice: _.sample(question.choices()) })); // randomly pick a choice
-      }) // flatten to get list of responses
+          .map(question => ({ guest, question, choice: _.sample(question.choices()) })) // randomly pick a choice
+      ) // flatten to get list of responses
     )
 
     // persist responses

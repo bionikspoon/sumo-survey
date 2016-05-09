@@ -3,6 +3,6 @@ module.exports = function disconnect(app) {
   console.log('Disconnecting from "sql" datasource');
 
   return new Promise((resolve, reject) =>
-    sql.disconnect((error, data) => error ? reject(error) : resolve(data)
-    ));
+    sql.disconnect((error, data) => (error ? reject(error) : resolve(data)))
+  );
 };

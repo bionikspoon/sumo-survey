@@ -3,6 +3,6 @@ module.exports = function automigrate(app) {
   console.log('Preparing "sql" datasource with automigrate');
 
   return new Promise((resolve, reject) =>
-      sql.automigrate((error, data) => error ? reject(error) : resolve(data)
-    ));
+    sql.automigrate((error, data) => (error ? reject(error) : resolve(data)))
+  );
 };

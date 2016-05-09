@@ -3,7 +3,6 @@ const crypto = require('crypto');
 const _ = require('lodash');
 
 module.exports = function createGuests(app) {
-
   const { Guest } = app.models;
   console.log('Creating Guests...');
 
@@ -12,7 +11,7 @@ module.exports = function createGuests(app) {
 
   // persist Guests, promisify result
   const guestsPromise = new Promise((resolve, reject) =>
-    Guest.create(guests, (err, data) => err ? reject(err) : resolve(data))
+    Guest.create(guests, (err, data) => (err ? reject(err) : resolve(data)))
   );
 
   // return promise

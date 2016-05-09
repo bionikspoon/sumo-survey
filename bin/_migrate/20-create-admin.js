@@ -6,7 +6,7 @@ module.exports = function createAdmin(app) {
 
   return Admin
     .create({ username: 'admin', email: 'admin@example.com', password: 'secret' })
-    .then(logResults)
+    .then(logResults);
 };
 
 function logResults(admin) {

@@ -2,7 +2,7 @@
   "name": "Guest",
   "base": "PersistedModel",
   "strict": true,
-  "idInjection": true,
+  "idInjection": false,
   "indexes": {},
   "options": {
     "validateUpsert": true
@@ -16,12 +16,12 @@
   "properties": {
     "fingerprint": {
       "type": "string",
-      "id": 1,
+      "id": true,
       "required": true
     },
     "ip": {
       "type": "string",
-      "id": 2
+      "required": true
     }
   },
   "validations": [],

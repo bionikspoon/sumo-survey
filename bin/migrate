@@ -5,12 +5,12 @@ require('babel-register');
 const path = require('path');
 const app = require(path.resolve(__dirname, '../'));
 
-const automigrate = require('./migrations/10-automigrate');
-const createAdmin = require('./migrations/20-create-admin');
-const createGuests = require('./migrations/30-create-guests');
-const createQuestions = require('./migrations/40-create-questions');
-const createResponses = require('./migrations/50-create-responses');
-const disconnect = require('./migrations/90-disconnect');
+const automigrate = require('./_migrate/10-automigrate');
+const createAdmin = require('./_migrate/20-create-admin');
+const createGuests = require('./_migrate/30-create-guests');
+const createQuestions = require('./_migrate/40-create-questions');
+const createResponses = require('./_migrate/50-create-responses');
+const disconnect = require('./_migrate/90-disconnect');
 
 automigrate(app)
   .then(() => createAdmin(app))
