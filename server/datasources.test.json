@@ -1,0 +1,6 @@
+{
+  "sql": {
+    "name": "sql",
+    "connector": "memory"
+  }
+}

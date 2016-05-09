@@ -26,7 +26,7 @@ const PATHS = {
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
 const TEST = 'test';
-const LOADER_INCLUDES = [ PATHS.client() ];
+const LOADER_INCLUDES = [ PATHS.client(), PATHS.base('tests.webpack.js') ];
 const SERVER = {
   HOST: 'localhost',
   PORT: 5000,
@@ -116,7 +116,7 @@ function getEntry(env) {
     case TEST:
       entry.bundle = [];
       entry.bundle.push('angular');
-      entry.bundle.push(`mocha!${PATHS.client('tests.webpack')}`);
+      entry.bundle.push(`${PATHS.base('tests.webpack.js')}`);
       break;
   }
 
@@ -166,6 +166,7 @@ function getLoaders(env) {
     { test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, loader: 'file' },
     { test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml' },
     { test: /\.(png|jpg|jpeg|gif)$/, loader: 'url?limit=10000' },
+    { test: /\.json$/, loader: 'json' },
   ];
   switch (env) {
     case DEVELOPMENT:
