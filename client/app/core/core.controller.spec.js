@@ -1,12 +1,14 @@
-/* eslint-env angular/mocks, jasmine */
+/* eslint-env angular/mocks, mocha */
+/* eslint no-unused-expressions:0 */
+const { expect } = require('chai');
 import CoreController from './core.controller';
-const { beforeEach } = global;
+const { beforeEach, describe, it, ngModule, inject } = global;
 
 describe('Core Controller', () => {
   let $ctrl;
   let $scope;
 
-  beforeEach(window.module(CoreController)); // eslint-disable-line angular/window-service
+  beforeEach(ngModule(CoreController));
 
   beforeEach(() => {
     let $controller;
@@ -22,10 +24,10 @@ describe('Core Controller', () => {
   });
 
   it('Should exist', () => {
-    expect(typeof $ctrl).toBe('object');
+    expect($ctrl).to.be.an('object');
   });
 
   it('Should have name CoreController', () => {
-    expect($ctrl.name).toBe('CoreController');
+    expect($ctrl.name).to.be.equal('CoreController');
   });
 });

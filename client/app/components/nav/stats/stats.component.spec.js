@@ -1,12 +1,14 @@
-/* eslint-env angular/mocks, jasmine */
+/* eslint-env angular/mocks, mocha */
+/* eslint no-unused-expressions:0 */
+const { expect } = require('chai');
 import NavStatsComponent from './stats.component';
-const { beforeEach, describe } = global;
+const { beforeEach, describe, it, ngModule, inject } = global;
 
 describe('navStats Component', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(NavStatsComponent)); // eslint-disable-line angular/window-service
+  beforeEach(ngModule(NavStatsComponent));
 
   beforeEach(() => {
     let $compile;
@@ -24,11 +26,11 @@ describe('navStats Component', () => {
 
   describe('Component', () => {
     it('Should exist with class ng-scope', () => {
-      expect(element[ 0 ].classList.contains('ng-scope')).toBeTruthy();
+      expect(element[ 0 ]).to.have.class('ng-scope');
     });
 
     it('Should exist with class ng-isolate-scope', () => {
-      expect(element[ 0 ].classList.contains('ng-isolate-scope')).toBeTruthy();
+      expect(element[ 0 ]).to.have.class('ng-isolate-scope');
     });
   });
 
@@ -40,7 +42,7 @@ describe('navStats Component', () => {
     });
 
     it('Should exist', () => {
-      expect(typeof $ctrl).toBe('object');
+      expect($ctrl).to.be.an('object');
     });
   });
 });

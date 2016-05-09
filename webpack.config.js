@@ -15,7 +15,7 @@ const autoprefixer = require('autoprefixer');
 // CONSTANTS
 // ===========================================================================
 const PATHS = {
-  src: unipath('client'),
+  client: unipath('client'),
   app: unipath('client', 'app'),
   dist: unipath('dist'),
   server: unipath('server'),
@@ -26,9 +26,15 @@ const PATHS = {
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
 const TEST = 'test';
-const LOADER_INCLUDES = [ PATHS.src() ];
-const HOST = 'localhost';
-const PORT = 5000;
+const LOADER_INCLUDES = [ PATHS.client() ];
+const SERVER = {
+  HOST: 'localhost',
+  PORT: 5000,
+  PROXY_PORT: 3000,
+};
+SERVER.URL = `http://${SERVER.HOST}:${SERVER.PORT}`;
+SERVER.PROXY_URL = `http://${SERVER.HOST}:${SERVER.PROXY_PORT}`;
+
 // ===========================================================================
 // SETUP ENV
 // ===========================================================================
@@ -40,7 +46,7 @@ const ENV_IS = {
 };
 const DEBUG = process.argv.includes('--debug');
 const VERBOSE = process.argv.includes('--verbose');
-const WATCH = ENV_IS.DEVELOPMENT || process.argv.includes('--auto-watch') || false;
+const WATCH = ENV_IS.DEVELOPMENT || process.env.npm_lifecycle_event === 'test' || false;
 
 // ===========================================================================
 // CONFIG EXPORT
@@ -49,7 +55,7 @@ module.exports = {
   entry: getEntry(ENV),
 
   output: {
-    path: PATHS.dist(),
+    path: ENV_IS.TEST ? PATHS.dist('tests') : PATHS.dist(),
     publicPath: '/',
     filename: DEBUG ? '[name].js?[hash]' : '[name].[chunkhash].js',
     chunkFilename: DEBUG ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
@@ -60,6 +66,7 @@ module.exports = {
   module: {
     preLoaders: getPreLoaders(ENV),
     loaders: getLoaders(ENV),
+    noParse: [ /node_modules\/sinon\// ],
   },
 
   plugins: getPlugins(ENV),
@@ -67,22 +74,22 @@ module.exports = {
   resolve: {
     root: [ PATHS.base(), PATHS.app() ],
     extensions: [ '', '.js' ],
+    alias: { sinon: 'sinon/pkg/sinon.js' },
   },
   resolveLoader: {
     modulesDirectories: [ 'node_modules', PATHS.base() ],
   },
   devtool: ENV_IS.PRODUCTION ? 'source-map' : 'inline-source-map',
+  devServer: { noInfo: !VERBOSE, colors: true, inline: true },
   postcss: getPostcss,
   cache: DEBUG,
   debug: DEBUG,
   target: 'web',
   progress: true,
   watch: WATCH,
-  noInfo: !VERBOSE,
   stats: getStatOptions(),
   PATHS,
-  HOST,
-  PORT,
+  SERVER,
 };
 
 // ===========================================================================
@@ -90,22 +97,26 @@ module.exports = {
 // ===========================================================================
 function getEntry(env) {
   const entry = {};
-  entry.main = [];
 
   switch (env) {
     case DEVELOPMENT:
+      entry.main = [];
       // enforce order
-      entry.main.push(PATHS.src('app.bootstrap.js'));
-      entry.main.push(`webpack-hot-middleware/client?http://${HOST}:${PORT}&reload=true`);
+      entry.main.push(PATHS.client('app.bootstrap.js'));
+      entry.main.push(`webpack-hot-middleware/client?${SERVER.URL}&reload=true`);
       entry.vendor = require('./package.json').vendor;
       break;
 
     case PRODUCTION:
-      entry.main.push(PATHS.src('app.bootstrap.js'));
+      entry.main = [];
+      entry.main.push(PATHS.client('app.bootstrap.js'));
       entry.vendor = require('./package.json').vendor;
       break;
 
     case TEST:
+      entry.bundle = [];
+      entry.bundle.push('angular');
+      entry.bundle.push(`mocha!${PATHS.client('tests.webpack')}`);
       break;
   }
 
@@ -131,9 +142,9 @@ function getPreLoaders(env) {
       break;
 
     case TEST:
-      preLoaders.push(
-        { test: /\.js/, include: LOADER_INCLUDES, loader: 'babel-istanbul' }
-      );
+      // preLoaders.push(
+      //   { test: /\.js/, include: LOADER_INCLUDES, loader: 'babel-istanbul' }
+      // );
       break;
   }
   preLoaders.push({ test: /index\.js$/, include: [ PATHS.app() ], loader: 'angular-autoload' });
@@ -141,12 +152,12 @@ function getPreLoaders(env) {
 }
 
 function getLoaders(env) {
-  const SASS_LOADER = { test: /\.s?css$/, includes: LOADER_INCLUDES };
+  const SASS_LOADER = { test: /\.scss$/, includes: LOADER_INCLUDES };
   const loaders = [
     { test: /\.js$/, loader: 'babel?cacheDirectory', include: LOADER_INCLUDES },
     {
       test: /\.html$/,
-      loader: `ngtemplate?relativeTo=${PATHS.src()}!html?interpolate`,
+      loader: `ngtemplate?relativeTo=${PATHS.client()}!html?interpolate`,
       include: LOADER_INCLUDES,
     },
     { test: /\.woff(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=application/font-woff' },
@@ -191,18 +202,7 @@ function getLoaders(env) {
 
 function getPlugins(env) {
   const plugins = [
-    new HtmlPlugin({
-      inject: false,
-      template: PATHS.src('index.ejs'),
-      filename: 'index.html',
-      title: 'Sumo Survey',
-      mobile: true,
-      unsupportedBrowser: true,
-      appMountDirective: 'app-core',
-      baseHref: ENV_IS.PRODUCTION ? '/' : `http://${HOST}:${PORT}/`,
-      minify: DEBUG ? false : getHtmlMinifyOptions(),
-      favicon: './static/favicon.ico',
-    }),
+    new HtmlPlugin(getHtmlOptions(env)),
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(env),
@@ -221,24 +221,9 @@ function getPlugins(env) {
       break;
 
     case PRODUCTION:
-      if (!DEBUG) {
-        plugins.push(new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }));
-      }
-      plugins.push(
-        new ExtractTextPlugin(DEBUG ? 'main.css?[chunkhash]' : 'main.[chunkhash].css')
-      );
-      // // create chunks for pages
-      // plugins.push(
-      //   new webpack.optimize.CommonsChunkPlugin({
-      //     names: [
-      //       './client/app/pages/admin',
-      //       './client/app/pages/done',
-      //       './client/app/pages/home',
-      //       './client/app/pages/login',
-      //       './client/app/pages/survey',
-      //     ],
-      //   })
-      // );
+      if (!DEBUG) plugins.push(new webpack.optimize.UglifyJsPlugin({ compress: { warnings: false } }));
+
+      plugins.push(new ExtractTextPlugin(DEBUG ? 'main.css?[chunkhash]' : 'main.[chunkhash].css'));
       plugins.push(new webpack.optimize.AggressiveMergingPlugin());
       plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] }));
       plugins.push(new webpack.optimize.DedupePlugin());
@@ -256,6 +241,33 @@ function getPostcss(bundler) {
     precss(),
     autoprefixer({ browsers: [ 'last 2 versions' ] }),
   ];
+}
+
+function getHtmlOptions(env) {
+  const options = {
+    inject: false,
+    template: PATHS.client('index.ejs'),
+    filename: 'index.html',
+    title: 'Sumo Survey',
+    mobile: true,
+    unsupportedBrowser: true,
+    appMountDirective: 'app-core',
+    baseHref: '/',
+    minify: DEBUG ? false : getHtmlMinifyOptions(),
+  };
+
+  switch (env) {
+    case DEVELOPMENT:
+      options.baseHref = `${SERVER.URL}/`;
+      break;
+    case PRODUCTION:
+      options.favicon = PATHS.client('favicon.ico');
+      break;
+    case TEST:
+      options.title = 'Sumo Survey Tests';
+      break;
+  }
+  return options;
 }
 
 function getHtmlMinifyOptions() {

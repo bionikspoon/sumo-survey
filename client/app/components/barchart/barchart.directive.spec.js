@@ -1,12 +1,14 @@
-/* eslint-env angular/mocks, jasmine */
+/* eslint-env angular/mocks, mocha */
+/* eslint no-unused-expressions:0 */
+const { expect } = require('chai');
 import BarchartDirective from './barchart.directive';
-const { beforeEach, describe } = global;
+const { beforeEach, describe, it, ngModule, inject } = global;
 
 describe('barchart Directive', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(BarchartDirective)); // eslint-disable-line angular/window-service
+  beforeEach(ngModule(BarchartDirective));
 
   beforeEach(() => {
     let $compile;
@@ -24,11 +26,11 @@ describe('barchart Directive', () => {
 
   describe('Directive', () => {
     it('Should exist with class ng-scope', () => {
-      expect(element[ 0 ].classList.contains('ng-scope')).toBeTruthy();
+      expect(element[ 0 ]).to.have.class('ng-scope');
     });
 
     it('Should exist with class ng-isolate-scope', () => {
-      expect(element[ 0 ].classList.contains('ng-isolate-scope')).toBeTruthy();
+      expect(element[ 0 ]).to.have.class('ng-isolate-scope');
     });
   });
 });

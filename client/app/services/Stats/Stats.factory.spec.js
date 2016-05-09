@@ -1,20 +1,22 @@
-/* eslint-env angular/mocks, jasmine */
+/* eslint-env angular/mocks, mocha */
+/* eslint no-unused-expressions:0 */
+const { expect } = require('chai');
 import StatsFactory from './Stats.factory';
-const { beforeEach, describe } = global;
+const { beforeEach, describe, it, ngModule, inject } = global;
 
 describe('Stats Factory', () => {
   let Stats;
 
-  beforeEach(window.module(StatsFactory)); // eslint-disable-line angular/window-service
+  beforeEach(ngModule(StatsFactory));
   beforeEach(inject((_Stats_) => {
     Stats = _Stats_;
   }));
 
   it('Should have method summary', () => {
-    expect(typeof Stats.summary).toBe('function');
+    expect(Stats.summary).to.be.a('function');
   });
 
   it('Should have method question', () => {
-    expect(typeof Stats.question).toBe('function');
+    expect(Stats.question).to.be.a('function');
   });
 });

@@ -1,20 +1,22 @@
-/* eslint-env angular/mocks, jasmine */
+/* eslint-env angular/mocks, mocha */
+/* eslint no-unused-expressions:0 */
+const { expect } = require('chai');
 import SurveyFactory from './Survey.factory';
-const { beforeEach, describe } = global;
+const { beforeEach, describe, it, ngModule, inject } = global;
 
 describe('Survey Factory', () => {
   let Survey;
 
-  beforeEach(window.module(SurveyFactory)); // eslint-disable-line angular/window-service
+  beforeEach(ngModule(SurveyFactory));
   beforeEach(inject((_Survey_) => {
     Survey = _Survey_;
   }));
 
   it('Should have method question', () => {
-    expect(typeof Survey.question).toBe('function');
+    expect(Survey.question).to.be.a('function');
   });
 
   it('Should have method answer', () => {
-    expect(typeof Survey.answer).toBe('function');
+    expect(Survey.answer).to.be.a('function');
   });
 });

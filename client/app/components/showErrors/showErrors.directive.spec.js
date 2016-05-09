@@ -1,12 +1,14 @@
-/* eslint-env angular/mocks, jasmine */
+/* eslint-env angular/mocks, mocha */
+/* eslint no-unused-expressions:0 */
+const { expect } = require('chai');
 import ShowErrorsDirective from './showErrors.directive';
-const { beforeEach } = global;
+const { beforeEach, describe, it, ngModule, inject } = global;
 
 describe('showErrors Directive', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(ShowErrorsDirective)); // eslint-disable-line angular/window-service
+  beforeEach(ngModule(ShowErrorsDirective));
 
   beforeEach(() => {
     let $compile;
@@ -24,11 +26,11 @@ describe('showErrors Directive', () => {
 
   describe('Directive', () => {
     it('Should exist without class ng-scope', () => {
-      expect(element.children()[ 0 ].classList.contains('ng-scope')).toBeFalsy();
+      expect(element.children()[ 0 ].classList.contains('ng-scope')).to.be.falsy;
     });
 
     it('Should exist with class ng-isolate-scope', () => {
-      expect(element.children()[ 0 ].classList.contains('ng-isolate-scope')).toBeTruthy();
+      expect(element.children()[ 0 ]).to.have.class('ng-isolate-scope');
     });
   });
 
@@ -40,7 +42,7 @@ describe('showErrors Directive', () => {
     });
 
     it('Should exist', () => {
-      expect(typeof $ctrl).toBe('object');
+      expect($ctrl).to.be.an('object');
     });
   });
 });

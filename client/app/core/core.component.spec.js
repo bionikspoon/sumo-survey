@@ -1,12 +1,14 @@
-/* eslint-env angular/mocks, jasmine */
+/* eslint-env angular/mocks, mocha */
+/* eslint no-unused-expressions:0 */
+const { expect } = require('chai');
 import CoreComponent from './core.component';
-const { beforeEach } = global;
+const { beforeEach, describe, it, ngModule, inject } = global;
 
 describe('Core Component', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(CoreComponent)); // eslint-disable-line angular/window-service
+  beforeEach(ngModule(CoreComponent));
 
   beforeEach(() => {
     let $compile;
@@ -24,11 +26,11 @@ describe('Core Component', () => {
 
   describe('Component', () => {
     it('Should exist with class ng-scope', () => {
-      expect(element[ 0 ].classList.contains('ng-scope')).toBeTruthy();
+      expect(element[ 0 ]).to.have.class('ng-scope');
     });
 
     it('Should exist with class ng-isolate-scope', () => {
-      expect(element[ 0 ].classList.contains('ng-isolate-scope')).toBeTruthy();
+      expect(element[ 0 ]).to.have.class('ng-isolate-scope');
     });
   });
 
@@ -40,7 +42,7 @@ describe('Core Component', () => {
     });
 
     it('Should exist', () => {
-      expect(typeof $ctrl).toBe('object');
+      expect($ctrl).to.be.an('object');
     });
   });
 });

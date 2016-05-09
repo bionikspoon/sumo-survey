@@ -16,16 +16,12 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const webpackConfig = require('./webpack.config.js');
 
 const PATHS = webpackConfig.PATHS;
-const HOST = webpackConfig.HOST;
-const PORT = webpackConfig.PORT;
-const PROXY_TARGET = { host: HOST, port: 3000 };
-PROXY_TARGET.url = `http://${PROXY_TARGET.host}:${PROXY_TARGET.port}`;
+const SERVER = webpackConfig.SERVER;
 
 gulp.task('default', [ 'dev' ]);
 gulp.task('dev', callback => {
   runSequence(
     'clean',
-    'copy',
     'loopback-angular',
     'nodemon',
     'browser-sync',
@@ -35,7 +31,6 @@ gulp.task('dev', callback => {
 gulp.task('build', callback => {
   runSequence(
     'clean',
-    'copy',
     'loopback-angular',
     'bundle',
     callback
@@ -44,36 +39,31 @@ gulp.task('build', callback => {
 
 gulp.task('clean', callback => fs.emptyDir(PATHS.dist(), callback));
 
-gulp.task('copy', () => {
-  gulp.src('./static/**/*')
-    .pipe(gulp.dest('./dist'))
-});
-
 gulp.task('loopback-angular', () => gulp
   .src(PATHS.server('server.js'))
   .pipe(loopbackAngular())
   .pipe(rename('index.js'))
-  .pipe(gulp.dest(PATHS.src('lbServices')))
+  .pipe(gulp.dest(PATHS.client('lbServices')))
 );
 
 gulp.task('browser-sync', callback => {
   const bundler = webpack(webpackConfig);
 
   browserSync.init({
-    baseDir: PATHS.src(),
+    baseDir: PATHS.client(),
 
     middleware: [
       webpackDevMiddleware(bundler, {
         publicPath: webpackConfig.output.publicPath,
         stats: webpackConfig.stats,
-        noInfo: webpackConfig.noInfo,
+        noInfo: webpackConfig.devServer.noInfo,
       }),
 
       webpackHotMiddleware(bundler),
     ],
 
-    proxy: PROXY_TARGET.url,
-    port: PORT,
+    proxy: SERVER.PROXY_URL,
+    port: SERVER.PORT,
     open: false,
   }, callback);
 });

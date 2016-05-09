@@ -1,12 +1,14 @@
-/* eslint-env angular/mocks, jasmine */
+/* eslint-env angular/mocks, mocha */
+/* eslint no-unused-expressions:0 */
+const { expect } = require('chai');
 import NavLogoutController from './logout.controller';
-const { beforeEach, describe } = global;
+const { beforeEach, describe, it, ngModule, inject } = global;
 
 describe('NavLogout Controller', () => {
   let $ctrl;
   let $scope;
 
-  beforeEach(window.module(NavLogoutController)); // eslint-disable-line angular/window-service
+  beforeEach(ngModule(NavLogoutController));
 
   beforeEach(() => {
     let $controller;
@@ -22,14 +24,14 @@ describe('NavLogout Controller', () => {
   });
 
   it('Should exist', () => {
-    expect(typeof $ctrl).toBe('object');
+    expect($ctrl).to.be.an('object');
   });
 
   it('Should have isAuthenticated method', () => {
-    expect(typeof $ctrl.isAuthenticated).toBe('function');
+    expect($ctrl.isAuthenticated).to.be.a('function');
   });
 
   it('Should have logout method', () => {
-    expect(typeof $ctrl.logout).toBe('function');
+    expect($ctrl.logout).to.be.a('function');
   });
 });

@@ -1,12 +1,14 @@
-/* eslint-env angular/mocks, jasmine */
+/* eslint-env angular/mocks, mocha */
+/* eslint no-unused-expressions:0 */
+const { expect } = require('chai');
 import WellDirective from './well.directive';
-const { beforeEach } = global;
+const { beforeEach, describe, it, ngModule, inject } = global;
 
 describe('well Directive', () => {
   let element;
   let $scope;
 
-  beforeEach(window.module(WellDirective)); // eslint-disable-line angular/window-service
+  beforeEach(ngModule(WellDirective));
 
   beforeEach(() => {
     let $compile;
@@ -24,11 +26,11 @@ describe('well Directive', () => {
 
   describe('Directive', () => {
     it('Should exist with class ng-scope', () => {
-      expect(element[ 0 ].classList.contains('ng-scope')).toBeTruthy();
+      expect(element[ 0 ]).to.have.class('ng-scope');
     });
 
     it('Should exist with class ng-isolate-scope', () => {
-      expect(element[ 0 ].classList.contains('ng-isolate-scope')).toBeTruthy();
+      expect(element[ 0 ]).to.have.class('ng-isolate-scope');
     });
   });
 
@@ -40,7 +42,7 @@ describe('well Directive', () => {
     });
 
     it('Should exist', () => {
-      expect(typeof $ctrl).toBe('object');
+      expect($ctrl).to.be.an('object');
     });
   });
 });
