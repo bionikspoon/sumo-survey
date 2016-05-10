@@ -8,8 +8,10 @@ angular
   .config(coreConfig);
 
 /** @ngInject **/
-function coreConfig($urlRouterProvider, $locationProvider) {
+function coreConfig($urlRouterProvider, $locationProvider, $httpProvider) {
   $urlRouterProvider.otherwise('/');
 
   $locationProvider.html5Mode(true);
+  $httpProvider.defaults.useXDomain = true;
+  delete $httpProvider.defaults.headers.common[ 'X-Requested-With' ];
 }
