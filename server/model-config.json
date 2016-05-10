@@ -39,11 +39,11 @@
   },
   "Choice": {
     "dataSource": "sql",
-    "public": true
+    "public": false
   },
   "Response": {
     "dataSource": "sql",
-    "public": true
+    "public": false
   },
   "Guest": {
     "dataSource": "sql",
