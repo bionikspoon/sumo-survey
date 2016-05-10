@@ -2,6 +2,7 @@ module.exports = function timestamp(Model) {
   Model.observe('before save', setLastUpdated);
   Model.defineProperty('created', { type: Date, default: '$now' });
   Model.defineProperty('lastUpdated', { type: Date, default: '$now' });
+  Model.validatesPresenceOf('created', 'lastUpdated');
 };
 
 /**

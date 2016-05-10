@@ -16,11 +16,12 @@
   "properties": {
     "fingerprint": {
       "type": "string",
-      "id": true,
+      "id": 1,
       "required": true
     },
     "ip": {
       "type": "string",
+      "id": 2,
       "required": true
     }
   },

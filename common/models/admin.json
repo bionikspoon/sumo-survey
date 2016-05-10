@@ -31,16 +31,19 @@
   "properties": {
     "email": {
       "type": "string",
-      "required": true
+      "required": true,
+      "length": 256
     },
     "status": {
       "type": "string",
       "required": true,
-      "default": "active"
+      "default": "active",
+      "length": 64
     },
     "username": {
       "type": "string",
-      "required": true
+      "required": true,
+      "length": 32
     }
   },
   "validations": [],

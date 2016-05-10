@@ -16,7 +16,7 @@
     "order": {
       "type": "number",
       "required": true,
-      "default": "50"
+      "default": 50
     }
   },
   "validations": [],

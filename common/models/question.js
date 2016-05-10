@@ -1,5 +1,8 @@
 const _ = require('lodash');
 module.exports = function setup(Question) {
+  Question.validatesPresenceOf('text');
+  Question.validatesLengthOf('text', { max: 512 });
+
   Question.createWithChoices = createWithChoices;
   /**
    * Create a new Question model with Choices and persist it into the data source.
