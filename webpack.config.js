@@ -116,7 +116,7 @@ function getEntry(env) {
     case TEST:
       entry.bundle = [];
       entry.bundle.push('angular');
-      entry.bundle.push(`${PATHS.base('tests.webpack.js')}`);
+      entry.bundle.push(`mocha!${PATHS.base('webpack.tests.js')}`);
       break;
   }
 

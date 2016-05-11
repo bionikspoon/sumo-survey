@@ -2,23 +2,6 @@
 /* eslint no-console:0 */
 require('babel-register');
 
-const path = require('path');
-const app = require(path.resolve(__dirname, '../'));
+const migrate = require('./_migrate');
 
-const automigrate = require('./_migrate/10-automigrate');
-const createAdmin = require('./_migrate/20-create-admin');
-const createGuests = require('./_migrate/30-create-guests');
-const createQuestions = require('./_migrate/40-create-questions');
-const createResponses = require('./_migrate/50-create-responses');
-const disconnect = require('./_migrate/90-disconnect');
-
-automigrate(app)
-  .then(() => createAdmin(app))
-  .then(() => createGuests(app))
-  .then(() => createQuestions(app))
-  .then(() => createResponses(app))
-  .then(() => disconnect(app))
-  .catch(error => {
-    console.error(error);
-    process.exit(1);
-  });
+module.exports = migrate();
