@@ -1,4 +1,5 @@
 'use strict'; // eslint-disable-line strict
+require('babel-register');
 
 const gulp = require('gulp');
 const gulpUtil = require('gulp-util');
@@ -12,6 +13,8 @@ const fs = require('fs-extra');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
+const migrate = require('./bin/_migrate');
+const autoupdate = require('./bin/_autoupdate');
 
 const webpackConfig = require('./webpack.config.js');
 
@@ -22,7 +25,7 @@ gulp.task('default', [ 'dev' ]);
 gulp.task('dev', callback => {
   runSequence(
     'clean',
-    'loopback-angular',
+    [ 'migrate', 'loopback-angular' ],
     'nodemon',
     'browser-sync',
     callback
@@ -38,6 +41,8 @@ gulp.task('build', callback => {
 });
 
 gulp.task('clean', callback => fs.emptyDir(PATHS.dist(), callback));
+gulp.task('migrate', callback => { migrate().then(() => callback()).catch(callback); });
+gulp.task('autoupdate', callback => { autoupdate().then(() => callback()).catch(callback); });
 
 gulp.task('loopback-angular', () => gulp
   .src(PATHS.server('server.js'))
@@ -79,6 +84,7 @@ gulp.task('nodemon', callback => {
   nodemon({
     script: './',
     watch: [ 'server/**/*', 'common/**/*' ],
+    tasks: [ 'autoupdate', 'loopback-angular' ],
   })
     .on('start', () => {
       if (!started) {
@@ -86,8 +92,7 @@ gulp.task('nodemon', callback => {
         process.env.STARTED = 'TRUE';
         callback();
       }
-    })
-    .on('restart', () => gulp.start('loopback-angular'));
+    });
 });
 
 gulp.task('bundle', callback => {

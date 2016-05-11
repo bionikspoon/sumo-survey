@@ -1,0 +1,7 @@
+#! /usr/bin/env node
+/* eslint no-console:0 */
+require('babel-register');
+
+const autoupdate = require('./_autoupdate');
+
+module.exports = autoupdate();

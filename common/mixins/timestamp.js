@@ -12,7 +12,10 @@ module.exports = function timestamp(Model) {
  * @returns {null}
  */
 function setLastUpdated(ctx, next) {
-  if (!ctx.isNewInstance) ctx.instance.lastUpdated = Date.now();
+  if (ctx.isNewInstance) return next();
+
+  if (ctx.instance) ctx.instance.lastUpdated = Date.now();
+  if (ctx.data) ctx.data.lastUpdated = Date.now();
 
   return next();
 }

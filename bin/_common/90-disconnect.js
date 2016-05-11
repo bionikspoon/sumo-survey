@@ -1,3 +1,4 @@
+/* eslint no-console:0 */
 module.exports = function disconnect(app) {
   const { sql } = app.datasources;
   console.log('Disconnecting from "sql" datasource');

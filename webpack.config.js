@@ -26,7 +26,7 @@ const PATHS = {
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
 const TEST = 'test';
-const LOADER_INCLUDES = [ PATHS.client(), PATHS.base('tests.webpack.js') ];
+const LOADER_INCLUDES = [ PATHS.client(), PATHS.base('webpack.tests.js') ];
 const SERVER = {
   HOST: 'localhost',
   PORT: 5000,
