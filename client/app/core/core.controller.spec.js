@@ -1,6 +1,6 @@
 /* eslint-env angular/mocks, mocha */
 /* eslint no-unused-expressions:0 */
-const { expect } = require('chai');
+import { expect } from 'chai';
 import CoreController from './core.controller';
 const { beforeEach, describe, it, ngModule, inject } = global;
 

@@ -24,5 +24,5 @@ global.inject = global.angular.mock.inject;
 global.ngModule = global.angular.mock.module;
 global.dump = global.angular.mock.dump;
 
-const clientContext = require.context('./client', true, /\.spec\.js$/);
+const clientContext = require.context('./client', true, /\.(?:spec)\.js$/);
 clientContext.keys().map(clientContext);
