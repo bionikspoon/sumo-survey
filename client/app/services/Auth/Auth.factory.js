@@ -1,16 +1,15 @@
 import angular from 'angular';
 import LoopbackService from 'services/Loopback';
-import uiRouter from 'angular-ui-router';
 
 const MODULE_NAME = 'app.service.auth.factory';
 export default MODULE_NAME;
 
 angular
-  .module(MODULE_NAME, [ LoopbackService, uiRouter ])
+  .module(MODULE_NAME, [ LoopbackService ])
   .factory('Auth', Auth);
 
 /** @ngInject **/
-function Auth($log, $q, Admin, LoopBackAuth) {
+function Auth($q, Admin, LoopBackAuth) {
   getCurrentUser.data = null;
   const service = { login, logout, isAuthenticated, streamCurrentUser, currentUser: {} };
   return service;
@@ -44,15 +43,19 @@ function Auth($log, $q, Admin, LoopBackAuth) {
   ////////////////
 
   function getCurrentUser() {
+    // Guard, not authenticated
     if (!Admin.isAuthenticated()) return $q.reject(null);
 
+    // Guard, used cached data
     if (Admin.getCachedCurrent()) return $q.resolve(Admin.getCachedCurrent());
 
+    // Guard, prevent digest spamming, return W.I.P. promise
     if (getCurrentUser.data) { return getCurrentUser.data; }
 
-    getCurrentUser.data = Admin.getCurrent().$promise;
+    // new request required ...
+    getCurrentUser.data = Admin.getCurrent().$promise;  // save W.I.P.
 
     return getCurrentUser.data
-      .finally(() => { getCurrentUser.data = null; });
+      .finally(() => { getCurrentUser.data = null; });  // clear W.I.P.
   }
 }

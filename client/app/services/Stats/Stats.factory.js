@@ -9,7 +9,7 @@ angular
   .factory('Stats', Stats);
 
 /** @ngInject **/
-function Stats($log, $q, Question) {
+function Stats(Question) {
   const service = { summary, question };
   return service;
 

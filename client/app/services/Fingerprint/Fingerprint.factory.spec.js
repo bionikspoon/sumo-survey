@@ -15,4 +15,9 @@ describe('Fingerprint Factory', () => {
   it('Should have method stream', () => {
     expect(Fingerprint.stream).to.be.a('function');
   });
+
+  it('Should have attribute fingerprint', () => {
+    expect(Fingerprint.fingerprint).to.be.an('object');
+    expect(Fingerprint.fingerprint).to.eql({});
+  });
 });

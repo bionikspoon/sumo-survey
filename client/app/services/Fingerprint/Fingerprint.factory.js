@@ -9,7 +9,7 @@ angular
   .factory('Fingerprint', FingerprintService);
 
 /** @ngInject **/
-function FingerprintService($log, $q) {
+function FingerprintService($q) {
   const service = {
     stream, fingerprint: {},
   };
@@ -25,15 +25,12 @@ function FingerprintService($log, $q) {
       })
       .catch(error => {
         angular.copy({}, service.fingerprint);
-        $log.error('Fingerprint error:', error);
-
         return $q.reject(error);
       });
   }
 
   ////////////////
   function getFingerprint() {
-    // const fingerprint = LocalStorage.get(KEY);
     const fingerprint = service.fingerprint.id;
     if (fingerprint) return $q.resolve(fingerprint);
 
