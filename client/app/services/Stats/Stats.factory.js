@@ -17,7 +17,7 @@ function Stats(Question) {
 
   function summary() {
     return Question
-      .find({ filter: { include: [ 'responses' ] } })
+      .find({ filter: { include: { relation: 'responses', scope: { fields: [] } } } })
       .$promise
       .then(questions => questions.map(_question =>
         Object.assign(_question, { count: _question.responses.length })
@@ -26,7 +26,20 @@ function Stats(Question) {
 
   function question(id) {
     return Question
-      .findOne({ filter: { where: { id }, include: { choices: 'responses' } } })
+      .findById({
+        id,
+        filter: {
+          include: {
+            relation: 'choices',
+            scope: {
+              include: {
+                relation: 'responses', scope: { fields: [] },
+              },
+              order: 'order',
+            },
+          },
+        },
+      })
       .$promise
       .then(_question =>
         Object.assign(_question, {

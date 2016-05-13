@@ -85,6 +85,7 @@
     "html-webpack-plugin": "2.16.1",
     "html-webpack-template": "4.0.0",
     "jshint": "2.9.2",
+    "json-loader": "0.5.4",
     "mocha": "2.4.5",
     "mocha-loader": "0.7.1",
     "ng-annotate-loader": "0.1.0",

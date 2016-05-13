@@ -1,0 +1,72 @@
+{
+  "text": "So far I have gotten the important things I want in life.",
+  "id": 4,
+  "creatorId": 1,
+  "created": "2016-05-13T00:33:47.000Z",
+  "lastUpdated": "2016-05-13T00:33:47.000Z",
+  "choices": [
+    {
+      "text": "Strongly Disagree",
+      "order": 0,
+      "id": 23,
+      "questionId": 4,
+      "created": "2016-05-13T00:33:47.000Z",
+      "lastUpdated": "2016-05-13T00:33:47.000Z",
+      "responses": [{"choiceId": 23}]
+    },
+    {
+      "text": "Disagree",
+      "order": 1,
+      "id": 22,
+      "questionId": 4,
+      "created": "2016-05-13T00:33:47.000Z",
+      "lastUpdated": "2016-05-13T00:33:47.000Z",
+      "responses": [{"choiceId": 22}, {"choiceId": 22}]
+    },
+    {
+      "text": "Slightly Disagree",
+      "order": 2,
+      "id": 24,
+      "questionId": 4,
+      "created": "2016-05-13T00:33:47.000Z",
+      "lastUpdated": "2016-05-13T00:33:47.000Z",
+      "responses": [{"choiceId": 24}, {"choiceId": 24}, {"choiceId": 24}]
+    },
+    {
+      "text": "Neither Agree or Disagree",
+      "order": 3,
+      "id": 25,
+      "questionId": 4,
+      "created": "2016-05-13T00:33:47.000Z",
+      "lastUpdated": "2016-05-13T00:33:47.000Z",
+      "responses": [{"choiceId": 25}]
+    },
+    {
+      "text": "Slightly Agree",
+      "order": 4,
+      "id": 26,
+      "questionId": 4,
+      "created": "2016-05-13T00:33:47.000Z",
+      "lastUpdated": "2016-05-13T00:33:47.000Z",
+      "responses": [{"choiceId": 26}, {"choiceId": 26}]
+    },
+    {
+      "text": "Agree",
+      "order": 5,
+      "id": 27,
+      "questionId": 4,
+      "created": "2016-05-13T00:33:47.000Z",
+      "lastUpdated": "2016-05-13T00:33:47.000Z",
+      "responses": []
+    },
+    {
+      "text": "Strongly Agree",
+      "order": 6,
+      "id": 28,
+      "questionId": 4,
+      "created": "2016-05-13T00:33:47.000Z",
+      "lastUpdated": "2016-05-13T00:33:47.000Z",
+      "responses": [{"choiceId": 28}, {"choiceId": 28}, {"choiceId": 28}]
+    }
+  ]
+}
