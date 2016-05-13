@@ -10,17 +10,10 @@ angular
 /** @ngInject **/
 function WellDirective() {
   const directive = {
-    bindToController: true,
-    controller: WellController,
-    controllerAs: '$ctrl',
     restrict: 'A',
     scope: {},
     transclude: true,
     templateUrl: require('./well.html'),
   };
   return directive;
-}
-
-/** @ngInject **/
-function WellController() {
 }

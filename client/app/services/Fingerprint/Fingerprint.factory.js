@@ -11,9 +11,7 @@ angular
 
 /** @ngInject **/
 function FingerprintService($q, FingerprintJS) {
-  const service = {
-    stream, fingerprint: {},
-  };
+  const service = { stream, fingerprint: {} };
   return service;
 
   ////////////////

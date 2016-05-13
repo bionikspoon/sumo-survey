@@ -32,17 +32,17 @@ describe('well Directive', () => {
     it('Should exist with class ng-isolate-scope', () => {
       expect(element[ 0 ]).to.have.class('ng-isolate-scope');
     });
-  });
 
-  describe('Controller', () => {
-    let $ctrl;
-
-    beforeEach(() => {
-      $ctrl = element.controller('appWell');
+    it('Should have a child describing the row', () => {
+      expect(element.children('div')[ 0 ]).to.have.class('row');
     });
 
-    it('Should exist', () => {
-      expect($ctrl).to.be.an('object');
+    it('Should have a grandchild describing columns', () => {
+      expect(element.children('div').children('div')[ 0 ]).to.have.class('col-md-6');
+    });
+
+    it('Should have a greatgrandchild with class well', () => {
+      expect(element.children('div').children('div').children('div')[ 0 ]).to.have.class('well');
     });
   });
 });
