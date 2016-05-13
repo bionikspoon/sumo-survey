@@ -29,6 +29,7 @@ describe('Stats Factory', () => {
       expect(Stats.question).to.be.a('function');
     });
   });
+
   describe('Responses', () => {
     describe('summary', () => {
       let response;
@@ -103,6 +104,7 @@ describe('Stats Factory', () => {
       it('Should call /api/Questions/:id', () => {
         expect(params.id).to.equal(id);
       });
+
       it('Should call the correct query string endpoint', () => {
         const expected = {
           include: {

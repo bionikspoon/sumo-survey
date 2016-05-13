@@ -10,7 +10,7 @@ angular
   .factory('Survey', Survey);
 
 /** @ngInject **/
-function Survey($log, Guest, Fingerprint) {
+function Survey(Guest, Fingerprint) {
   const service = { question, answer };
   return service;
 
@@ -23,8 +23,7 @@ function Survey($log, Guest, Fingerprint) {
 
   function answer(response) {
     return Fingerprint.stream()
-      .then(fingerprint => Guest
-        .createResponse({ fingerprint }, response)
-        .$promise);
+      .then(fingerprint =>
+        Guest.createResponse({ fingerprint }, response).$promise);
   }
 }

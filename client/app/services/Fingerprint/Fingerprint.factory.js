@@ -1,15 +1,16 @@
 import angular from 'angular';
-import Fingerprint from 'fingerprintjs2';
+import _FingerprintJS from 'fingerprintjs2';
 
 const MODULE_NAME = 'app.service.fingerprint.factory';
 export default MODULE_NAME;
 
 angular
   .module(MODULE_NAME, [])
+  .value('FingerprintJS', _FingerprintJS)
   .factory('Fingerprint', FingerprintService);
 
 /** @ngInject **/
-function FingerprintService($q) {
+function FingerprintService($q, FingerprintJS) {
   const service = {
     stream, fingerprint: {},
   };
@@ -35,7 +36,7 @@ function FingerprintService($q) {
     if (fingerprint) return $q.resolve(fingerprint);
 
     const defer = $q.defer();
-    new Fingerprint().get(defer.resolve);
+    new FingerprintJS().get(defer.resolve);
 
     return defer.promise;
   }

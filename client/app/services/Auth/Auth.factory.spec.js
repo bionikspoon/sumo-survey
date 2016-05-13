@@ -25,13 +25,11 @@ describe('Auth Factory', () => {
   };
 
   beforeEach(ngModule(AuthFactory));
-
   beforeEach(inject((_Auth_, _$httpBackend_, _LoopBackAuth_) => {
     Auth = _Auth_;
     $httpBackend = _$httpBackend_;
     LoopBackAuth = _LoopBackAuth_;
   }));
-
   beforeEach(() => {
     $httpBackend
       .whenRoute('POST', '/api/Admins/login', credentials)
@@ -40,7 +38,10 @@ describe('Auth Factory', () => {
       .whenPOST('/api/Admins/logout')
       .respond(204);
   });
-
+  afterEach(() => {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
+  });
   afterEach(() => {
     LoopBackAuth.clearUser();
     LoopBackAuth.clearStorage();
@@ -51,6 +52,7 @@ describe('Auth Factory', () => {
       it('Should be a function', () => {
         expect(Auth.isAuthenticated).to.be.a('function');
       });
+
       it('Should return a boolean', () => {
         expect(Auth.isAuthenticated()).to.be.a('boolean');
       });
@@ -84,9 +86,11 @@ describe('Auth Factory', () => {
 
   describe('Before logging in', () => {
     beforeEach(() => { Auth.streamCurrentUser(); });
+
     it('Should not be authenticated', () => {
       expect(Auth.isAuthenticated()).to.be.false;
     });
+
     it('Should have an empty currentUser', () => {
       expect(Auth.currentUser).to.eql({});
     });
@@ -98,9 +102,11 @@ describe('Auth Factory', () => {
       Auth.login(credentials);
       $httpBackend.flush();
     });
+
     it('Should be authenticated', () => {
       expect(Auth.isAuthenticated()).to.be.true;
     });
+
     it('Should have a currentUser', () => {
       expect(Auth.currentUser).to.eql(token.user);
     });
@@ -113,9 +119,11 @@ describe('Auth Factory', () => {
       Auth.logout();
       $httpBackend.flush();
     });
+
     it('Should not be authenticated', () => {
       expect(Auth.isAuthenticated()).to.be.false;
     });
+
     it('Should have an empty currentUser', () => {
       expect(Auth.currentUser).to.eql({});
     });
