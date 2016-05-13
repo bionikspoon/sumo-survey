@@ -32,43 +32,41 @@ describe('Stats Factory', () => {
 
   describe('Responses', () => {
     describe('summary', () => {
-      let response;
-      let filter;
+      let questions;
+      let request;
 
       beforeEach(done => {
         Stats.summary()
-          .then(results => {
-            response = results;
+          .then(_questions_ => {
+            questions = _questions_;
             done();
           });
 
         $httpBackend
           .whenRoute('GET', '/api/Questions')
           .respond((method, url, data, headers, params) => {
-            filter = angular.fromJson(params.filter);
+            request = { method, url, data, headers, params };
             return [ 200, mockSummaryResponse ];
           });
 
         $httpBackend.flush();
       });
 
-      it('Should call /api/Questions', () => {
-        const expected = { include: { relation: 'responses', scope: { fields: [] } } };
-        expect(filter).to.eql(expected);
+      it('Should call /api/Questions/stats', () => {
+        expect(request.url).to.eql('/api/Questions/stats');
       });
 
       it('Should have count by question', () => {
-        const actual = response.map(i => i.count);
-        const expected = [ 13, 10, 10, 12, 9 ];
+        const actual = questions.map(question => question.count);
 
-        expect(actual).to.eql(expected);
+        expect(actual).to.eql([ 13, 12, 10, 14, 12 ]);
       });
 
       it('Should have questions text', () => {
-        const actual = response.map(i => i.text);
+        const actual = questions.map(question => question.text);
         const expected = [
-          'The conditions of my life are excellent.',
           'In most ways my life is close to my ideal.',
+          'The conditions of my life are excellent.',
           'I am satisfied with life.',
           'So far I have gotten the important things I want in life.',
           'If I could live my life over, I would change almost nothing.',
@@ -80,59 +78,69 @@ describe('Stats Factory', () => {
 
     describe('question', () => {
       let question;
-      let params;
+      let request;
       const id = 4;
 
       beforeEach(done => {
         Stats.question(id)
-          .then(results => {
-            question = results;
+          .then(_question_ => {
+            question = _question_;
             done();
           });
 
         $httpBackend
           .whenRoute('GET', '/api/Questions/:id')
-          .respond((method, url, data, headers, _params_) => {
-            params = {};
-            params.filter = angular.fromJson(_params_.filter);
-            params.id = parseInt(_params_.id.split('?', 1)[ 0 ], 10);
+          .respond((method, _url_, data, headers, params) => {
+            const [ url, query ] = _url_.split('?', 2);
+            request = {
+              method,
+              url,
+              query,
+              data,
+              headers,
+              params: parseObj(params),
+            };
             return [ 200, mockQuestionResponse ];
+
+            function parseObj(obj) {
+              return Object.keys(obj).reduce(copyKeys(obj), {});
+            }
+
+            function copyKeys(obj) {
+              return (copy, key) => {
+                copy[ key ] = angular.fromJson(obj[ key ]);
+                return copy;
+              };
+            }
           });
         $httpBackend.flush();
       });
 
-      it('Should call /api/Questions/:id', () => {
-        expect(params.id).to.equal(id);
+      it('Should call /api/Questions/:id/stats', () => {
+        expect(request.url).to.equal(`/api/Questions/${id}/stats`);
+      });
+
+      it(`Should have id ${id}`, () => {
+        expect(request.params.id).to.equal(id);
       });
 
       it('Should call the correct query string endpoint', () => {
-        const expected = {
-          include: {
-            relation: 'choices',
-            scope: {
-              include: {
-                relation: 'responses', scope: { fields: [] },
-              },
-              order: 'order',
-            },
-          },
-        };
-        expect(params.filter).to.eql(expected);
+        const expected = { order: 'order' };
+        expect(request.params.filter).to.eql(expected);
       });
 
       it('Should have question text', () => {
-        expect(question.text).to.eql('So far I have gotten the important things I want in life.');
+        expect(question.text).to.eql('I am satisfied with life.');
       });
 
       it('Should have count by choice', () => {
-        const actual = question.choices.map(i => i.count);
-        const expected = [ 1, 2, 3, 1, 2, 0, 3 ];
+        const actual = question.choices.map(choice => choice.count);
 
-        expect(actual).to.eql(expected);
+        expect(actual).to.eql([ 1, 2, 1, 2, 3, 1, 0 ]);
       });
 
       it('Should have choices text', () => {
-        const actual = question.choices.map(i => i.text);
+        const actual = question.choices.map(choice => choice.text);
         const expected = [
           'Strongly Disagree',
           'Disagree',

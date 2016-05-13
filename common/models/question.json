@@ -57,6 +57,20 @@
       "principalId": "$authenticated",
       "permission": "ALLOW",
       "property": "createWithChoices"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "statsSummary"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "statsQuestion"
     }
   ],
   "methods": {
@@ -86,6 +100,64 @@
         {
           "path": "/",
           "verb": "post"
+        }
+      ]
+    },
+    "statsSummary": {
+      "isStatic": true,
+      "accepts": [
+        {
+          "arg": "filter",
+          "type": "object",
+          "required": false,
+          "description": "Filter defining fields, where, include, order, offset, and limit",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "data",
+          "type": "array",
+          "root": true,
+          "description": "Questions including response count"
+        }
+      ],
+      "description": "Get response count by question",
+      "http": [
+        {
+          "path": "/stats",
+          "verb": "get"
+        }
+      ]
+    },
+    "statsQuestion": {
+      "isStatic": false,
+      "accepts": [
+        {
+          "arg": "filter",
+          "type": "object",
+          "required": false,
+          "description": "Filter defining fields, where, include, order, offset, and limit",
+          "http": {
+            "source": "query"
+          }
+        }
+      ],
+      "returns": [
+        {
+          "arg": "data",
+          "type": "Question",
+          "root": true,
+          "description": "Question with response count by choice"
+        }
+      ],
+      "description": "Get response count by choice",
+      "http": [
+        {
+          "path": "/stats",
+          "verb": "get"
         }
       ]
     }

@@ -1,72 +1,72 @@
 {
-  "text": "So far I have gotten the important things I want in life.",
-  "id": 4,
+  "text": "I am satisfied with life.",
+  "id": 3,
   "creatorId": 1,
-  "created": "2016-05-13T00:33:47.000Z",
-  "lastUpdated": "2016-05-13T00:33:47.000Z",
+  "created": "2016-05-13T20:57:20.000Z",
+  "lastUpdated": "2016-05-13T20:57:20.000Z",
   "choices": [
     {
       "text": "Strongly Disagree",
       "order": 0,
-      "id": 23,
-      "questionId": 4,
-      "created": "2016-05-13T00:33:47.000Z",
-      "lastUpdated": "2016-05-13T00:33:47.000Z",
-      "responses": [{"choiceId": 23}]
+      "id": 14,
+      "questionId": 3,
+      "created": "2016-05-13T20:57:20.000Z",
+      "lastUpdated": "2016-05-13T20:57:20.000Z",
+      "count": 1
     },
     {
       "text": "Disagree",
       "order": 1,
-      "id": 22,
-      "questionId": 4,
-      "created": "2016-05-13T00:33:47.000Z",
-      "lastUpdated": "2016-05-13T00:33:47.000Z",
-      "responses": [{"choiceId": 22}, {"choiceId": 22}]
+      "id": 15,
+      "questionId": 3,
+      "created": "2016-05-13T20:57:20.000Z",
+      "lastUpdated": "2016-05-13T20:57:20.000Z",
+      "count": 2
     },
     {
       "text": "Slightly Disagree",
       "order": 2,
-      "id": 24,
-      "questionId": 4,
-      "created": "2016-05-13T00:33:47.000Z",
-      "lastUpdated": "2016-05-13T00:33:47.000Z",
-      "responses": [{"choiceId": 24}, {"choiceId": 24}, {"choiceId": 24}]
+      "id": 16,
+      "questionId": 3,
+      "created": "2016-05-13T20:57:20.000Z",
+      "lastUpdated": "2016-05-13T20:57:20.000Z",
+      "count": 1
     },
     {
       "text": "Neither Agree or Disagree",
       "order": 3,
-      "id": 25,
-      "questionId": 4,
-      "created": "2016-05-13T00:33:47.000Z",
-      "lastUpdated": "2016-05-13T00:33:47.000Z",
-      "responses": [{"choiceId": 25}]
+      "id": 17,
+      "questionId": 3,
+      "created": "2016-05-13T20:57:20.000Z",
+      "lastUpdated": "2016-05-13T20:57:20.000Z",
+      "count": 2
     },
     {
       "text": "Slightly Agree",
       "order": 4,
-      "id": 26,
-      "questionId": 4,
-      "created": "2016-05-13T00:33:47.000Z",
-      "lastUpdated": "2016-05-13T00:33:47.000Z",
-      "responses": [{"choiceId": 26}, {"choiceId": 26}]
+      "id": 18,
+      "questionId": 3,
+      "created": "2016-05-13T20:57:20.000Z",
+      "lastUpdated": "2016-05-13T20:57:20.000Z",
+      "count": 3
     },
     {
       "text": "Agree",
       "order": 5,
-      "id": 27,
-      "questionId": 4,
-      "created": "2016-05-13T00:33:47.000Z",
-      "lastUpdated": "2016-05-13T00:33:47.000Z",
-      "responses": []
+      "id": 19,
+      "questionId": 3,
+      "created": "2016-05-13T20:57:20.000Z",
+      "lastUpdated": "2016-05-13T20:57:20.000Z",
+      "count": 1
     },
     {
       "text": "Strongly Agree",
       "order": 6,
-      "id": 28,
-      "questionId": 4,
-      "created": "2016-05-13T00:33:47.000Z",
-      "lastUpdated": "2016-05-13T00:33:47.000Z",
-      "responses": [{"choiceId": 28}, {"choiceId": 28}, {"choiceId": 28}]
+      "id": 20,
+      "questionId": 3,
+      "created": "2016-05-13T20:57:20.000Z",
+      "lastUpdated": "2016-05-13T20:57:20.000Z",
+      "count": 0
     }
   ]
 }

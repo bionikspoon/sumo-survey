@@ -16,37 +16,11 @@ function Stats(Question) {
   ////////////////
 
   function summary() {
-    return Question
-      .find({ filter: { include: { relation: 'responses', scope: { fields: [] } } } })
-      .$promise
-      .then(questions => questions.map(_question =>
-        Object.assign(_question, { count: _question.responses.length })
-      ));
+    return Question.statsSummary().$promise;
   }
 
   function question(id) {
-    return Question
-      .findById({
-        id,
-        filter: {
-          include: {
-            relation: 'choices',
-            scope: {
-              include: {
-                relation: 'responses', scope: { fields: [] },
-              },
-              order: 'order',
-            },
-          },
-        },
-      })
-      .$promise
-      .then(_question =>
-        Object.assign(_question, {
-          responses: _question.choices.map(choice =>
-            Object.assign(choice, { count: choice.responses.length })
-          ),
-        })
-      );
+    const filter = { order: 'order' };
+    return Question.prototype$statsQuestion({ id, filter }).$promise;
   }
 }

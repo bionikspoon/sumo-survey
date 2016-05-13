@@ -3306,6 +3306,67 @@ module.factory(
           method: "POST"
         },
 
+        /**
+         * @ngdoc method
+         * @name lbServices.Question#statsSummary
+         * @methodOf lbServices.Question
+         *
+         * @description
+         *
+         * Get response count by question
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Array.<Object>,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Array.<Object>} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Questions including response count
+         */
+        "statsSummary": {
+          isArray: true,
+          url: urlBase + "/Questions/stats",
+          method: "GET"
+        },
+
+        /**
+         * @ngdoc method
+         * @name lbServices.Question#prototype$statsQuestion
+         * @methodOf lbServices.Question
+         *
+         * @description
+         *
+         * Get response count by choice
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `filter` – `{object=}` - Filter defining fields, where, include, order, offset, and limit
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * Question with response count by choice
+         */
+        "prototype$statsQuestion": {
+          url: urlBase + "/Questions/:id/stats",
+          method: "GET"
+        },
+
         // INTERNAL. Use Admin.questions.findById() instead.
         "::findById::Admin::questions": {
           params: {

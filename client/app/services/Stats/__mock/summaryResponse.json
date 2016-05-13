@@ -1,101 +1,42 @@
 [
   {
-    "text": "The conditions of my life are excellent.",
+    "text": "In most ways my life is close to my ideal.",
     "id": 1,
     "creatorId": 1,
-    "created": "2016-05-13T00:33:47.000Z",
-    "lastUpdated": "2016-05-13T00:33:47.000Z",
-    "responses": [
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1},
-      {"questionId": 1}
-    ]
+    "created": "2016-05-13T20:57:20.000Z",
+    "lastUpdated": "2016-05-13T20:57:20.000Z",
+    "count": 13
   },
   {
-    "text": "In most ways my life is close to my ideal.",
+    "text": "The conditions of my life are excellent.",
     "id": 2,
     "creatorId": 1,
-    "created": "2016-05-13T00:33:47.000Z",
-    "lastUpdated": "2016-05-13T00:33:47.000Z",
-    "responses": [
-      {"questionId": 2},
-      {"questionId": 2},
-      {"questionId": 2},
-      {"questionId": 2},
-      {"questionId": 2},
-      {"questionId": 2},
-      {"questionId": 2},
-      {"questionId": 2},
-      {"questionId": 2},
-      {"questionId": 2}
-    ]
+    "created": "2016-05-13T20:57:20.000Z",
+    "lastUpdated": "2016-05-13T20:57:20.000Z",
+    "count": 12
   },
   {
     "text": "I am satisfied with life.",
     "id": 3,
     "creatorId": 1,
-    "created": "2016-05-13T00:33:47.000Z",
-    "lastUpdated": "2016-05-13T00:33:47.000Z",
-    "responses": [
-      {"questionId": 3},
-      {"questionId": 3},
-      {"questionId": 3},
-      {"questionId": 3},
-      {"questionId": 3},
-      {"questionId": 3},
-      {"questionId": 3},
-      {"questionId": 3},
-      {"questionId": 3},
-      {"questionId": 3}
-    ]
+    "created": "2016-05-13T20:57:20.000Z",
+    "lastUpdated": "2016-05-13T20:57:20.000Z",
+    "count": 10
   },
   {
     "text": "So far I have gotten the important things I want in life.",
     "id": 4,
     "creatorId": 1,
-    "created": "2016-05-13T00:33:47.000Z",
-    "lastUpdated": "2016-05-13T00:33:47.000Z",
-    "responses": [
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4},
-      {"questionId": 4}
-    ]
+    "created": "2016-05-13T20:57:20.000Z",
+    "lastUpdated": "2016-05-13T20:57:20.000Z",
+    "count": 14
   },
   {
     "text": "If I could live my life over, I would change almost nothing.",
     "id": 5,
     "creatorId": 1,
-    "created": "2016-05-13T00:33:47.000Z",
-    "lastUpdated": "2016-05-13T00:33:47.000Z",
-    "responses": [
-      {"questionId": 5},
-      {"questionId": 5},
-      {"questionId": 5},
-      {"questionId": 5},
-      {"questionId": 5},
-      {"questionId": 5},
-      {"questionId": 5},
-      {"questionId": 5},
-      {"questionId": 5}
-    ]
+    "created": "2016-05-13T20:57:20.000Z",
+    "lastUpdated": "2016-05-13T20:57:20.000Z",
+    "count": 12
   }
 ]
