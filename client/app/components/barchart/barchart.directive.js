@@ -47,8 +47,7 @@ function BarchartDirective($log, $window, d3) {
 
       svg.attr('height', height);
 
-      svg
-        .selectAll('rect')
+      svg.selectAll('rect')
         .data(data)
         .enter()
         .append('rect')
@@ -66,8 +65,9 @@ function BarchartDirective($log, $window, d3) {
         .data(data)
         .enter()
         .append('text')
-        .attr('fill', '#ffffff')
         .on('click', item => scope.onClick({ item }))
+        .attr('class', 'category-label')
+        .attr('fill', '#ffffff')
         .attr('x', Math.round(margin / 2) + labelPadding)
         .attr('y', (d, i) => (i + 0.5) * barHeight + (i + 1) * barPadding)
         .text(d => `${d.text} (${d.count})`);
