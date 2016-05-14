@@ -1,5 +1,5 @@
 import angular from 'angular';
-import d3 from 'd3';
+import _d3 from 'd3';
 
 // barchart
 const MODULE_NAME = 'app.component.barchart.directive';
@@ -7,10 +7,11 @@ export default MODULE_NAME;
 
 angular
   .module(MODULE_NAME, [])
+  .value('d3', _d3)
   .directive('appBarchart', BarchartDirective);
 
 /** @ngInject **/
-function BarchartDirective($log, $window) {
+function BarchartDirective($log, $window, d3) {
   const directive = {
     restrict: 'E',
     scope: { data: '<', onClick: '&' },
@@ -55,7 +56,7 @@ function BarchartDirective($log, $window) {
         .attr('width', 140)
         .attr('x', Math.round(margin / 2))
         .attr('y', (d, i) => i * (barHeight + barPadding))
-        .attr('fill', d => color(d.count))
+        .attr('fill', (d, i) => color(i))
         .on('click', item => scope.onClick({ item }))
         .transition()
         .duration(1000)

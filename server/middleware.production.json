@@ -1,4 +1,7 @@
 {
+  "routes:before": {
+    "loopback#logger": {"params": ["short"]}
+  },
   "final:after": {
     "loopback#errorHandler": {
       "params": {
