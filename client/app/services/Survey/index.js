@@ -1,8 +1,2 @@
-import angular from 'angular';
-
-const { blocks } = global;
-const MODULE_NAME = 'app.service.survey';
-
-export default MODULE_NAME;
-
-angular.module(MODULE_NAME, [ ...blocks() ]);
+import surveyFactory from './Survey.factory';
+export default surveyFactory;

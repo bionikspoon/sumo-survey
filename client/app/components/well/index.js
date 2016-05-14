@@ -1,8 +1,2 @@
-import angular from 'angular';
-
-const { blocks } = global;
-const MODULE_NAME = 'app.well';
-
-export default MODULE_NAME;
-
-angular.module(MODULE_NAME, [ ...blocks() ]);
+import wellDirective from './well.directive';
+export default wellDirective;
