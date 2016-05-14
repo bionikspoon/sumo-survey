@@ -1,6 +1,10 @@
 {
   "initial:before": {
-    "loopback#favicon": {"params": ["$!../favicon.ico"]}
+    "loopback#favicon": {
+      "params": [
+        "$!../favicon.ico"
+      ]
+    }
   },
   "initial": {
     "compression": {},
@@ -13,7 +17,9 @@
     },
     "helmet#xssFilter": {},
     "helmet#frameguard": {
-      "params": ["deny"]
+      "params": [
+        "deny"
+      ]
     },
     "helmet#hsts": {
       "params": {
@@ -24,18 +30,34 @@
     "helmet#hidePoweredBy": {},
     "helmet#ieNoOpen": {},
     "helmet#noSniff": {},
-    "helmet#noCache": {"enabled": false}
+    "helmet#noCache": {
+      "enabled": false
+    }
   },
   "session": {},
-  "auth": {"loopback#token": {}},
+  "auth": {
+    "loopback#token": {}
+  },
   "parse": {},
   "routes:before": {
-    "loopback#logger": {"params": ["dev"]},
+    "loopback#logger": {
+      "params": [
+        "dev"
+      ]
+    },
     "loopback#context": {},
-    "./middleware/ip": {"paths": ["/api/Guests/"]}
+    "./middleware/ip": {
+      "paths": [
+        "/api/Guests/"
+      ]
+    }
   },
   "routes": {
-    "loopback#rest": {"paths": ["${restApiRoot}"]}
+    "loopback#rest": {
+      "paths": [
+        "${restApiRoot}"
+      ]
+    }
   },
   "files:before": {
     "connect-history-api-fallback": {}
