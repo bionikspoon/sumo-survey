@@ -103,6 +103,7 @@ function getEntry(env) {
       entry.main = [];
       // enforce order
       entry.main.push(PATHS.client('app.bootstrap.js'));
+      entry.main.push('css!animate.css');
       entry.main.push(`webpack-hot-middleware/client?${SERVER.URL}&reload=true`);
       entry.vendor = require('./package.json').vendor;
       break;
@@ -110,6 +111,7 @@ function getEntry(env) {
     case PRODUCTION:
       entry.main = [];
       entry.main.push(PATHS.client('app.bootstrap.js'));
+      entry.main.push('animate.css');
       entry.vendor = require('./package.json').vendor;
       break;
 
@@ -245,34 +247,7 @@ function getPostcss(bundler) {
 }
 
 function getHtmlOptions(env) {
-  const options = {
-    inject: false,
-    template: PATHS.client('index.ejs'),
-    filename: 'index.html',
-    title: 'Sumo Survey',
-    mobile: true,
-    unsupportedBrowser: true,
-    appMountDirective: 'app-core',
-    baseHref: '/',
-    minify: DEBUG ? false : getHtmlMinifyOptions(),
-  };
-
-  switch (env) {
-    case DEVELOPMENT:
-      options.baseHref = `${SERVER.URL}/`;
-      break;
-    case PRODUCTION:
-      options.favicon = PATHS.client('favicon.ico');
-      break;
-    case TEST:
-      options.title = 'Sumo Survey Tests';
-      break;
-  }
-  return options;
-}
-
-function getHtmlMinifyOptions() {
-  return {
+  const minifyOptions = {
     removeComments: true,
     collapseWhitespace: true,
     conservativeCollapse: true,
@@ -286,6 +261,31 @@ function getHtmlMinifyOptions() {
     keepClosingSlash: true,
     caseSensitive: true,
   };
+
+  const options = {
+    inject: false,
+    template: PATHS.client('index.ejs'),
+    filename: 'index.html',
+    title: 'Sumo Survey',
+    mobile: true,
+    unsupportedBrowser: true,
+    appMountDirective: 'app-core',
+    baseHref: '/',
+    minify: DEBUG ? false : minifyOptions,
+  };
+
+  switch (env) {
+    case DEVELOPMENT:
+      options.baseHref = `${SERVER.URL}/`;
+      break;
+    case PRODUCTION:
+      options.favicon = PATHS.base('favicon.ico');
+      break;
+    case TEST:
+      options.title = 'Sumo Survey Tests';
+      break;
+  }
+  return options;
 }
 
 function getStatOptions() {

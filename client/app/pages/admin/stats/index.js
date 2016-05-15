@@ -27,15 +27,9 @@ function routeConfig($stateProvider) {
 }
 
 /** @ngInject **/
-function ResultsController($log, $scope, $state, questions) {
+function ResultsController($scope, $state, questions) {
   const $ctrl = this;
   $ctrl.questions = questions;
-  activate();
-
-  ////////////////
-
-  function activate() {
-  }
 
   ////////////////
 
