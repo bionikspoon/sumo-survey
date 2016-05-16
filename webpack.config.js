@@ -102,7 +102,6 @@ function getEntry(env) {
   switch (env) {
     case DEVELOPMENT:
       entry.main = [];
-      // enforce order
       entry.main.push(PATHS.client('app.bootstrap.js'));
       entry.main.push('css!animate.css');
       entry.main.push(`webpack-hot-middleware/client?${SERVER.URL}&reload=true`);
@@ -124,27 +123,19 @@ function getEntry(env) {
 }
 
 function getPreLoaders(env) {
-  const preLoaders = [
-    { test: /\.js$/, include: LOADER_INCLUDES, loader: 'baggage?[dir].html&[dir].scss' },
-  ];
+  const preLoaders = [ { test: /\.js$/, include: LOADER_INCLUDES, loader: 'baggage?[dir].html&[dir].scss' } ];
 
   switch (env) {
     case DEVELOPMENT:
-      preLoaders.push(
-        { test: /\.js$/, include: [ PATHS.app() ], loaders: [ 'eslint' ] }
-      );
+      preLoaders.push({ test: /\.js$/, include: [ PATHS.app() ], loaders: [ 'eslint' ] });
       break;
 
     case PRODUCTION:
-      preLoaders.push(
-        { test: /\.js$/, include: [ PATHS.app() ], loaders: [ 'eslint' ] }
-      );
+      preLoaders.push({ test: /\.js$/, include: [ PATHS.app() ], loaders: [ 'eslint' ] });
       break;
 
     case TEST:
-      preLoaders.push(
-        { test: /\.js$/, include: [ PATHS.app() ], loader: 'babel-istanbul?cacheDirectory' }
-      );
+      preLoaders.push({ test: /\.js$/, include: [ PATHS.app() ], loader: 'babel-istanbul?cacheDirectory' });
       break;
   }
   preLoaders.push({ test: /index\.js$/, include: [ PATHS.app() ], loader: 'angular-autoload' });
