@@ -11,7 +11,7 @@ angular
   .directive('appBarchart', BarchartDirective);
 
 /** @ngInject **/
-function BarchartDirective($log, $window, d3) {
+function BarchartDirective($window, d3) {
   const directive = {
     restrict: 'E',
     scope: { data: '<', onClick: '&' },
@@ -26,13 +26,17 @@ function BarchartDirective($log, $window, d3) {
     const labelPadding = parseInt(attrs.barPadding, 10) || 15;
     const svg = d3
       .select(element[ 0 ])
-      .append('svg')
-      .style('width', '100%');
+      .append('svg');
+    if (angular.isDefined(attrs.onClick)) element.addClass('app-clickable');
+    else element.removeClass('app-clickable');
 
     $window.onresize = () => scope.$apply();
 
-    scope.$watch(() => angular.element($window)[ 0 ].innerWidth, () => scope.render(scope.data));
-    scope.$watch('data', data => scope.render(data), true);
+    const unregister = [
+      scope.$watch(() => angular.element($window)[ 0 ].innerWidth, () => scope.render(scope.data)),
+      scope.$watch('data', data => scope.render(data), true),
+    ];
+    scope.$on('$destroy', () => unregister.forEach(destroy => destroy()));
 
     scope.render = data => {
       svg.selectAll('*').remove();
@@ -51,6 +55,7 @@ function BarchartDirective($log, $window, d3) {
         .data(data)
         .enter()
         .append('rect')
+        .attr('class', 'rect')
         .attr('height', barHeight)
         .attr('width', 140)
         .attr('x', Math.round(margin / 2))

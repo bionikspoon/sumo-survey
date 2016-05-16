@@ -1,9 +1,23 @@
 @import "../../mixins";
 
 app-barchart {
+  > svg {
+    width: 100%;
+  }
+
   .category-label {
     font-family: $font-family-sans-serif;
     color:       #ffffff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, .7);
+    cursor:      default;
+  }
+
+  &.app-clickable {
+    > svg {
+      > .rect,
+      > .category-label {
+        cursor: pointer;
+      }
+    }
   }
 }

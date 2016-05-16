@@ -112,7 +112,7 @@ function getEntry(env) {
     case PRODUCTION:
       entry.main = [];
       entry.main.push(PATHS.client('app.bootstrap.js'));
-      entry.main.push('animate.css');
+      entry.main.push('css!animate.css');
       entry.vendor = require('./package.json').vendor;
       break;
 
