@@ -13,5 +13,5 @@ angular.module(MODULE_NAME, [ ...blocks(), ...modules() ]);
  */
 function modules() {
   const context = require.context('./', true, /\.\/[^\/]+\/index\.js$/);
-  return context.keys().map(_module => context(_module).default);
+  return context.keys().map(context);
 }

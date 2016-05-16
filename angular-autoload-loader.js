@@ -6,7 +6,7 @@ function blocks(includes = []) {
     ? context.keys().filter(notIncluded, false)
     : context.keys();
 
-  return requiredContext.map(context).map(i => i.default);
+  return requiredContext.map(context);
 
   function notIncluded(path) {
     return includes.reduce((required, include) => required || path.endsWith(include), false);

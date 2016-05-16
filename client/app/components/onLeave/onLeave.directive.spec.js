@@ -29,7 +29,6 @@ describe('onLeave Directive', () => {
 
   describe('Directive', () => {
     it('Should exist with class ng-scope', () => {
-      console.log('$scope', $scope);
       expect(container[ 0 ]).to.have.class('ng-scope');
     });
 

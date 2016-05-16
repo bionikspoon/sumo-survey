@@ -46,7 +46,7 @@ const ENV_IS = {
 };
 const DEBUG = process.argv.includes('--debug');
 const VERBOSE = process.argv.includes('--verbose');
-const WATCH = ENV_IS.DEVELOPMENT || process.env.npm_lifecycle_event === 'test' || false;
+const WATCH = ENV_IS.DEVELOPMENT || process.argv.includes('--auto-watch') || false;
 
 // ===========================================================================
 // CONFIG EXPORT
@@ -61,6 +61,7 @@ module.exports = {
     chunkFilename: DEBUG ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
     sourceMapFilename: '[file].map',
     sourcePrefix: '  ',
+    libraryTarget: 'umd',
   },
 
   module: {
@@ -74,7 +75,7 @@ module.exports = {
   resolve: {
     root: [ PATHS.base(), PATHS.app() ],
     extensions: [ '', '.js' ],
-    alias: { sinon: 'sinon/pkg/sinon.js' },
+    alias: { sinon$: 'sinon/pkg/sinon.js' },
   },
   resolveLoader: {
     modulesDirectories: [ 'node_modules', PATHS.base() ],
@@ -116,9 +117,6 @@ function getEntry(env) {
       break;
 
     case TEST:
-      entry.bundle = [];
-      entry.bundle.push('angular');
-      entry.bundle.push(`mocha!${PATHS.base('webpack.tests.js')}`);
       break;
   }
 
@@ -144,9 +142,9 @@ function getPreLoaders(env) {
       break;
 
     case TEST:
-      // preLoaders.push(
-      //   { test: /\.js/, include: LOADER_INCLUDES, loader: 'babel-istanbul' }
-      // );
+      preLoaders.push(
+        { test: /\.js$/, include: [ PATHS.app() ], loader: 'babel-istanbul?cacheDirectory' }
+      );
       break;
   }
   preLoaders.push({ test: /index\.js$/, include: [ PATHS.app() ], loader: 'angular-autoload' });
@@ -311,6 +309,8 @@ function getEnv(target) {
 
   switch (target) {
     case 'test':
+      return TEST;
+    case 'test:watch':
       return TEST;
     case 'dev':
       return DEVELOPMENT;

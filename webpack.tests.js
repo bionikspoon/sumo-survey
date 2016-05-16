@@ -1,5 +1,6 @@
 /* eslint-env angular/mocks, mocha */
 /* eslint angular/window-service:0, func-names:0 */
+import 'angular';
 import 'angular-mocks';
 import chai from 'chai';
 import sinon from 'sinon';

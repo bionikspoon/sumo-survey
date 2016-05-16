@@ -38,13 +38,15 @@ describe('Auth Factory', () => {
       .whenPOST('/api/Admins/logout')
       .respond(204);
   });
-  afterEach(() => {
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-  });
+
   afterEach(() => {
     LoopBackAuth.clearUser();
     LoopBackAuth.clearStorage();
+  });
+
+  afterEach(() => {
+    $httpBackend.verifyNoOutstandingExpectation();
+    $httpBackend.verifyNoOutstandingRequest();
   });
 
   describe('API', () => {
