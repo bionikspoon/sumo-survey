@@ -23,7 +23,7 @@ before_deploy:
 - eval "$(ssh-agent -s)"
 - chmod 600 deploy_key
 - ssh-add deploy_key
-- git clean -x -d
+- git clean -x -d -f
 - npm install strongloop
 deploy:
   provider: script
