@@ -12,12 +12,13 @@
     "test:watch": "karma start --debug --auto-watch --no-single-run",
     "posttest": "nsp check",
     "migrate": "./bin/migrate",
-    "preheroku-postbuild": "npm install -g strong-supervisor",
-    "heroku-postbuild": "npm run build",
+    "preheroku-postbuild": "npm run build",
+    "heroku-postbuild": "npm install -g strong-supervisor",
     "postheroku-postbuild": "npm prune --production"
   },
   "engines": {
-    "node": "5.11.x"
+    "node": "5.11.x",
+    "npm": "3.8.x"
   },
   "vendor": [
     "angular",
