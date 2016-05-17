@@ -17,23 +17,15 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-before_install:
-- openssl aes-256-cbc -K $encrypted_2b46ddb74751_key -iv $encrypted_2b46ddb74751_iv
-  -in deploy_key.enc -out deploy_key -d
 before_deploy:
 - export NODE_ENV=production
-- eval "$(ssh-agent -s)"
-- chmod 600 deploy_key
-- mv deploy_key ~/.ssh
-- ssh-add ~/.ssh/deploy_key
-- chmod +x ./bin/deploy
-- npm install strongloop
 - git init
 - git config user.name "Manu Phatak"
 - git config user.email "bionikspoon@gmail.com"
 - git remote add upstream "https://bionikspoon:$GH_TOKEN@github.com/bionikspoon/sumo-survey.git"
-- git clean -x -d -f
 - git fetch upstream
+- git clean -x -d -f
+- npm install strongloop
 - slc build --commit --onto deploy --install
 - git push -q upstream HEAD:deploy
 deploy:
