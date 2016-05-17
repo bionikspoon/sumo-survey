@@ -10,6 +10,9 @@ build_app() {
   if [ -e $build_dir/package.json ]; then
     cd $build_dir
 
+    echo "Installing gulp-cli"
+    npm install gulp-cli --unsafe-perm --userconfig $build_dir/.npmrc 2>&1
+
     echo "Running npm run build"
     npm run build 2>&1
 
