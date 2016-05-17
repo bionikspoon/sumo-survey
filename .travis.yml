@@ -26,14 +26,15 @@ before_deploy:
 - chmod 600 deploy_key
 - mv deploy_key ~/.ssh
 - ssh-add ~/.ssh/deploy_key
-- git clean -x -d -f
 - chmod +x ./bin/deploy
 - npm install strongloop
 - git init
 - git config user.name "Manu Phatak"
 - git config user.email "bionikspoon@gmail.com"
 - git remote add upstream "https://bionikspoon:$GH_TOKEN@github.com/bionikspoon/sumo-survey.git"
-- slc build
+- git clean -x -d -f
+- git fetch upstream
+- slc build --commit --onto deploy --install
 - git push -q upstream HEAD:deploy
 deploy:
   provider: script
