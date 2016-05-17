@@ -17,8 +17,7 @@ addons:
 before_cache:
 - npm install strongloop
 before_install:
-- openssl aes-256-cbc -K $encrypted_2b46ddb74751_key -iv $encrypted_2b46ddb74751_iv
-  -in deploy_key.enc -out deploy_key -d
+- openssl aes-256-cbc -K $encrypted_2b46ddb74751_key -iv $encrypted_2b46ddb74751_iv -in deploy_key.enc -out deploy_key -d
 before_deploy:
 - export NODE_ENV=production
 - eval "$(ssh-agent -s)"
