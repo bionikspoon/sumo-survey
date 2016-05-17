@@ -17,7 +17,7 @@ build_app() {
     cat $build_dir/.npmrc
 
     echo "Installing gulp-cli"
-    npm install gulp-cli --unsafe-perm --userconfig $build_dir/.npmrc 2>&1
+    npm install -g gulp-cli --unsafe-perm --userconfig $build_dir/.npmrc 2>&1
 
     echo "Running npm run build"
     npm run build --userconfig $build_dir/.npmrc 2>&1
