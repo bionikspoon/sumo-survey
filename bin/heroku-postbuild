@@ -4,8 +4,6 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-echo "PATH: $PATH"
-
 build_app() {
   local build_dir=${1:-}
 
@@ -13,20 +11,12 @@ build_app() {
   if [ -e $build_dir/package.json ]; then
     cd $build_dir
 
-    echo "cat $build_dir/.npmrc"
-    cat $build_dir/.npmrc
-
-    echo "Installing gulp-cli"
-    npm install -g gulp-cli --unsafe-perm --userconfig $build_dir/.npmrc 2>&1
-
     echo "Running npm run build"
-    npm run build --userconfig $build_dir/.npmrc 2>&1
+    npm run build 2>&1
 
     echo "Running npm prune --production"
     npm prune --production 2>&1
 
-    echo "Installing Strongloop"
-    npm install -g strongloop --unsafe-perm --userconfig $build_dir/.npmrc 2>&1
   else
     echo "Skipping (no package.json)"
   fi

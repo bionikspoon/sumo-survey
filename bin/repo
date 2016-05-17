@@ -1,9 +1,0 @@
-#! /usr/bin/env bash
-
-set -o errexit -o nounset
-
-git init
-git config user.name "Manu Phatak (bionikspoon)"
-git config user.email "bionikspoon@gmail.com"
-git remote add upstream "https://bionikspoon:$GH_TOKEN@github.com/bionikspoon/sumo-survey.git"
-git fetch upstream
