@@ -49,12 +49,16 @@ module.exports = config => {
         { type: 'html', subdir: '.' },
         { type: 'text', subdir: '.', file: 'report.txt' },
         { type: 'text-summary', subdir: '.', file: 'summary.txt' },
+        { type: 'lcovonly', subdir: '.', file: 'lcov.txt' },
       ],
       watermarks: {
         statements: [ 50, 90 ],
         functions: [ 50, 90 ],
         branches: [ 50, 90 ],
         lines: [ 50, 90 ],
+      },
+      instrumenterOptions: {
+        istanbul: { noCompact: true },
       },
     },
 

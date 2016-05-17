@@ -77,9 +77,6 @@ module.exports = {
     extensions: [ '', '.js' ],
     alias: { sinon$: 'sinon/pkg/sinon.js' },
   },
-  resolveLoader: {
-    modulesDirectories: [ 'node_modules', PATHS.base() ],
-  },
   devtool: ENV_IS.PRODUCTION ? 'source-map' : 'inline-source-map',
   devServer: { noInfo: !VERBOSE, colors: true, inline: true },
   postcss: getPostcss,

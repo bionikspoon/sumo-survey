@@ -1,6 +1,7 @@
 {
   "name": "sumo-survey",
   "version": "0.0.0",
+  "private": true,
   "main": "server/server.js",
   "scripts": {
     "prestart": "npm run migrate",
@@ -9,8 +10,9 @@
     "build": "gulp build",
     "build:debug": "npm run build -- --debug",
     "test": "karma start --debug",
-    "test:watch": "karma start --debug --auto-watch --no-single-run",
     "posttest": "nsp check",
+    "test:watch": "karma start --debug --auto-watch --no-single-run",
+    "coveralls": "[ -e ./coverage/lcov.txt ] && cat ./coverage/lcov.txt | coveralls || exit 1",
     "migrate": "./bin/migrate",
     "preheroku-postbuild": "npm run build",
     "heroku-postbuild": "npm install -g strong-supervisor",
@@ -50,6 +52,7 @@
   "devDependencies": {
     "angular": "1.5.5",
     "angular-animate": "1.5.5",
+    "angular-autoload-loader": "file:./lib/angular-autoload-loader",
     "angular-mocks": "1.5.5",
     "angular-resource": "1.5.5",
     "angular-touch": "1.5.5",
@@ -68,6 +71,7 @@
     "chai": "3.5.0",
     "chai-as-promised": "5.3.0",
     "chai-dom": "1.4.0",
+    "coveralls": "2.11.9",
     "css-loader": "0.23.1",
     "d3": "3.5.17",
     "eslint": "2.10.1",
