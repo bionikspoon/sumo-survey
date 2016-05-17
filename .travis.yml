@@ -1,9 +1,13 @@
+sudo: false
 language: node_js
 node_js:
 - '5.11'
 - '6'
 env:
 - CXX=g++-4.8 NODE_ENV=test TRAVIS_CI=TRUE
+cache:
+  directories:
+    - node_modules
 addons:
   apt:
     sources:
