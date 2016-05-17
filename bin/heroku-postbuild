@@ -4,11 +4,6 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-echo "PATH: $PATH"
-( set -o posix ; set )
-env
-echo "BUILD_DIR: $BUILD_DIR"
-
 build_app() {
   local build_dir=${1:-}
 
@@ -28,4 +23,4 @@ build_app() {
   fi
 }
 
-build_app "$BUILD_DIR"
+build_app "$PWD"
