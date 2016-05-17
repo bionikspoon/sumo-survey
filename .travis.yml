@@ -4,7 +4,10 @@ node_js:
 - '5.11'
 - '6'
 env:
-- NODE_ENV=test TRAVIS_CI=TRUE CXX=g++-4.8
+  matrix:
+  - NODE_ENV=test CXX=g++-4.8
+  global:
+    secure: CdjOtd4M4Uct4ASU9UWTVoETmupNC6MB3Z3J/Ct5njf3hirjnljCn/vqXuQiXPDsauM7VcZXJdIxLxX9G2ZXPondHygknPFYo3u/+IeHCrVWS8kJuXLDPO+BKMYw324u3rDk6zF7K5UlCdvfQhL8wDhWdLhnW2VHrvOxRPK+Zsjj1D7q530MMTn0/TAoWnjTHiz2WEWNlcnVhhiSTQGOy6/AL1hgWkaRNW3Vn2Hbua6DYKCX5CfFHmYZOVm6Gar+BO7F+PHfpEZXONob1eKK1GEFCbKpGubcZ5icfaplhwmzAviS54Hltc+ycQWky8wPMNYJbejY4MO3G7zuOCUo4zUJ/ALOH+XoNpEgOf30Z8NZW0fKgqYX80S50FV1CE/FUPZGlSt+gVUkh6D4mNFw1vRNKLvn8daNK97h4SpTDWGP0CM+X46fPiApxqiSEB2NvbRuGh+bu9eOELpfSByVk7dVWkpxtOualT+Iy5rjCsKBBmW0P/nIq8mc4Rc1mGQ7Rn/owkdLvwFq8NYdyirYo6nDi2s635vM4HmwSOf9Zny1gU5tR0lEXo9JPYMOmCgC0EGW0cLSXB7ECtrR+9LmgkYCQC50Bb0b+9VvD625Dae4/o6gwstC10A4XMCyn3Nyq9+VRfhpUplS+DVheg/Gn8T3eJmllkFZsfRWjpeHFi8=
 cache:
   directories:
   - node_modules
@@ -15,7 +18,8 @@ addons:
     packages:
     - g++-4.8
 before_install:
-- openssl aes-256-cbc -K $encrypted_2b46ddb74751_key -iv $encrypted_2b46ddb74751_iv -in deploy_key.enc -out deploy_key -d
+- openssl aes-256-cbc -K $encrypted_2b46ddb74751_key -iv $encrypted_2b46ddb74751_iv
+  -in deploy_key.enc -out deploy_key -d
 before_deploy:
 - export NODE_ENV=production
 - eval "$(ssh-agent -s)"
@@ -25,11 +29,18 @@ before_deploy:
 - git clean -x -d -f
 - chmod +x ./bin/deploy
 - npm install strongloop
+- git init
+- git config user.name "Manu Phatak"
+- git config user.email "bionikspoon@gmail.com"
+- git remote add upstream "https://bionikspoon:$GH_TOKEN@github.com/bionikspoon/sumo-survey.git"
+- git fetch upstream
+- git reset upstream/deploy
+- slc build
+- git push -q upstream HEAD:deploy
 deploy:
   provider: script
   on:
     branch: master
     node: '5.11'
   skip_cleanup: true
-  script: ./bin/deploy
-
+  script: "./bin/deploy"
