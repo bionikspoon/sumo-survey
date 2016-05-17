@@ -4,35 +4,15 @@ node_js:
 - '5.11'
 - '6'
 env:
-  matrix:
-  - NODE_ENV=test CXX=g++-4.8
-  global:
-    secure: QruUkSDNizERlHnDOy8XhOu+bRrVGju4E7l92MvxHMAKE+uClgY2uMm3jumwUbMwUczZ6wk2UINSoH6UtPr8/aLnVJeM+B09s40P4qdu/QBokmBwp6Tg1OzzHuZFUGASiPdC/9p6rzv9k8rMTXeUd/jxUEhSQgAwNgwpBf+cXD51vyC1FJxYcPvFoYJIj9djBXluhS3zvlllAd+xTe7wdfbvdCsQbFy5OzGFjvLDzi67zYfkTGyOMQjuaDOXGxNRsvDzLiLrpulbWI2odjfRdU6A0feGmIvZbUjs893wkqYb4fi42c6neiyN+slldl8hp00tTm1q7VeBYlYjDICHYoqdjVPDGHUT2jV3mhlCGi6HO6MXrDh3DTTYAimqtEKP5ilCRjNs7GDdjie0NLtn9KTaeD6g7Z7Ygh2dUVpI4LnA6ZQJmqtGX3gp+++BYjBB29d3qd/GQ3TIkoZOsqITIFYujQ9cRn1UdH79evDvXrwxz54bPEzg1pBSEnncGenYUgfvu3Zm6aaeS7KSCGZNx5KJTXtzSQDM2BaIHeb5w0dYyEuuDtPtfQVaMXFSBJO6MotHAMqncqwDc9WJJ8ci3qqHkq8bkUqnSBBH4TKXV+sa3+GVr8VeO9kpoC7MvtrIYxYg8IoRBAazlhQ/k9SkRlFySBy40ztP9mwlGTIWMoA=
+- NODE_ENV=test
 cache:
-  apt: true
   directories:
   - node_modules
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
-before_deploy:
-- export NODE_ENV=production
-- ./bin/repo
-- git checkout -b deploy
-- git clean -x -d -f
-- npm install
-- npm install gulp-cli
-- npm run build
-- npm prune --production
-- ./bin/commit
-- git push -q upstream HEAD:deploy
 deploy:
-  provider: script
+  provider: heroku
   on:
     branch: master
     node: '5.11'
-  skip_cleanup: true
-  script: "./bin/deploy"
+  app: bionikspoon-sumo-survey
+  api_key:
+    secure: N7eJS9MOKczVoCf9n23dL0w3ZPtNbJOEmYlXsSPIMqVyI4oy6wUBoXKiK3CndAVD0yW+8YTBxf4YeqbiH6s0YvU7sP1wCWn2+3tHJGRjDHs5wtW4lmatPRBakXxuwknWjXj6EmWQ2WG61ciQNgzsEf9oRlbPqqIu6xDdIgTD/cTzJ4Nl8RJkdZp1v6DnthhZJhec3KL+Cr6oxshs6JHDzBZyAcJZLvbsJioIotzNpVbW0Mbb72DevpRm9uQnubGlN5sKTzESh0PMPzJkZvWfphYGxCZ9OYMfWqv+yp189XziJlW+y+3joDTKuPPS5nI+BbrF1Ck89mEIIJ0Llubt36deNJ9an1n1RG8uenwOvQ6mFBU4ZilSr5pjUeW5sScM/2/c/ba0q20m7g/iJIgFGkxzBZTYdeFPfck1zMCw4ncbleITHz0yvDR72rJJDdyk3rwoUv/onTk4cncBZnE6jr+Dt32GaZEzDZohqeyzePvvwXzPPwm/T+oAHVi94kFQ/wDnmU101L6633xbFrH7twI820O+Pfl3rmBntl4ctFF8bXx1y7qL/KY3OJb61XNO1e/59xKHR7FyHwyOFSZnb/TJ7P0rWvg8eHwgWLnoSpbirCy6kYnz+6ipNq64MMAyPhFciotfVZe9deI8TgnGcdwJ6RlEYkx8bZuA7QgyVAc=

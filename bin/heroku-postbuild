@@ -1,0 +1,26 @@
+#! /usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+build_app() {
+  local build_dir=${1:-}
+
+  if [ -e $build_dir/package.json ]; then
+    cd $build_dir
+
+    echo "Running npm run build"
+    npm run build 2>&1
+
+    echo "Running npm prune --production"
+    npm prune --production 2>&1
+
+    echo "Installing Strongloop"
+    npm install -g strongloop --unsafe-perm --userconfig $build_dir/.npmrc 2>&1
+  else
+    echo "Skipping (no package.json)"
+  fi
+}
+
+build_app "$BUILD_DIR"
