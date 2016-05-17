@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+# echo "slc build"
+# slc build
+
+# echo "git checkout deploy"
+# git checkout deploy
+
+echo "git push origin deploy"
+git push origin deploy

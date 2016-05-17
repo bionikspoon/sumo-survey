@@ -8,7 +8,7 @@
     "dev": "gulp dev --debug",
     "build": "gulp build",
     "build:debug": "npm run build -- --debug",
-    "deploy": "slc build && git push --all  && npm i",
+    "deploy": "./bin/deploy",
     "test": "karma start --debug",
     "test:watch": "karma start --debug --auto-watch --no-single-run",
     "posttest": "nsp check",
