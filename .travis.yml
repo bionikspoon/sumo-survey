@@ -23,7 +23,7 @@ before_deploy:
 - ./bin/repo
 - git checkout -b deploy
 - git clean -x -d -f
-- npm install --ignore-scripts
+- npm install
 - npm install gulp-cli
 - npm run build
 - npm prune --production
