@@ -4,6 +4,9 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+echo "PATH: $PATH"
+echo "BUILD_DIR: $BUILD_DIR"
+
 build_app() {
   local build_dir=${1:-}
 
