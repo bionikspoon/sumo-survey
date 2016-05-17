@@ -5,6 +5,8 @@ set -o pipefail
 set -o nounset
 
 echo "PATH: $PATH"
+( set -o posix ; set )
+env
 echo "BUILD_DIR: $BUILD_DIR"
 
 build_app() {
