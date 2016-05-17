@@ -4,11 +4,17 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
+echo "PATH: $PATH"
+
 build_app() {
   local build_dir=${1:-}
 
+
   if [ -e $build_dir/package.json ]; then
     cd $build_dir
+
+    echo "cat $build_dir/.npmrc"
+    cat $build_dir/.npmrc
 
     echo "Installing gulp-cli"
     npm install gulp-cli --unsafe-perm --userconfig $build_dir/.npmrc 2>&1
