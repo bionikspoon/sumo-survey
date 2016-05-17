@@ -6,7 +6,7 @@
     "prestart": "npm run migrate",
     "start": "slc run",
     "dev": "gulp dev --debug",
-    "build": "gulp build",
+    "build": "echo $PATH && gulp build",
     "build:debug": "npm run build -- --debug",
     "deploy": "./bin/deploy",
     "test": "karma start --debug",
