@@ -3,7 +3,13 @@ node_js:
 - '5.11'
 - '6'
 env:
-- NODE_ENV=test TRAVIS_CI=TRUE
+- CXX=g++-4.8 NODE_ENV=test TRAVIS_CI=TRUE
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 after_success:
   - npm install strongloop
   - slc build
