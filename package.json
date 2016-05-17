@@ -12,6 +12,7 @@
     "test:watch": "karma start --debug --auto-watch --no-single-run",
     "posttest": "nsp check",
     "migrate": "./bin/migrate",
+    "preheroku-postbuild": "npm install -g strong-supervisor",
     "heroku-postbuild": "npm run build",
     "postheroku-postbuild": "npm prune --production"
   },
@@ -43,8 +44,7 @@
     "loopback-component-explorer": "2.5.0",
     "loopback-connector-mysql": "2.2.1",
     "loopback-datasource-juggler": "2.46.0",
-    "morgan": "1.7.0",
-    "strong-supervisor": "3.3.3"
+    "morgan": "1.7.0"
   },
   "devDependencies": {
     "angular": "1.5.5",
