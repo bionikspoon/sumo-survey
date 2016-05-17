@@ -36,4 +36,3 @@ deploy:
     node: '5.11'
   skip_cleanup: true
   script: "./bin/deploy"
-
