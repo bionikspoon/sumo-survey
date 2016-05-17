@@ -35,4 +35,3 @@ deploy:
     - slc build
     - git checkout deploy
     - git push
-
