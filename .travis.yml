@@ -33,8 +33,6 @@ before_deploy:
 - git config user.name "Manu Phatak"
 - git config user.email "bionikspoon@gmail.com"
 - git remote add upstream "https://bionikspoon:$GH_TOKEN@github.com/bionikspoon/sumo-survey.git"
-- git fetch upstream
-- git reset upstream/deploy
 - slc build
 - git push -q upstream HEAD:deploy
 deploy:
