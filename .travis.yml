@@ -4,13 +4,13 @@ node_js:
 - '6'
 env:
 - NODE_ENV=test TRAVIS_CI=TRUE
+after_success:
+  - npm install strongloop
+  - slc build
+  - git checkout deploy
 deploy:
   provider: heroku
   api_key:
     secure: ZORlUVfpDhPBkmpjSQpmbY/7KpQfIV+IBF0484ItRlxqtqW0l7Eh3KM8rBIHi2tkPKQutDFcA0ds4GGmlWamq5e9vUKZT8pNdqPHJtSehZPSIaDlSGixHB4+G9Jh53jVD1Za1SCcMIJr/ENjm55uNeEoiyNrAbqk8Zl2fchUTpE1OHAVbPHpve0TzTzoMO0zI3uP+oxkidmYuUhny+V6Bdf4j0f7D2sKdm6AuXK4SUTOEdc40I2gEto1buuL3StbambYz2o+F3JFqAyHiuoSEBpTe/4l4eiXQWzfZ2P+4Up2KiQqc3GRd1QmEWjAW330NKgkKQ6DRYjZ6vWWeete3z9kiUUncRGVFmBPKX09gtRmJum/48m49cY3dXTAjdOTsiTodFSqqq+xEZ3S2NLFLVTkEPO8sPZRcUWqvtZVR0HptKV68Ic87xUEoAc36jEKbRjKvQPL0E6nH/sCZQDfp7/Pj2wnsFk5gml5UKd1Huk7WFqzTZRAscq6B0yqwjfYq2EHU1K52a9eGqUGMU+eSvSwzqza4WbQyip2PUcx0+I+R+X9whXi41oMUZnQi3ugO05xqLEsgucTy89VwaI58k8Q38MwweyDZ8nRH+6yMSeoUSSuOVFV+v8NjBjD/aNou0BBPQoMuGG92zWQ7k/OKJh0uzRiNTUUiwrtiEHJQK0=
-  on: deploy
-  run:
-    - npm install strongloop
-    - slc build
-    - git checkout deploy
-
+  on: master
+  app: bionikspoon-sumo-survey
