@@ -20,12 +20,14 @@ before_deploy:
 - export NODE_ENV=production
 - eval "$(ssh-agent -s)"
 - chmod 600 deploy_key
-- ssh-add deploy_key
+- mv deploy_key ~/.ssh
+- ssh-add ~/.ssh/deploy_key
 - git clean -x -d -f
+- chmod +x ./bin/deploy
 - npm install strongloop
 deploy:
   provider: script
   on:
     branch: master
     node: '5.11'
-  script: bin/deploy
+  script: ./bin/deploy
