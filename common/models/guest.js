@@ -2,9 +2,7 @@ const loopback = require('loopback');
 const _ = require('lodash/fp');
 const app = require('../../server/server');
 
-// const VALID_IP = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-
-module.exports = function setup(Guest) {
+module.exports = Guest => {
   Guest.observe('access', includeClientIp);
   Guest.observe('before save', includeClientIp);
   Guest.createResponse = createResponse;
@@ -12,7 +10,6 @@ module.exports = function setup(Guest) {
   Guest.getOneUnanswered = getOneUnanswered;
   Guest.validatesPresenceOf('fingerprint', 'ip');
   Guest.validatesFormatOf('fingerprint', { with: /^[a-f0-9]{32}$/i, message: 'must be 32 digit hex string.' });
-  // Guest.validatesFormatOf('ip', { with: VALID_IP, message: 'must be an ipv4 address.' });
 
   /**
    * Include client ip in query

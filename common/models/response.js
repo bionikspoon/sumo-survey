@@ -1,3 +1,3 @@
-module.exports = function setup(Response) {
+module.exports = Response => {
 
 };

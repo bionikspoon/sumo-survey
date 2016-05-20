@@ -1,3 +1,3 @@
-module.exports = function auth(app) {
+module.exports = app => {
   app.enableAuth();
 };

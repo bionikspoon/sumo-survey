@@ -1,4 +1,4 @@
-module.exports = function setup(Admin) {
+module.exports = Admin => {
   Admin.validatesPresenceOf('email', 'status', 'username');
 
   Admin.validatesLengthOf('email', { max: 256 });
