@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const loopback = require('loopback');
+const Promise = require('bluebird');
 
 module.exports = Question => {
   Question.validatesPresenceOf('text');
@@ -66,22 +67,11 @@ module.exports = Question => {
    */
   function statsQuestion(filter = {}) {
     const question = this;
-    return getChoices(question, filter)
+    const choicesAsync = Promise.promisify(question.choices);
+    return choicesAsync(filter)
       .then(choices => Promise.all(choices.map(choice => choice.responses.count()
         .then(count => Object.assign(choice.toObject(), { count }))
       )))
       .then(choices => Object.assign(question.toObject(), { choices }));
   }
 };
-
-/**
- * Get questions' choices
- * @param {object} question instance
- * @param {object} filter
- * @returns {Promise.<[choice]>}
- */
-function getChoices(question, filter = {}) {
-  return new Promise((resolve, reject) => {
-    question.choices(filter, (err, choices) => (err ? reject(err) : resolve(choices)));
-  });
-}
