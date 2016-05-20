@@ -1,5 +1,7 @@
 const _ = require('lodash');
-module.exports = function setup(Question) {
+const loopback = require('loopback');
+
+module.exports = Question => {
   Question.validatesPresenceOf('text');
   Question.validatesLengthOf('text', { max: 512 });
   Question.createWithChoices = createWithChoices;
@@ -7,11 +9,15 @@ module.exports = function setup(Question) {
   Question.prototype.statsQuestion = statsQuestion;
 
   /**
-   * Create a new Question model with Choices and persist it into the data source.
+   * Create a new Question with Choices and persist it into the data source.
    * @param {[question]|question} data Model instance data
    * @return {Promise.<[question]|question>}
    */
   function createWithChoices(data) {
+    const ctx = loopback.getCurrentContext();
+    // noinspection JSAccessibilityCheck
+    const currentUser = ctx.get('currentUser');
+    if (!currentUser) return Promise.reject(new Error('Current User not found in current context'));
     // normalize input to array
     return _.isArray(data) ? createMany(data) : createOne(data);
 
@@ -24,6 +30,7 @@ module.exports = function setup(Question) {
       // pop choices
       const choices = _.isFunction(dataItem.choices) ? dataItem.choices() : dataItem.choices;
       delete dataItem.choices;
+      dataItem.creatorId = currentUser.id;
 
       // create question
       return Question.create(dataItem)

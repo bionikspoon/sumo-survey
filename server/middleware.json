@@ -38,6 +38,9 @@
   "auth": {
     "loopback#token": {}
   },
+  "auth:after": {
+    "./middleware/currentUser": {}
+  },
   "parse": {},
   "routes:before": {
     "loopback#logger": {

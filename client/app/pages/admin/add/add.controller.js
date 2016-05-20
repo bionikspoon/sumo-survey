@@ -28,9 +28,7 @@ function AddController($log, $state, $q, Question) {
   $ctrl.addQuestion = question => {
     if (question.$invalid || question.addChoice.text.length || !question.choices.length) return;
     const { text, choices } = question;
-    $log.debug('AdminController choices:', choices);
-
-    Question.create({ text, choices })
+    Question.createWithChoices({ text, choices })
       .$promise
       .then(results => {
         $state.reload();
