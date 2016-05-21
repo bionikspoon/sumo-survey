@@ -2,6 +2,11 @@
   "sql": {
     "name": "sql",
     "connector": "mysql",
-    "url": "${DB_URL}"
+    "host": "${DB_HOST}",
+    "port": "${DB_PORT}",
+    "database": "${DB_NAME}",
+    "password": "${DB_PW}",
+    "user": "${DB_USER}",
+    "connectionLimit": "${DB_CONNECTION_LIMIT}"
   }
 }
