@@ -4,24 +4,17 @@ require('babel-register');
 const gulp = require('gulp');
 const gulpUtil = require('gulp-util');
 const runSequence = require('run-sequence');
-
-const browserSync = require('browser-sync').create();
-const nodemon = require('gulp-nodemon');
 const rename = require('gulp-rename');
 const loopbackAngular = require('gulp-loopback-sdk-angular');
 const fs = require('fs-extra');
-const webpack = require('webpack');
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpackHotMiddleware = require('webpack-hot-middleware');
-const migrate = require('./bin/_migrate');
-const autoupdate = require('./bin/_autoupdate');
+const browserSync = require('browser-sync').create();
 
 const webpackConfig = require('./webpack.config.js');
-
 const PATHS = webpackConfig.PATHS;
 const SERVER = webpackConfig.SERVER;
 
 gulp.task('default', [ 'dev' ]);
+
 gulp.task('dev', callback => {
   runSequence(
     'clean',
@@ -31,6 +24,7 @@ gulp.task('dev', callback => {
     callback
   );
 });
+
 gulp.task('build', callback => {
   runSequence(
     'clean',
@@ -41,8 +35,22 @@ gulp.task('build', callback => {
 });
 
 gulp.task('clean', callback => fs.emptyDir(PATHS.dist(), callback));
-gulp.task('migrate', callback => { migrate().then(() => callback()).catch(callback); });
-gulp.task('autoupdate', callback => { autoupdate().then(() => callback()).catch(callback); });
+
+gulp.task('migrate', callback => {
+  const migrate = require('./bin/_migrate');
+
+  migrate()
+    .then(() => callback())
+    .catch(callback);
+});
+
+gulp.task('autoupdate', callback => {
+  const autoupdate = require('./bin/_autoupdate');
+
+  autoupdate()
+    .then(() => callback())
+    .catch(callback);
+});
 
 gulp.task('loopback-angular', () => gulp
   .src(PATHS.server('server.js'))
@@ -52,6 +60,9 @@ gulp.task('loopback-angular', () => gulp
 );
 
 gulp.task('browser-sync', callback => {
+  const webpack = require('webpack');
+  const webpackDevMiddleware = require('webpack-dev-middleware');
+  const webpackHotMiddleware = require('webpack-hot-middleware');
   const bundler = webpack(webpackConfig);
 
   browserSync.init({
@@ -79,7 +90,9 @@ gulp.task('browser-sync-reload', [ 'loopback-angular' ], callback => {
 });
 
 gulp.task('nodemon', callback => {
+  const nodemon = require('gulp-nodemon');
   let started;
+
   process.env.STARTED = 'FALSE';
   nodemon({
     script: './',
@@ -96,6 +109,8 @@ gulp.task('nodemon', callback => {
 });
 
 gulp.task('bundle', callback => {
+  const webpack = require('webpack');
+
   webpack(webpackConfig, (err, stats) => {
     if (err) throw new gulpUtil.PluginError('webpack', err);
 
