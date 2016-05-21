@@ -2,6 +2,6 @@
   "sql": {
     "name": "sql",
     "connector": "mysql",
-    "url":"${JAWSDB_MARIA_URL}"
+    "url": "${JAWSDB_MARIA_URL}?connectionLimit=${DB_CONNECTION_LIMIT}"
   }
 }
