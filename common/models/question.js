@@ -6,6 +6,7 @@ module.exports = Question => {
   Question.validatesPresenceOf('text');
   Question.validatesLengthOf('text', { max: 512 });
   Question.createWithChoices = createWithChoices;
+  Question._createWithChoices = _createWithChoices;
   Question.statsSummary = statsSummary;
   Question.prototype.statsQuestion = statsQuestion;
 
@@ -17,9 +18,13 @@ module.exports = Question => {
   function createWithChoices(data) {
     const ctx = loopback.getCurrentContext();
     // noinspection JSAccessibilityCheck
-    const currentUser = ctx.get('currentUser');
+    const currentUser = ctx ? ctx.get('currentUser') : undefined;
     if (!currentUser) return Promise.reject(new Error('Current User not found in current context'));
     // normalize input to array
+    return Question._createWithChoices(data, currentUser);
+  }
+
+  function _createWithChoices(data, creator) {
     return _.isArray(data) ? createMany(data) : createOne(data);
 
     function createMany(dataItems) {
@@ -31,7 +36,7 @@ module.exports = Question => {
       // pop choices
       const choices = _.isFunction(dataItem.choices) ? dataItem.choices() : dataItem.choices;
       delete dataItem.choices;
-      dataItem.creatorId = currentUser.id;
+      if (creator) dataItem.creatorId = creator.id;
 
       // create question
       return Question.create(dataItem)

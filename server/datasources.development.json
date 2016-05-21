@@ -1,11 +1,7 @@
 {
   "sql": {
-    "host": "localhost",
-    "port": 3306,
-    "database": "sumo-survey",
-    "password": "secret",
     "name": "sql",
-    "user": "sumo-survey",
-    "connector": "mysql"
+    "connector": "mysql",
+    "url":"mysql://sumo-survey:secret@localhost:3306/sumo-survey"
   }
 }

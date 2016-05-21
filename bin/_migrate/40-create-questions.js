@@ -6,7 +6,7 @@ module.exports = function createQuestions(app) {
 
   return Admin.findOne({})
     .then(admin => getSurvey(admin))
-    .then(questions => Question.createWithChoices(questions))
+    .then(questions => Question._createWithChoices(questions))
     .then(logResults);
 
   function logResults(questions) {
