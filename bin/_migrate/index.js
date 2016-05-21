@@ -19,6 +19,6 @@ module.exports = function migrate(app = _app) {
     .then(() => disconnect(app))
     .catch(error => {
       console.trace(error);
-      process.exit(1);
+      return Promise.reject(error);
     });
 };

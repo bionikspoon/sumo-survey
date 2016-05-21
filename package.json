@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "scripts": {
     "prestart": "npm run migrate",
-    "start": "slr",
+    "start": "slr .",
     "dev": "gulp dev --debug",
     "build": "gulp build",
     "build:debug": "npm run build -- --debug",

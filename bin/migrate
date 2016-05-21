@@ -4,4 +4,6 @@ require('babel-register');
 
 const migrate = require('./_migrate');
 
-module.exports = migrate();
+module.exports = migrate()
+  .then(() => process.exit())
+  .catch(() => process.exit(1));

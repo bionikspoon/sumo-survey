@@ -4,4 +4,6 @@ require('babel-register');
 
 const autoupdate = require('./_autoupdate');
 
-module.exports = autoupdate();
+module.exports = autoupdate()
+  .then(() => process.exit())
+  .catch(() => process.exit(1));
