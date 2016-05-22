@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "precompile": "babel ./index.es6 -o ./index.js --source-maps=inline --presets=es2015 --no-babelrc",
-    "preinstall": "npm run precompile"
+    "postinstall": "npm run precompile"
 
   },
   "peerDependencies": {
