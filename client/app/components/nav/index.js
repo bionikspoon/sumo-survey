@@ -1,11 +1,11 @@
 import angular from 'angular';
 
-const { blocks } = global;
+const { NG_MODULES } = global;
 const MODULE_NAME = 'app.component.nav';
 
 export default MODULE_NAME;
 
-angular.module(MODULE_NAME, [ ...blocks(), ...modules() ]);
+angular.module(MODULE_NAME, [ ...NG_MODULES(), ...modules() ]); // eslint-disable-line new-cap
 
 /**
  * Import top level modules

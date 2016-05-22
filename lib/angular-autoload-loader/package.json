@@ -1,6 +1,6 @@
 {
   "name": "angular-autoload-loader",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "main": "index.js",
   "author": "Manu Phatak <bionikspoon@gmail.com>",
   "license": "MIT"

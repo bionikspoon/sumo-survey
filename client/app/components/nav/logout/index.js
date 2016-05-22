@@ -1,8 +1,8 @@
 import angular from 'angular';
 
-const { blocks } = global;
+const { NG_MODULES } = global;
 const MODULE_NAME = 'app.component.nav.logout';
 
 export default MODULE_NAME;
 
-angular.module(MODULE_NAME, [ ...blocks() ]);
+angular.module(MODULE_NAME, [ ...NG_MODULES() ]); // eslint-disable-line new-cap
