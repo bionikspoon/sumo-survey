@@ -1,4 +1,5 @@
 const loopback = require('loopback');
+const Promise = require('bluebird');
 
 module.exports = () => (req, res, next) => {
   const { app, accessToken } = req;

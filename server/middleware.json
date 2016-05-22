@@ -39,7 +39,7 @@
     "loopback#token": {}
   },
   "auth:after": {
-    "./middleware/currentUser": {}
+    "middleware-current-user": {}
   },
   "parse": {},
   "routes:before": {
@@ -49,7 +49,7 @@
       ]
     },
     "loopback#context": {},
-    "./middleware/ip": {
+    "middleware-client-ip": {
       "paths": [
         "/api/Guests/"
       ]
