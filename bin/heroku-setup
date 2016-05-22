@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+
+function exportDB() {
+  local URL=${1:-}
+
+  read db_type db_user db_pw db_host db_port db_name <<<$(echo $URL | sed -e 's/:\/\// /g' -e 's/[:@\/]/ /g')
+  heroku config:set "DB_TYPE=$db_type DB_USER=$db_user DB_PW=$db_pw DB_HOST=$db_host DB_PORT=$db_port DB_NAME=$db_name"
+}
+
+exportDB "$JAWSDB_MARIA_URL"
