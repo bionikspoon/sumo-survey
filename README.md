@@ -9,17 +9,16 @@ More information @ https://manuphatak.com/portfolio/sumo-survey/
 ## Local Install
 
 1. Create a MySQL user/database named `sumo-survey` with password `secret`
+
   ```sql
   CREATE USER 'sumo-survey'@'localhost' IDENTIFIED BY 'secret';
-  GRANT USAGE ON
-    *.* TO 'sumo-survey'@'localhost';
   CREATE DATABASE IF NOT EXISTS `sumo-survey`;
   GRANT ALL PRIVILEGES ON
     `sumo-survey`.* TO 'sumo-survey'@'localhost';
   ```
 2. `npm install`
-3. Run local dev server `npm run dev`
-4. http://localhost:5000
+3. Run local dev server `npm run dev` OR serve a build `npm run build:serve`
+4. http://localhost:5000 (dev) OR http://localhost:3000 (build:serve) 
 5. Login to admin interface with username: `admin@example.com` and password: `secret`
 
 ## Requirements
