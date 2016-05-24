@@ -6,6 +6,8 @@
 
 More information @ https://manuphatak.com/portfolio/sumo-survey/
 
+Live @ http://sumo-survey.manuphatak.com/
+
 ## Local Install
 
 1. Create a MySQL user/database named `sumo-survey` with password `secret`
