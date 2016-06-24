@@ -36,8 +36,7 @@ Live @ http://sumo-survey.manuphatak.com/
 
 ## Known Bugs
 
-* The ‘admin add survey’ form is buggy on Firefox. It’s submitting the entire form when you click to add a choice.
-* The d3 frequency charts are not respecting the width of its container (on smaller screen sizes).
+* Firefox: ‘admin add survey’ form submits form when adding a choice.
 
 ## Screenshots
 
