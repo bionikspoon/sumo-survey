@@ -38,13 +38,22 @@ Live @ http://sumo-survey.manuphatak.com/
 
 ## Screenshots
 
-![Home][screen-home]
-![Survey][screen-survey]
-![Fin][screen-fin]
-![Login][screen-login]
-![Admin Questions][screen-admin-questions]
-![Admin Choices][screen-admin-choices]
-![Admin Add][screen-admin-add]
+![Home][lg-screen-home]
+![Survey][lg-screen-survey]
+![Fin][lg-screen-fin]
+![Login][lg-screen-login]
+![Admin Questions][lg-screen-admin-questions]
+![Admin Choices][lg-screen-admin-choices]
+![Admin Add][lg-screen-admin-add]
+
+
+![Home][sm-screen-home]
+![Survey][sm-screen-survey]
+![Fin][sm-screen-fin]
+![Login][sm-screen-login]
+![Admin Questions][sm-screen-admin-questions]
+![Admin Choices][sm-screen-admin-choices]
+![Admin Add][sm-screen-admin-add]
 
 [travis-image]: https://travis-ci.org/bionikspoon/sumo-survey.svg?branch=master
 [travis-url]: https://travis-ci.org/bionikspoon/sumo-survey
@@ -52,10 +61,18 @@ Live @ http://sumo-survey.manuphatak.com/
 [coverage-image]: https://coveralls.io/repos/github/bionikspoon/sumo-survey/badge.svg?branch=master
 [coverage-url]: https://coveralls.io/github/bionikspoon/sumo-survey?branch=master
 
-[screen-home]: docs/screenshots/10-home.png
-[screen-survey]: docs/screenshots/20-survey.png
-[screen-fin]: docs/screenshots/30-fin.png
-[screen-login]: docs/screenshots/40-login.png
-[screen-admin-questions]: docs/screenshots/50-admin-questions.png
-[screen-admin-choices]: docs/screenshots/60-admin-choices.png
-[screen-admin-add]: docs/screenshots/70-admin-add.png
+[lg-screen-home]: docs/screenshots/lg-10-home.png
+[lg-screen-survey]: docs/screenshots/lg-20-survey.png
+[lg-screen-fin]: docs/screenshots/lg-30-fin.png
+[lg-screen-login]: docs/screenshots/lg-40-login.png
+[lg-screen-admin-questions]: docs/screenshots/lg-50-admin-questions.png
+[lg-screen-admin-choices]: docs/screenshots/lg-60-admin-choices.png
+[lg-screen-admin-add]: docs/screenshots/lg-70-admin-add.png
+
+[sm-screen-home]: docs/screenshots/sm-10-home.png
+[sm-screen-survey]: docs/screenshots/sm-20-survey.png
+[sm-screen-fin]: docs/screenshots/sm-30-fin.png
+[sm-screen-login]: docs/screenshots/sm-40-login.png
+[sm-screen-admin-questions]: docs/screenshots/sm-50-admin-questions.png
+[sm-screen-admin-choices]: docs/screenshots/sm-60-admin-choices.png
+[sm-screen-admin-add]: docs/screenshots/sm-70-admin-add.png
