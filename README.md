@@ -36,8 +36,6 @@ Live @ http://sumo-survey.manuphatak.com/
 
 ## Known Bugs
 
-* Firefox: ‘admin add survey’ form submits form when adding a choice.
-
 ## Screenshots
 
 ![Home][screen-home]
