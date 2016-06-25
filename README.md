@@ -1,3 +1,5 @@
+![Sumo Survey][sumo-survey]
+
 # sumo-survey
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coverage-image]][coverage-url]
@@ -54,6 +56,8 @@ Live @ http://sumo-survey.manuphatak.com/
 ![Admin Questions][sm-screen-admin-questions]
 ![Admin Choices][sm-screen-admin-choices]
 ![Admin Add][sm-screen-admin-add]
+
+[sumo-survey]: docs/screenshots/sumo-survey.png
 
 [travis-image]: https://travis-ci.org/bionikspoon/sumo-survey.svg?branch=master
 [travis-url]: https://travis-ci.org/bionikspoon/sumo-survey
