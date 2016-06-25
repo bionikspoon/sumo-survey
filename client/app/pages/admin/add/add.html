@@ -1,5 +1,5 @@
 <div app-well id="page-admin-add">
-   <form name="question" ng-submit="$ctrl.addQuestion(question)" novalidate>
+   <form name="question" novalidate ng-submit="$ctrl.submit(question)">
       <h1 class="page-header">Add a Question</h1>
       <div class="form-group" app-show-errors>
          <label for="text">New Question</label>
@@ -37,14 +37,14 @@
       </div>
 
       <button
+         type="submit"
          class="btn btn-dark"
-         ng-click="$ctrl.addChoice(question.addChoice, question)"
-         ng-disabled="!question.addChoice.text.length">Add Choice
+         ng-disabled="!$ctrl.canAddChoice(question)">Add Choice
       </button>
       <button
          type="submit"
          class="btn btn-dark"
-         ng-disabled="question.$invalid || question.addChoice.text.length || !question.choices.length">Add Question
+         ng-disabled="!$ctrl.canAddQuestion(question)">Add Question
       </button>
    </form>
 </div>
