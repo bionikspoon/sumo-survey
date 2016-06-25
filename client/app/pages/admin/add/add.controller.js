@@ -12,21 +12,42 @@ angular
 /** @ngInject **/
 function AddController($log, $state, $q, Question) {
   const $ctrl = this;
-  $ctrl.name = 'AddController';
 
   ////////////////
 
-  $ctrl.addChoice = (choice, question) => {
-    if (!question.choices) question.choices = [];
-    if (!choice) return;
-    if (question.choices.includes(choice)) return;
+  $ctrl.submit = question => {
+    if ($ctrl.canAddChoice(question)) $ctrl.addChoice(question);
+    else if ($ctrl.canAddQuestion(question)) $ctrl.addQuestion(question);
+  };
 
-    question.choices.push(angular.copy(choice));
+  $ctrl.canAddChoice = ({ addChoice, choices }) => {
+    if (angular.isUndefined(addChoice)) return false;
+    if (!addChoice.text.length) return false;
+    if (angular.isDefined(choices) && choices.map(choice => choice.text).includes(addChoice.text)) return false;
+
+    return true;
+  };
+
+  $ctrl.canAddQuestion = ({ $valid, text, addChoice, choices }) => {
+    if ($valid !== true) return false;
+    if (angular.isUndefined(text) || !text.length) return false;
+    if (addChoice && angular.isDefined(addChoice.text) && addChoice.text.length) return false;
+    if (angular.isUndefined(choices) || !choices.length) return false;
+
+    return true;
+  };
+
+  $ctrl.addChoice = question => {
+    if (!$ctrl.canAddChoice(question)) return;
+
+    question.choices = question.choices || [];
+    question.choices.push(angular.copy(question.addChoice));
     question.addChoice.text = '';
   };
 
   $ctrl.addQuestion = question => {
-    if (question.$invalid || question.addChoice.text.length || !question.choices.length) return;
+    if (!$ctrl.canAddQuestion(question)) return;
+
     const { text, choices } = question;
     Question.createWithChoices({ text, choices })
       .$promise
