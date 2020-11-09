@@ -1,10 +1,11 @@
 ![Sumo Survey][sumo-survey]
 
 # sumo-survey
+
 [![Build Status][travis-image]][travis-url]
 [![Coverage Status][coverage-image]][coverage-url]
 
-*Premier data collection & survey machine. An Angular & Loopback responsive survey app with a d3 graphical admin interface.*
+_Premier data collection & survey machine. An Angular & Loopback responsive survey app with a d3 graphical admin interface._
 
 More information @ https://manuphatak.com/portfolio/sumo-survey/
 
@@ -14,18 +15,20 @@ Live @ http://sumo-survey.manuphatak.com/
 
 1. Create a MySQL user/database named `sumo-survey` with password `secret`
 
-  ```sql
-  CREATE USER 'sumo-survey'@'localhost' IDENTIFIED BY 'secret';
-  CREATE DATABASE IF NOT EXISTS `sumo-survey`;
-  GRANT ALL PRIVILEGES ON
-    `sumo-survey`.* TO 'sumo-survey'@'localhost';
-  ```
+```sql
+CREATE USER 'sumo-survey'@'localhost' IDENTIFIED BY 'secret';
+CREATE DATABASE IF NOT EXISTS `sumo-survey`;
+GRANT ALL PRIVILEGES ON
+  `sumo-survey`.* TO 'sumo-survey'@'localhost';
+```
+
 2. `npm install`
 3. Run local dev server `npm run dev` OR serve a build `npm run build:serve`
-4. http://localhost:5000 (dev) OR http://localhost:3000 (build:serve) 
+4. http://localhost:5000 (dev) OR http://localhost:3000 (build:serve)
 5. Login to admin interface with username: `admin@example.com` and password: `secret`
 
 ## Requirements
+
 1. Create a web app written in Node.JS using an Express based framework, SequelizeJS, and MySQL.
 1. Use NPM to declare all dependencies so that we can run it in a test environment.
 1. The app should allow an admin to enter survey questions with multiple choice answers.
@@ -48,7 +51,6 @@ Live @ http://sumo-survey.manuphatak.com/
 ![Admin Choices][lg-screen-admin-choices]
 ![Admin Add][lg-screen-admin-add]
 
-
 ![Home][sm-screen-home]
 ![Survey][sm-screen-survey]
 ![Fin][sm-screen-fin]
@@ -58,13 +60,10 @@ Live @ http://sumo-survey.manuphatak.com/
 ![Admin Add][sm-screen-admin-add]
 
 [sumo-survey]: docs/screenshots/sumo-survey.png
-
 [travis-image]: https://travis-ci.org/bionikspoon/sumo-survey.svg?branch=master
 [travis-url]: https://travis-ci.org/bionikspoon/sumo-survey
-
 [coverage-image]: https://coveralls.io/repos/github/bionikspoon/sumo-survey/badge.svg?branch=master
 [coverage-url]: https://coveralls.io/github/bionikspoon/sumo-survey?branch=master
-
 [lg-screen-home]: docs/screenshots/lg-10-home.png
 [lg-screen-survey]: docs/screenshots/lg-20-survey.png
 [lg-screen-fin]: docs/screenshots/lg-30-fin.png
@@ -72,7 +71,6 @@ Live @ http://sumo-survey.manuphatak.com/
 [lg-screen-admin-questions]: docs/screenshots/lg-50-admin-questions.png
 [lg-screen-admin-choices]: docs/screenshots/lg-60-admin-choices.png
 [lg-screen-admin-add]: docs/screenshots/lg-70-admin-add.png
-
 [sm-screen-home]: docs/screenshots/sm-10-home.png
 [sm-screen-survey]: docs/screenshots/sm-20-survey.png
 [sm-screen-fin]: docs/screenshots/sm-30-fin.png

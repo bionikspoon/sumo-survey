@@ -7,7 +7,7 @@ const MODULE_NAME = 'app.core.controller';
 export default MODULE_NAME;
 
 angular
-  .module(MODULE_NAME, [ AuthService, FingerprintService, NavigationService ])
+  .module(MODULE_NAME, [AuthService, FingerprintService, NavigationService])
   .controller('CoreController', CoreController);
 
 /** @ngInject **/
@@ -18,7 +18,7 @@ function CoreController(Auth, Fingerprint, Navigation) {
 
   activate();
 
-  ////////////////
+  // //////////////
 
   function activate() {
     Auth.streamCurrentUser();

@@ -3,7 +3,7 @@ import app from './app';
 import WebFont from 'webfontloader';
 
 angular.element(document).ready(() => {
-  angular.bootstrap(document, [ app ], { strictDi: __PRODUCTION__ });
+  angular.bootstrap(document, [app], { strictDi: __PRODUCTION__ });
 });
 
 WebFont.load({

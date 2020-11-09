@@ -11,13 +11,15 @@ describe('Survey Factory', () => {
   const fingerprint = '4f4b484839c1862f68c293778986233a';
 
   beforeEach(ngModule(SurveyFactory));
-  beforeEach(ngModule($provide => {
-    function MockFingerprintJS(value = fingerprint) {
-      this.get = callback => callback(value);
-    }
+  beforeEach(
+    ngModule(($provide) => {
+      function MockFingerprintJS(value = fingerprint) {
+        this.get = (callback) => callback(value);
+      }
 
-    $provide.value('FingerprintJS', MockFingerprintJS);
-  }));
+      $provide.value('FingerprintJS', MockFingerprintJS);
+    })
+  );
   beforeEach(inject((_Survey_, _$httpBackend_) => {
     Survey = _Survey_;
     $httpBackend = _$httpBackend_;
@@ -40,7 +42,7 @@ describe('Survey Factory', () => {
         .whenRoute('GET', '/api/Guests/:fingerprint/questions/unanswered/findOne')
         .respond((method, url, data, headers, _params_) => {
           params = _params_;
-          return [ 200 ];
+          return [200];
         });
       Survey.question();
       $httpBackend.flush();
@@ -60,7 +62,7 @@ describe('Survey Factory', () => {
         .respond((method, url, _data_, headers, _params_) => {
           params = _params_;
           data = angular.fromJson(_data_);
-          return [ 200 ];
+          return [200];
         });
       Survey.answer({ fingerprint, choiceId: 1, questionId: 2 });
       $httpBackend.flush();

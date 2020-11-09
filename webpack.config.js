@@ -1,5 +1,5 @@
 /* eslint default-case:0, angular/json-functions:0 */
-require('babel-polyfill');
+require('@babel/polyfill');
 
 const _ = require('lodash');
 const webpack = require('webpack');
@@ -26,7 +26,7 @@ const PATHS = {
 const DEVELOPMENT = 'development';
 const PRODUCTION = 'production';
 const TEST = 'test';
-const LOADER_INCLUDES = [ PATHS.client(), PATHS.base('webpack.tests.js') ];
+const LOADER_INCLUDES = [PATHS.client(), PATHS.base('webpack.tests.js')];
 const SERVER = {
   HOST: 'localhost',
   PORT: 5000,
@@ -44,7 +44,7 @@ const ENV_IS = {
   PRODUCTION: ENV === PRODUCTION,
   TEST: ENV === TEST,
 };
-const DEBUG = process.argv.includes('--debug');
+const DEBUG = process.argv.includes('--inspect');
 const VERBOSE = process.argv.includes('--verbose');
 const WATCH = ENV_IS.DEVELOPMENT || process.argv.includes('--auto-watch') || false;
 
@@ -57,7 +57,7 @@ module.exports = {
   output: {
     path: ENV_IS.TEST ? PATHS.dist('tests') : PATHS.dist(),
     publicPath: '/',
-    filename: DEBUG ? '[name].js?[hash]' : '[name].[chunkhash].js',
+    filename: DEBUG ? '[name].js?[hash]' : '[name].[hash].js',
     chunkFilename: DEBUG ? '[name].js?[chunkhash]' : '[name].[chunkhash].js',
     sourceMapFilename: '[file].map',
     sourcePrefix: '  ',
@@ -67,14 +67,14 @@ module.exports = {
   module: {
     preLoaders: getPreLoaders(ENV),
     loaders: getLoaders(ENV),
-    noParse: [ /node_modules\/sinon\// ],
+    noParse: [/node_modules\/sinon\//],
   },
 
   plugins: getPlugins(ENV),
 
   resolve: {
-    root: [ PATHS.base(), PATHS.app() ],
-    extensions: [ '', '.js' ],
+    root: [PATHS.base(), PATHS.app()],
+    extensions: ['', '.js'],
     alias: { sinon$: 'sinon/pkg/sinon.js' },
   },
   devtool: ENV_IS.PRODUCTION ? 'source-map' : 'inline-source-map',
@@ -120,22 +120,22 @@ function getEntry(env) {
 }
 
 function getPreLoaders(env) {
-  const preLoaders = [ { test: /\.js$/, include: LOADER_INCLUDES, loader: 'baggage?[dir].html&[dir].scss' } ];
+  const preLoaders = [{ test: /\.js$/, include: LOADER_INCLUDES, loader: 'baggage?[dir].html&[dir].scss' }];
 
   switch (env) {
     case DEVELOPMENT:
-      preLoaders.push({ test: /\.js$/, include: [ PATHS.app() ], loaders: [ 'eslint' ] });
+      preLoaders.push({ test: /\.js$/, include: [PATHS.app()], loaders: ['eslint'] });
       break;
 
     case PRODUCTION:
-      preLoaders.push({ test: /\.js$/, include: [ PATHS.app() ], loaders: [ 'eslint' ] });
+      preLoaders.push({ test: /\.js$/, include: [PATHS.app()], loaders: ['eslint'] });
       break;
 
     case TEST:
-      preLoaders.push({ test: /\.js$/, include: [ PATHS.app() ], loader: 'babel-istanbul?cacheDirectory' });
+      preLoaders.push({ test: /\.js$/, include: [PATHS.app()], loader: 'babel-istanbul?cacheDirectory' });
       break;
   }
-  preLoaders.push({ test: /index\.js$/, include: [ PATHS.app() ], loader: 'angular-autoload' });
+  preLoaders.push({ test: /index\.js$/, include: [PATHS.app()], loader: 'angular-autoload' });
   return preLoaders;
 }
 
@@ -158,27 +158,22 @@ function getLoaders(env) {
   ];
   switch (env) {
     case DEVELOPMENT:
-      loaders.push(_.merge(SASS_LOADER, {
-        loaders: [
-          'style?sourceMap',
-          'css?sourceMap',
-          'postcss?sourceMap',
-          'sass?sourceMap',
-        ],
-      }));
+      loaders.push(
+        _.merge(SASS_LOADER, {
+          loaders: ['style?sourceMap', 'css?sourceMap', 'postcss?sourceMap', 'sass?sourceMap'],
+        })
+      );
       break;
 
     case PRODUCTION:
       loaders.unshift({ test: /\.js$/, loader: 'ng-annotate', include: LOADER_INCLUDES });
-      loaders.push(_.merge(SASS_LOADER, {
-        loader: ExtractTextPlugin.extract(''
-          + 'css?minimize&sourceMap'
-          + '!'
-          + 'postcss?sourceMap'
-          + '!'
-          + 'sass?sourceMap'
-        ),
-      }));
+      loaders.push(
+        _.merge(SASS_LOADER, {
+          loader: ExtractTextPlugin.extract(
+            ['css?minimize&sourceMap', '!', 'postcss?sourceMap', '!', 'sass?sourceMap'].join('')
+          ),
+        })
+      );
       break;
 
     case TEST:
@@ -205,7 +200,7 @@ function getPlugins(env) {
     case DEVELOPMENT:
       plugins.push(new webpack.HotModuleReplacementPlugin());
       plugins.push(new webpack.NoErrorsPlugin());
-      plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] }));
+      plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }));
       plugins.push(new WriteFilePlugin({ log: VERBOSE }));
       break;
 
@@ -214,7 +209,7 @@ function getPlugins(env) {
 
       plugins.push(new ExtractTextPlugin(DEBUG ? 'main.css?[chunkhash]' : 'main.[chunkhash].css'));
       plugins.push(new webpack.optimize.AggressiveMergingPlugin());
-      plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: [ 'vendor', 'manifest' ] }));
+      plugins.push(new webpack.optimize.CommonsChunkPlugin({ names: ['vendor', 'manifest'] }));
       plugins.push(new webpack.optimize.DedupePlugin());
       break;
 
@@ -225,11 +220,7 @@ function getPlugins(env) {
 }
 
 function getPostcss(bundler) {
-  return [
-    postcssImport({ addDependencyTo: bundler }),
-    precss(),
-    autoprefixer({ browsers: [ 'last 2 versions' ] }),
-  ];
+  return [postcssImport({ addDependencyTo: bundler }), precss(), autoprefixer({ browsers: ['last 2 versions'] })];
 }
 
 function getHtmlOptions(env) {
@@ -293,7 +284,9 @@ function getStatOptions() {
 // UTILS
 // ===========================================================================
 function getEnv(target) {
-  if (global.test === true) { return TEST; }
+  if (global.test === true) {
+    return TEST;
+  }
 
   switch (target) {
     case 'test':

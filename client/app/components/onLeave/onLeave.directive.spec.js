@@ -29,11 +29,11 @@ describe('onLeave Directive', () => {
 
   describe('Directive', () => {
     it('Should exist with class ng-scope', () => {
-      expect(container[ 0 ]).to.have.class('ng-scope');
+      expect(container[0]).to.have.class('ng-scope');
     });
 
     it('Should exist with class ng-isolate-scope', () => {
-      expect(element[ 0 ]).to.have.class('ng-isolate-scope');
+      expect(element[0]).to.have.class('ng-isolate-scope');
     });
   });
 

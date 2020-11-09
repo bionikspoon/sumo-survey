@@ -4,9 +4,7 @@ module.exports = function createAdmin(app) {
 
   const { Admin } = app.models;
 
-  return Admin
-    .create({ username: 'admin', email: 'admin@example.com', password: 'secret' })
-    .then(logResults);
+  return Admin.create({ username: 'admin', email: 'admin@example.com', password: 'secret' }).then(logResults);
 };
 
 function logResults(admin) {

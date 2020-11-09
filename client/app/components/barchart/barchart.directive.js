@@ -5,10 +5,7 @@ import _d3 from 'd3';
 const MODULE_NAME = 'app.component.barchart.directive';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [])
-  .value('d3', _d3)
-  .directive('appBarchart', BarchartDirective);
+angular.module(MODULE_NAME, []).value('d3', _d3).directive('appBarchart', BarchartDirective);
 
 /** @ngInject **/
 function BarchartDirective($window, d3) {
@@ -24,34 +21,37 @@ function BarchartDirective($window, d3) {
     const barHeight = parseInt(attrs.barHeight, 10) || 35;
     const barPadding = parseInt(attrs.barPadding, 10) || 5;
     const labelPadding = parseInt(attrs.barPadding, 10) || 15;
-    const svg = d3
-      .select(element[ 0 ])
-      .append('svg');
+    const svg = d3.select(element[0]).append('svg');
     if (angular.isDefined(attrs.onClick)) element.addClass('app-clickable');
     else element.removeClass('app-clickable');
 
     $window.onresize = () => scope.$apply();
 
     const unregister = [
-      scope.$watch(() => angular.element($window)[ 0 ].innerWidth, () => scope.render(scope.data)),
-      scope.$watch('data', data => scope.render(data), true),
+      scope.$watch(
+        () => angular.element($window)[0].innerWidth,
+        () => scope.render(scope.data)
+      ),
+      scope.$watch('data', (data) => scope.render(data), true),
     ];
-    scope.$on('$destroy', () => unregister.forEach(destroy => destroy()));
+    scope.$on('$destroy', () => unregister.forEach((destroy) => destroy()));
 
-    scope.render = data => {
+    scope.render = (data) => {
       svg.selectAll('*').remove();
       if (!data) return;
 
-      const width = d3.select(element[ 0 ]).node().offsetWidth - margin;
+      const width = d3.select(element[0]).node().offsetWidth - margin;
       const height = scope.data.length * (barHeight + barPadding);
       const color = d3.scale.category20();
-      const xScale = d3.scale.linear()
-        .domain([ 0, d3.max(data, d => d.count) ])
-        .range([ 0, width ]);
+      const xScale = d3.scale
+        .linear()
+        .domain([0, d3.max(data, (d) => d.count)])
+        .range([0, width]);
 
       svg.attr('height', height);
 
-      svg.selectAll('rect')
+      svg
+        .selectAll('rect')
         .data(data)
         .enter()
         .append('rect')
@@ -61,21 +61,22 @@ function BarchartDirective($window, d3) {
         .attr('x', Math.round(margin / 2))
         .attr('y', (d, i) => i * (barHeight + barPadding))
         .attr('fill', (d, i) => color(i))
-        .on('click', item => scope.onClick({ item }))
+        .on('click', (item) => scope.onClick({ item }))
         .transition()
         .duration(1000)
-        .attr('width', d => xScale(d.count));
+        .attr('width', (d) => xScale(d.count));
 
-      svg.selectAll('categoryLabel')
+      svg
+        .selectAll('categoryLabel')
         .data(data)
         .enter()
         .append('text')
-        .on('click', item => scope.onClick({ item }))
+        .on('click', (item) => scope.onClick({ item }))
         .attr('class', 'category-label')
         .attr('fill', '#ffffff')
         .attr('x', Math.round(margin / 2) + labelPadding)
         .attr('y', (d, i) => (i + 0.5) * barHeight + (i + 1) * barPadding)
-        .text(d => `${d.text} (${d.count})`);
+        .text((d) => `${d.text} (${d.count})`);
     };
   }
 }

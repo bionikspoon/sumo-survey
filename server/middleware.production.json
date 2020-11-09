@@ -1,6 +1,6 @@
 {
   "routes:before": {
-    "morgan": {"params": ["short"]}
+    "morgan": { "params": ["short"] }
   },
   "final:after": {
     "loopback#errorHandler": {

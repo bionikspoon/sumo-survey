@@ -2,7 +2,7 @@ const _ = require('lodash');
 const loopback = require('loopback');
 const Promise = require('bluebird');
 
-module.exports = Question => {
+module.exports = (Question) => {
   Question.validatesPresenceOf('text');
   Question.validatesLengthOf('text', { max: 512 });
   Question.createWithChoices = createWithChoices;
@@ -39,17 +39,22 @@ module.exports = Question => {
       if (creator) dataItem.creatorId = creator.id;
 
       // create question
-      return Question.create(dataItem)
-        // add choices to question ...
-        .then(question => {
-          // Guard, no choices
-          if (!choices || !choices.length) return question;
+      return (
+        Question.create(dataItem)
+          // add choices to question ...
+          .then((question) => {
+            // Guard, no choices
+            if (!choices || !choices.length) return question;
 
-          // create choices
-          return question.choices.create(choices)
-            // return original question
-            .then(() => question);
-        });
+            // create choices
+            return (
+              question.choices
+                .create(choices)
+                // return original question
+                .then(() => question)
+            );
+          })
+      );
     }
   }
 
@@ -59,10 +64,13 @@ module.exports = Question => {
    * @return {Promise.<[question]>} Questions including response count
    */
   function statsSummary(filter = {}) {
-    return Question.find(filter)
-      .then(questions => Promise.all(questions.map(question => question.responses.count()
-        .then(count => Object.assign(question.toObject(), { count }))
-      )));
+    return Question.find(filter).then((questions) =>
+      Promise.all(
+        questions.map((question) =>
+          question.responses.count().then((count) => Object.assign(question.toObject(), { count }))
+        )
+      )
+    );
   }
 
   /**
@@ -74,9 +82,11 @@ module.exports = Question => {
     const question = this;
     const choicesAsync = Promise.promisify(question.choices);
     return choicesAsync(filter)
-      .then(choices => Promise.all(choices.map(choice => choice.responses.count()
-        .then(count => Object.assign(choice.toObject(), { count }))
-      )))
-      .then(choices => Object.assign(question.toObject(), { choices }));
+      .then((choices) =>
+        Promise.all(
+          choices.map((choice) => choice.responses.count().then((count) => Object.assign(choice.toObject(), { count })))
+        )
+      )
+      .then((choices) => Object.assign(question.toObject(), { choices }));
   }
 };

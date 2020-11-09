@@ -3,13 +3,14 @@
     "browser": true
   },
   "settings": {
-    "import/resolver": {"webpack": "config"}
+    "import/resolver": { "webpack": "config" }
   },
-  "globals": {"__PRODUCTION__": true},
+  "globals": { "__PRODUCTION__": true },
   "extends": ["airbnb-base", "angular", "../.eslintrc"],
   "rules": {
-    "angular/no-service-method": 0,
-    "angular/log": 1,
-    "angular/controller-as-vm": [2, "$ctrl"]
+    "angular/no-service-method": "off",
+    "angular/log": "warn",
+    "angular/controller-as-vm": ["error", "$ctrl"],
+    "global-require": "off"
   }
 }

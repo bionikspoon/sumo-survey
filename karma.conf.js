@@ -1,6 +1,6 @@
 const webpackConfig = require('./webpack.config');
 
-module.exports = config => {
+module.exports = (config) => {
   config.set({
     browserNoActivityTimeout: 155000,
 
@@ -9,12 +9,10 @@ module.exports = config => {
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: [ 'mocha', 'chai' ],
+    frameworks: ['mocha', 'chai'],
 
     // list of files / patterns to load in the browser
-    files: [
-      './webpack.tests.js',
-    ],
+    files: ['./webpack.tests.js'],
 
     webpack: webpackConfig,
     webpackMiddleware: {
@@ -26,12 +24,12 @@ module.exports = config => {
 
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: { './webpack.tests.js': [ 'webpack', 'sourcemap' ] },
+    preprocessors: { './webpack.tests.js': ['webpack', 'sourcemap'] },
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: [ 'mocha', 'coverage' ],
+    reporters: ['mocha', 'coverage'],
 
     client: {
       mocha: {
@@ -52,10 +50,10 @@ module.exports = config => {
         { type: 'lcovonly', subdir: '.', file: 'lcov.txt' },
       ],
       watermarks: {
-        statements: [ 50, 90 ],
-        functions: [ 50, 90 ],
-        branches: [ 50, 90 ],
-        lines: [ 50, 90 ],
+        statements: [50, 90],
+        functions: [50, 90],
+        branches: [50, 90],
+        lines: [50, 90],
       },
       instrumenterOptions: {
         istanbul: { noCompact: true },
@@ -77,7 +75,7 @@ module.exports = config => {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: process.env.CI === 'true' ? [ 'PhantomJS' ] : [ 'PhantomJS', 'Chrome' ],
+    browsers: process.env.CI === 'true' ? ['PhantomJS'] : ['PhantomJS', 'Chrome'],
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits

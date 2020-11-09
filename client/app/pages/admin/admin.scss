@@ -1,4 +1,4 @@
-@import "../../mixins";
+@import '../../mixins';
 
 #page-admin {
   @include full-page;
@@ -6,13 +6,12 @@
 
   > main {
     vertical-align: top;
-    padding-top:    55px;
+    padding-top: 55px;
     padding-bottom: 55px;
 
     @media (max-width: $screen-xs-max) {
-      padding-top:    50px;
+      padding-top: 50px;
       padding-bottom: 50px;
     }
   }
-
 }

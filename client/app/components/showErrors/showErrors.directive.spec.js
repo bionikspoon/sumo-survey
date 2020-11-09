@@ -26,11 +26,11 @@ describe('showErrors Directive', () => {
 
   describe('Directive', () => {
     it('Should exist without class ng-scope', () => {
-      expect(element.children()[ 0 ].classList.contains('ng-scope')).to.be.falsy;
+      expect(element.children()[0].classList.contains('ng-scope')).to.be.falsy;
     });
 
     it('Should exist with class ng-isolate-scope', () => {
-      expect(element.children()[ 0 ]).to.have.class('ng-isolate-scope');
+      expect(element.children()[0]).to.have.class('ng-isolate-scope');
     });
   });
 

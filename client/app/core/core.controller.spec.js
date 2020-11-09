@@ -10,17 +10,19 @@ describe('Core Controller', () => {
   let $scope;
 
   beforeEach(ngModule(CoreController));
-  beforeEach(ngModule($provide => {
-    $provide.service('Auth', MockAuth);
-    $provide.service('Fingerprint', MockFingerprint);
-    function MockAuth() {
-      this.streamCurrentUser = spy();
-    }
+  beforeEach(
+    ngModule(($provide) => {
+      $provide.service('Auth', MockAuth);
+      $provide.service('Fingerprint', MockFingerprint);
+      function MockAuth() {
+        this.streamCurrentUser = spy();
+      }
 
-    function MockFingerprint() {
-      this.stream = spy();
-    }
-  }));
+      function MockFingerprint() {
+        this.stream = spy();
+      }
+    })
+  );
 
   beforeEach(() => {
     let $controller;
@@ -39,11 +41,11 @@ describe('Core Controller', () => {
     expect($ctrl).to.be.an('object');
   });
 
-  it('Should have called Auth.streamCurrentUser', inject(Auth => {
+  it('Should have called Auth.streamCurrentUser', inject((Auth) => {
     expect(Auth.streamCurrentUser).to.have.been.calledOnce;
   }));
 
-  it('Should have called Fingerprint.stream', inject(Fingerprint => {
+  it('Should have called Fingerprint.stream', inject((Fingerprint) => {
     expect(Fingerprint.stream).to.have.been.calledOnce;
   }));
 });

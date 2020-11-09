@@ -7,23 +7,20 @@ import question from './question';
 const MODULE_NAME = 'app.page.admin.results';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [ uiRouter, barchart, question, StatsService ])
-  .config(routeConfig);
+angular.module(MODULE_NAME, [uiRouter, barchart, question, StatsService]).config(routeConfig);
 
 /** @ngInject **/
 function routeConfig($stateProvider) {
-  $stateProvider
-    .state('admin.stats', {
-      url: 'stats/',
-      templateUrl: require('./stats.html'),
-      controller: ResultsController,
-      controllerAs: '$ctrl',
-      authenticate: true,
-      resolve: {
-        questions: /** @ngInject **/Stats => Stats.summary(),
-      },
-    });
+  $stateProvider.state('admin.stats', {
+    url: 'stats/',
+    templateUrl: require('./stats.html'),
+    controller: ResultsController,
+    controllerAs: '$ctrl',
+    authenticate: true,
+    resolve: {
+      questions: /** @ngInject **/ (Stats) => Stats.summary(),
+    },
+  });
 }
 
 /** @ngInject **/
@@ -31,7 +28,7 @@ function ResultsController($scope, $state, questions) {
   const $ctrl = this;
   $ctrl.questions = questions;
 
-  ////////////////
+  // //////////////
 
   $ctrl.showQuestion = ({ id }) => {
     $scope.$apply(() => {
@@ -39,4 +36,3 @@ function ResultsController($scope, $state, questions) {
     });
   };
 }
-

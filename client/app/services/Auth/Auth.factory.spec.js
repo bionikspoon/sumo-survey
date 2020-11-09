@@ -31,12 +31,8 @@ describe('Auth Factory', () => {
     LoopBackAuth = _LoopBackAuth_;
   }));
   beforeEach(() => {
-    $httpBackend
-      .whenRoute('POST', '/api/Admins/login', credentials)
-      .respond(200, token);
-    $httpBackend
-      .whenPOST('/api/Admins/logout')
-      .respond(204);
+    $httpBackend.whenRoute('POST', '/api/Admins/login', credentials).respond(200, token);
+    $httpBackend.whenPOST('/api/Admins/logout').respond(204);
   });
 
   afterEach(() => {
@@ -87,7 +83,9 @@ describe('Auth Factory', () => {
   });
 
   describe('Before logging in', () => {
-    beforeEach(() => { Auth.streamCurrentUser(); });
+    beforeEach(() => {
+      Auth.streamCurrentUser();
+    });
 
     it('Should not be authenticated', () => {
       expect(Auth.isAuthenticated()).to.be.false;

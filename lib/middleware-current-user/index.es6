@@ -8,7 +8,7 @@ module.exports = () => (req, res, next) => {
   if (!accessToken) return next();
 
   return Admin.findById(accessToken.userId)
-    .then(currentUser => {
+    .then((currentUser) => {
       const ctx = loopback.getCurrentContext();
       if (!currentUser) return Promise.reject(new Error('No user with this access token was found.'));
       if (ctx) ctx.set('currentUser', currentUser);
@@ -17,4 +17,3 @@ module.exports = () => (req, res, next) => {
     .then(() => next())
     .catch(next);
 };
-
