@@ -43,7 +43,7 @@ $link-hover-decoration: underline;
 $font-family-sans-serif: 'Open Sans', sans-serif;
 $font-family-serif: 'Playfair Display', serif;
 //** Default monospace fonts for `<code>`, `<kbd>`, and `<pre>`.
-$font-family-monospace: Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-family-monospace: Menlo, Monaco, Consolas, 'Courier New', monospace;
 $font-family-base: $font-family-sans-serif;
 
 $font-size-base: 14px;
@@ -77,12 +77,12 @@ $headings-color: inherit;
 
 // [converter] If $bootstrap-sass-asset-helper if used, provide path relative to the assets load path.
 // [converter] This is because some asset helpers, such as Sprockets, do not work with file-relative paths.
-$icon-font-path: if($bootstrap-sass-asset-helper, "bootstrap/", "~bootstrap-sass/assets/fonts/bootstrap/");
+$icon-font-path: if($bootstrap-sass-asset-helper, 'bootstrap/', '~bootstrap-sass/assets/fonts/bootstrap/');
 
 //** File name for all font files.
-$icon-font-name: "glyphicons-halflings-regular";
+$icon-font-name: 'glyphicons-halflings-regular';
 //** Element ID within SVG icon file.
-$icon-font-svg-id: "glyphicons_halflingsregular";
+$icon-font-svg-id: 'glyphicons_halflingsregular';
 
 //== Components
 //
@@ -180,7 +180,7 @@ $btn-border-radius-small: $border-radius-small;
 //##
 
 //** `<input>` background color
-$input-bg: rgba(0, 0, 0, .3);
+$input-bg: rgba(0, 0, 0, 0.3);
 //** `<input disabled>` background color
 $input-bg-disabled: $gray-lighter;
 
@@ -232,7 +232,7 @@ $cursor-disabled: not-allowed;
 //** Background for the dropdown menu.
 $dropdown-bg: #ffffff;
 //** Dropdown menu `border-color`.
-$dropdown-border: rgba(0, 0, 0, .15);
+$dropdown-border: rgba(0, 0, 0, 0.15);
 //** Dropdown menu `border-color` **for IE8**.
 $dropdown-fallback-border: #cccccc;
 //** Divider color for between dropdown items.
@@ -509,7 +509,7 @@ $tooltip-max-width: 200px;
 $tooltip-color: #ffffff;
 //** Tooltip background color
 $tooltip-bg: #000000;
-$tooltip-opacity: .9;
+$tooltip-opacity: 0.9;
 
 //** Tooltip arrow width
 $tooltip-arrow-width: 5px;
@@ -525,7 +525,7 @@ $popover-bg: #ffffff;
 //** Popover maximum width
 $popover-max-width: 276px;
 //** Popover border color
-$popover-border-color: rgba(0, 0, 0, .2);
+$popover-border-color: rgba(0, 0, 0, 0.2);
 //** Popover fallback border color
 $popover-fallback-border-color: #cccccc;
 
@@ -581,14 +581,14 @@ $modal-title-line-height: $line-height-base;
 //** Background color of modal content area
 $modal-content-bg: #ffffff;
 //** Modal content border color
-$modal-content-border-color: rgba(0, 0, 0, .2);
+$modal-content-border-color: rgba(0, 0, 0, 0.2);
 //** Modal content border color **for IE8**
 $modal-content-fallback-border-color: #999999;
 
 //** Modal backdrop background color
 $modal-backdrop-bg: #000000;
 //** Modal backdrop opacity
-$modal-backdrop-opacity: .5;
+$modal-backdrop-opacity: 0.5;
 //** Modal header border color
 $modal-header-border-color: #e5e5e5;
 //** Modal footer border color
@@ -737,7 +737,7 @@ $thumbnail-caption-padding: 9px;
 //
 //##
 
-$well-bg: rgba(0, 0, 0, .4);
+$well-bg: rgba(0, 0, 0, 0.4);
 $well-border: darken($well-bg, 7%);
 
 //== Badges
@@ -771,17 +771,17 @@ $breadcrumb-color: #cccccc;
 //** Text color of current page in the breadcrumb
 $breadcrumb-active-color: $gray-light;
 //** Textual separator for between breadcrumb elements
-$breadcrumb-separator: "/";
+$breadcrumb-separator: '/';
 
 //== Carousel
 //
 //##
 
-$carousel-text-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+$carousel-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 
 $carousel-control-color: #ffffff;
 $carousel-control-width: 15%;
-$carousel-control-opacity: .5;
+$carousel-control-opacity: 0.5;
 $carousel-control-font-size: 20px;
 
 $carousel-indicator-active-bg: #ffffff;

@@ -1,4 +1,4 @@
-@import "../../mixins";
+@import '../../mixins';
 
 app-nav {
   > nav {
@@ -7,7 +7,6 @@ app-nav {
     a.btn {
       padding: 3px 6px 1px;
     }
-
   }
 
   &.bottom {

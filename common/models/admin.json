@@ -18,13 +18,7 @@
       "status": "active"
     }
   },
-  "hidden": [
-    "credentials",
-    "challenges",
-    "password",
-    "email",
-    "emailVerified"
-  ],
+  "hidden": ["credentials", "challenges", "password", "email", "emailVerified"],
   "mixins": {
     "Timestamp": {}
   },

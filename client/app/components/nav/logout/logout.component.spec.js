@@ -26,11 +26,11 @@ describe('navLogout Component', () => {
 
   describe('Component', () => {
     it('Should exist with class ng-scope', () => {
-      expect(element[ 0 ]).to.have.class('ng-scope');
+      expect(element[0]).to.have.class('ng-scope');
     });
 
     it('Should exist with class ng-isolate-scope', () => {
-      expect(element[ 0 ]).to.have.class('ng-isolate-scope');
+      expect(element[0]).to.have.class('ng-isolate-scope');
     });
   });
 

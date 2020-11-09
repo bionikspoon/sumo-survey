@@ -1,9 +1,7 @@
 {
   "initial:before": {
     "loopback#favicon": {
-      "params": [
-        "$!../favicon.ico"
-      ]
+      "params": ["$!../favicon.ico"]
     }
   },
   "initial": {
@@ -17,9 +15,7 @@
     },
     "helmet#xssFilter": {},
     "helmet#frameguard": {
-      "params": [
-        "deny"
-      ]
+      "params": ["deny"]
     },
     "helmet#hsts": {
       "params": {
@@ -44,22 +40,16 @@
   "parse": {},
   "routes:before": {
     "morgan": {
-      "params": [
-        "dev"
-      ]
+      "params": ["dev"]
     },
     "loopback#context": {},
     "middleware-client-ip": {
-      "paths": [
-        "/api/Guests/"
-      ]
+      "paths": ["/api/Guests/"]
     }
   },
   "routes": {
     "loopback#rest": {
-      "paths": [
-        "${restApiRoot}"
-      ]
+      "paths": ["${restApiRoot}"]
     }
   },
   "files:before": {

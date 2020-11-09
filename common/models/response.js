@@ -1,3 +1,1 @@
-module.exports = Response => {
-
-};
+module.exports = (Response) => {};

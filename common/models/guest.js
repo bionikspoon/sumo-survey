@@ -2,7 +2,7 @@ const loopback = require('loopback');
 const _ = require('lodash/fp');
 const app = require('../../server/server');
 
-module.exports = Guest => {
+module.exports = (Guest) => {
   Guest.observe('access', includeClientIp);
   Guest.observe('before save', includeClientIp);
   Guest.createResponse = createResponse;
@@ -21,10 +21,12 @@ module.exports = Guest => {
     let target;
 
     // setup, get target object
-    if (context.query) { // is 'access'
+    if (context.query) {
+      // is 'access'
       target = context.query.where = context.query.where || { ip: '*' };
     }
-    if (context.instance) { // is 'before save'
+    if (context.instance) {
+      // is 'before save'
       target = context.instance;
     }
 
@@ -46,8 +48,8 @@ module.exports = Guest => {
     const { choiceId, questionId } = response;
 
     return Guest.findOrCreate({ fingerprint })
-      .then(data => data[ 0 ])
-      .then(guest => guest.responses.create({ choiceId, questionId }));
+      .then((data) => data[0])
+      .then((guest) => guest.responses.create({ choiceId, questionId }));
   }
 
   /**
@@ -60,29 +62,31 @@ module.exports = Guest => {
   function getAllUnanswered(fingerprint, ip, filter = {}) {
     const { Question } = app.models;
 
-    return Guest.findOrCreate({ fingerprint, ip })
-      .then(data => data[ 0 ]) // data = [instance, isNew]
+    return (
+      Guest.findOrCreate({ fingerprint, ip })
+        .then((data) => data[0]) // data = [instance, isNew]
 
-      // get guest id
-      .then(guest => {
-        const guestId = guest.id.fingerprint;
-        const guestFilter = {
-          include: [
-            {
-              relation: 'responses',
-              scope: { where: { guestId }, fields: [ 'guestId' ] },
-            },
-            {
-              relation: 'choices',
-            },
-          ],
-        };
+        // get guest id
+        .then((guest) => {
+          const guestId = guest.id.fingerprint;
+          const guestFilter = {
+            include: [
+              {
+                relation: 'responses',
+                scope: { where: { guestId }, fields: ['guestId'] },
+              },
+              {
+                relation: 'choices',
+              },
+            ],
+          };
 
-        // get questions, include responses by guest
-        return Question.find(Object.assign({}, filter, guestFilter));
-      })
-      // filter questions answered by guest
-      .then(questions => questions.filter(question => !question.responses().length));
+          // get questions, include responses by guest
+          return Question.find(Object.assign({}, filter, guestFilter));
+        })
+        // filter questions answered by guest
+        .then((questions) => questions.filter((question) => !question.responses().length))
+    );
   }
 
   /**
@@ -93,8 +97,9 @@ module.exports = Guest => {
    * @returns {Promise.<question>}
    */
   function getOneUnanswered(fingerprint, ip, filter = {}) {
-    return Guest.getAllUnanswered(fingerprint, ip, filter)
-      .then(questions => (questions.length ? _.sample(questions) : {}));
+    return Guest.getAllUnanswered(fingerprint, ip, filter).then((questions) =>
+      questions.length ? _.sample(questions) : {}
+    );
   }
 };
 

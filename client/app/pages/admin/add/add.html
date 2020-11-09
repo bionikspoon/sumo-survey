@@ -9,11 +9,12 @@
             id="text"
             placeholder="New Question"
             ng-model="question.text"
-            required>
+            required
+         />
       </div>
 
       <div class="form-group" ng-repeat="choice in question.choices" app-show-errors>
-         <input type="hidden" ng-model="choice.order" ng-init="choice.order=$index">
+         <input type="hidden" ng-model="choice.order" ng-init="choice.order=$index" />
          <label for="choice-{{$index}}">Choice #{{$index}}</label>
          <input
             type="text"
@@ -21,30 +22,22 @@
             id="choice-{{$index}}"
             placeholder="Choice #{{$index}}"
             ng-model="choice.text"
-            required>
+            required
+         />
       </div>
 
       <div class="form-group" app-show-errors>
-         <label for="Add Choice">
-            Add Choice
-         </label>
+         <label for="Add Choice"> Add Choice </label>
          <input
             type="text"
             class="form-control"
             id="Add Choice"
             placeholder="Add Choice"
-            ng-model="question.addChoice.text">
+            ng-model="question.addChoice.text"
+         />
       </div>
 
-      <button
-         type="submit"
-         class="btn btn-dark"
-         ng-disabled="!$ctrl.canAddChoice(question)">Add Choice
-      </button>
-      <button
-         type="submit"
-         class="btn btn-dark"
-         ng-disabled="!$ctrl.canAddQuestion(question)">Add Question
-      </button>
+      <button type="submit" class="btn btn-dark" ng-disabled="!$ctrl.canAddChoice(question)">Add Choice</button>
+      <button type="submit" class="btn btn-dark" ng-disabled="!$ctrl.canAddQuestion(question)">Add Question</button>
    </form>
 </div>

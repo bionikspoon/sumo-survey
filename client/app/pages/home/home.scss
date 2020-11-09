@@ -1,11 +1,11 @@
-@import "../../mixins";
+@import '../../mixins';
 
 #page-home {
   @include full-page;
   background-color: #9c27b0;
 
   > main {
-    color:      rgba(255, 255, 255, .87);
+    color: rgba(255, 255, 255, 0.87);
     text-align: center;
 
     > h1 {

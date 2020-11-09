@@ -2,7 +2,7 @@
    <main app-well class="container">
       <form name="question" ng-submit="$ctrl.setResponse(question)" ng-show="$ctrl.question.text" novalidate>
          <h2>{{$ctrl.question.text}}</h2>
-         <hr>
+         <hr />
          <div class="radio" ng-repeat="choice in $ctrl.question.choices | orderBy:'order'">
             <label for="choice-{{$index}}">
                <input
@@ -10,7 +10,8 @@
                   value="{{choice.id}}"
                   type="radio"
                   id="choice-{{$index}}"
-                  ng-required="!question.choiceId">
+                  ng-required="!question.choiceId"
+               />
                {{choice.text}}
             </label>
          </div>

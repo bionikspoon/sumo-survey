@@ -6,9 +6,7 @@ import uiRouter from 'angular-ui-router';
 const MODULE_NAME = 'app.core.run';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [ uiRouter, AuthService, NavigationService ])
-  .run(guardRoutes);
+angular.module(MODULE_NAME, [uiRouter, AuthService, NavigationService]).run(guardRoutes);
 
 /** @ngInject **/
 function guardRoutes($rootScope, $state, Auth) {

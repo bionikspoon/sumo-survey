@@ -3,9 +3,7 @@ import angular from 'angular';
 const MODULE_NAME = 'app.component.showErrors.directive';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [])
-  .directive('appShowErrors', ShowErrorsDirective);
+angular.module(MODULE_NAME, []).directive('appShowErrors', ShowErrorsDirective);
 
 /** @ngInject **/
 function ShowErrorsDirective($timeout) {
@@ -21,10 +19,10 @@ function ShowErrorsDirective($timeout) {
   return directive;
 
   function link(scope, element) {
-    const inputEl = angular.element(element[ 0 ].querySelector('[id]'));
+    const inputEl = angular.element(element[0].querySelector('[id]'));
 
     inputEl.bind('blur', () => {
-      $timeout(() => element.toggleClass('has-error', hasError(inputEl[ 0 ])), 25);
+      $timeout(() => element.toggleClass('has-error', hasError(inputEl[0])), 25);
     });
   }
 }

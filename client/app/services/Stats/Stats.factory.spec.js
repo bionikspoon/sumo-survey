@@ -35,19 +35,16 @@ describe('Stats Factory', () => {
       let questions;
       let request;
 
-      beforeEach(done => {
-        Stats.summary()
-          .then(_questions_ => {
-            questions = _questions_;
-            done();
-          });
+      beforeEach((done) => {
+        Stats.summary().then((_questions_) => {
+          questions = _questions_;
+          done();
+        });
 
-        $httpBackend
-          .whenRoute('GET', '/api/Questions')
-          .respond((method, url, data, headers, params) => {
-            request = { method, url, data, headers, params };
-            return [ 200, mockSummaryResponse ];
-          });
+        $httpBackend.whenRoute('GET', '/api/Questions').respond((method, url, data, headers, params) => {
+          request = { method, url, data, headers, params };
+          return [200, mockSummaryResponse];
+        });
 
         $httpBackend.flush();
       });
@@ -57,13 +54,13 @@ describe('Stats Factory', () => {
       });
 
       it('Should have count by question', () => {
-        const actual = questions.map(question => question.count);
+        const actual = questions.map((question) => question.count);
 
-        expect(actual).to.eql([ 13, 12, 10, 14, 12 ]);
+        expect(actual).to.eql([13, 12, 10, 14, 12]);
       });
 
       it('Should have questions text', () => {
-        const actual = questions.map(question => question.text);
+        const actual = questions.map((question) => question.text);
         const expected = [
           'In most ways my life is close to my ideal.',
           'The conditions of my life are excellent.',
@@ -81,38 +78,35 @@ describe('Stats Factory', () => {
       let request;
       const id = 4;
 
-      beforeEach(done => {
-        Stats.question(id)
-          .then(_question_ => {
-            question = _question_;
-            done();
-          });
+      beforeEach((done) => {
+        Stats.question(id).then((_question_) => {
+          question = _question_;
+          done();
+        });
 
-        $httpBackend
-          .whenRoute('GET', '/api/Questions/:id')
-          .respond((method, _url_, data, headers, params) => {
-            const [ url, query ] = _url_.split('?', 2);
-            request = {
-              method,
-              url,
-              query,
-              data,
-              headers,
-              params: parseObj(params),
+        $httpBackend.whenRoute('GET', '/api/Questions/:id').respond((method, _url_, data, headers, params) => {
+          const [url, query] = _url_.split('?', 2);
+          request = {
+            method,
+            url,
+            query,
+            data,
+            headers,
+            params: parseObj(params),
+          };
+          return [200, mockQuestionResponse];
+
+          function parseObj(obj) {
+            return Object.keys(obj).reduce(copyKeys(obj), {});
+          }
+
+          function copyKeys(obj) {
+            return (copy, key) => {
+              copy[key] = angular.fromJson(obj[key]);
+              return copy;
             };
-            return [ 200, mockQuestionResponse ];
-
-            function parseObj(obj) {
-              return Object.keys(obj).reduce(copyKeys(obj), {});
-            }
-
-            function copyKeys(obj) {
-              return (copy, key) => {
-                copy[ key ] = angular.fromJson(obj[ key ]);
-                return copy;
-              };
-            }
-          });
+          }
+        });
         $httpBackend.flush();
       });
 
@@ -134,13 +128,13 @@ describe('Stats Factory', () => {
       });
 
       it('Should have count by choice', () => {
-        const actual = question.choices.map(choice => choice.count);
+        const actual = question.choices.map((choice) => choice.count);
 
-        expect(actual).to.eql([ 1, 2, 1, 2, 3, 1, 0 ]);
+        expect(actual).to.eql([1, 2, 1, 2, 3, 1, 0]);
       });
 
       it('Should have choices text', () => {
-        const actual = question.choices.map(choice => choice.text);
+        const actual = question.choices.map((choice) => choice.text);
         const expected = [
           'Strongly Disagree',
           'Disagree',

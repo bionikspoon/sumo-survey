@@ -6,9 +6,7 @@ import angularAnimate from 'angular-animate';
 const MODULE_NAME = 'app.component.onLeave.directive';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [ angularAnimate ])
-  .directive('appOnLeave', OnLeaveDirective);
+angular.module(MODULE_NAME, [angularAnimate]).directive('appOnLeave', OnLeaveDirective);
 
 /** @ngInject **/
 function OnLeaveDirective($animate) {

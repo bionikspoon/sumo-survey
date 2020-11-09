@@ -40,7 +40,7 @@ describe('Add Controller', () => {
       });
 
       it('Should be false with repeat choice', () => {
-        const question = { addChoice: { text: 'I like turtles' }, choices: [ { text: 'I like turtles' } ] };
+        const question = { addChoice: { text: 'I like turtles' }, choices: [{ text: 'I like turtles' }] };
         expect($ctrl.canAddChoice(question)).to.be.false;
       });
     });
@@ -50,7 +50,7 @@ describe('Add Controller', () => {
           $valid: true,
           text: 'I like turtles',
           addChoice: { text: '' },
-          choices: [ { text: 'Agree' }, { text: 'Strongly Agree' } ],
+          choices: [{ text: 'Agree' }, { text: 'Strongly Agree' }],
         };
         expect($ctrl.canAddQuestion(question)).to.be.true;
       });
@@ -58,7 +58,7 @@ describe('Add Controller', () => {
       it('Should be false with missing text', () => {
         const question = {
           $valid: true,
-          choices: [ { text: 'Agree' }, { text: 'Strongly Agree' } ],
+          choices: [{ text: 'Agree' }, { text: 'Strongly Agree' }],
         };
         expect($ctrl.canAddQuestion(question)).to.be.false;
       });
@@ -75,7 +75,7 @@ describe('Add Controller', () => {
         const question = {
           $valid: false,
           text: 'I like turtles',
-          choices: [ { text: 'Agree' }, { text: 'Strongly Agree' } ],
+          choices: [{ text: 'Agree' }, { text: 'Strongly Agree' }],
         };
         expect($ctrl.canAddQuestion(question)).to.be.false;
       });
@@ -85,7 +85,7 @@ describe('Add Controller', () => {
           $valid: true,
           addChoice: { text: 'Neutral' },
           text: 'I like turtles',
-          choices: [ { text: 'Agree' }, { text: 'Strongly Agree' } ],
+          choices: [{ text: 'Agree' }, { text: 'Strongly Agree' }],
         };
         expect($ctrl.canAddQuestion(question)).to.be.false;
       });
@@ -112,7 +112,7 @@ describe('Add Controller', () => {
           $valid: true,
           addChoice: { text: '' },
           text: 'I like turtles',
-          choices: [ { text: 'Agree' }, { text: 'Strongly Agree' } ],
+          choices: [{ text: 'Agree' }, { text: 'Strongly Agree' }],
         };
         $ctrl.submit(question);
         expect($ctrl.addQuestion).to.have.been.calledWith(question);
@@ -126,7 +126,7 @@ describe('Add Controller', () => {
           $valid: true,
           addChoice: { text: 'Strongly Agree' },
           text: 'I like turtles',
-          choices: [ { text: 'Agree' } ],
+          choices: [{ text: 'Agree' }],
         };
         $ctrl.addChoice(question);
 
@@ -134,14 +134,12 @@ describe('Add Controller', () => {
           $valid: true,
           addChoice: { text: '' },
           text: 'I like turtles',
-          choices: [ { text: 'Agree' }, { text: 'Strongly Agree' } ],
+          choices: [{ text: 'Agree' }, { text: 'Strongly Agree' }],
         };
         expect(question).to.be.eql(expected);
       });
     });
 
-    describe('addQuestion', () => {
-
-    });
+    describe('addQuestion', () => {});
   });
 });

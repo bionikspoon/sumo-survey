@@ -1,10 +1,11 @@
 [app-well] {
   .well {
     margin-bottom: 0;
-    border:        none;
+    border: none;
 
-    .form-group, .checkbox {
-      color: rgba(255, 255, 255, .87);
+    .form-group,
+    .checkbox {
+      color: rgba(255, 255, 255, 0.87);
     }
 
     h1 {

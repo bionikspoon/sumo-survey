@@ -4,9 +4,7 @@ import uiRouter from 'angular-ui-router';
 const MODULE_NAME = 'app.core.config';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [ uiRouter ])
-  .config(coreConfig);
+angular.module(MODULE_NAME, [uiRouter]).config(coreConfig);
 
 /** @ngInject **/
 function coreConfig($urlRouterProvider, $locationProvider, $httpProvider) {
@@ -14,5 +12,5 @@ function coreConfig($urlRouterProvider, $locationProvider, $httpProvider) {
 
   $locationProvider.html5Mode(true);
   $httpProvider.defaults.useXDomain = true;
-  delete $httpProvider.defaults.headers.common[ 'X-Requested-With' ];
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
 }

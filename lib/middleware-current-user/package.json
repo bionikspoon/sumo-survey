@@ -7,7 +7,6 @@
   "scripts": {
     "precompile": "babel ./index.es6 -o ./index.js --source-maps=inline --presets=es2015 --no-babelrc",
     "postinstall": "npm run precompile"
-
   },
   "peerDependencies": {
     "loopback": "2.29.0",
