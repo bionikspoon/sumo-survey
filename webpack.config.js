@@ -142,7 +142,7 @@ function getPreLoaders(env) {
 function getLoaders(env) {
   const SASS_LOADER = { test: /\.scss$/, includes: LOADER_INCLUDES };
   const loaders = [
-    { test: /\.js$/, loader: 'babel', include: LOADER_INCLUDES },
+    { test: /\.js$/, loader: 'babel?cacheDirectory', include: LOADER_INCLUDES },
     {
       test: /\.html$/,
       loader: `ngtemplate?relativeTo=${PATHS.client()}!html?interpolate`,
@@ -170,7 +170,7 @@ function getLoaders(env) {
       loaders.push(
         _.merge(SASS_LOADER, {
           loader: ExtractTextPlugin.extract(
-            ['', 'css?minimize&sourceMap', '!', 'postcss?sourceMap', '!', 'sass?sourceMap'].join('')
+            ['css?minimize&sourceMap', '!', 'postcss?sourceMap', '!', 'sass?sourceMap'].join('')
           ),
         })
       );
