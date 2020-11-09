@@ -4,7 +4,10 @@ import componentsNav from 'components/nav';
 
 // import top level pages
 const context = require.context('./', true, /\.\/[^\/]+\/index\.js$/);
-const pages = context.keys().map(context);
+const pages = context
+  .keys()
+  .map(context)
+  .map((esModule) => esModule.default);
 
 const MODULE_NAME = 'app.page.admin';
 export default MODULE_NAME;

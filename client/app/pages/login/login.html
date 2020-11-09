@@ -9,25 +9,31 @@
                type="email"
                class="form-control"
                id="email"
-               placeholder="Email"
+               placeholder="Try 'admin@example.com'"
                ng-model="login.email"
-               required>
+               required
+            />
          </div>
          <div class="form-group" app-show-errors>
             <label for="password">Password</label>
-            <input type="password"
+            <input
+               type="password"
                class="form-control"
                id="password"
-               placeholder="Password"
+               placeholder="Try 'secret'"
                ng-model="login.password"
-               required>
+               required
+            />
          </div>
          <div class="checkbox">
             <label>
-               <input type="checkbox"
+               <input
+                  type="checkbox"
                   ng-model="login.rememberMe"
                   ng-false-value="false"
-                  ng-init="login.rememberMe=true"> Remember me
+                  ng-init="login.rememberMe=true"
+               />
+               Remember me
             </label>
          </div>
 
@@ -35,7 +41,6 @@
       </form>
    </main>
 </div>
-
 
 <app-nav class="top left">
    <app-nav-home></app-nav-home>

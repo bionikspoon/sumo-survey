@@ -5,6 +5,6 @@ export default MODULE_NAME;
 
 const { NG_MODULES } = global;
 
-angular
-  .module(MODULE_NAME, [...NG_MODULES(['component', 'config', 'run'])]) // eslint-disable-line new-cap
-  .value('$routerRootComponent', 'appCore');
+const allModules = NG_MODULES(['component', 'config', 'run']).map((ngModule) => ngModule.default); // eslint-disable-line new-cap
+
+angular.module(MODULE_NAME, allModules).value('$routerRootComponent', 'appCore');

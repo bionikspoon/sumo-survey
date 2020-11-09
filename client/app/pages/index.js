@@ -1,8 +1,7 @@
 const MODULE_NAME = 'app.pages';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, modules());
+angular.module(MODULE_NAME, modules());
 
 /**
  * Import top level pages
@@ -10,5 +9,8 @@ angular
  */
 function modules() {
   const context = require.context('./', true, /\.\/[^\/]+\/index\.js$/);
-  return context.keys().map(context);
+  return context
+    .keys()
+    .map(context)
+    .map((esModule) => esModule.default);
 }
