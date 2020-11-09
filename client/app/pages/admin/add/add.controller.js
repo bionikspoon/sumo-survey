@@ -5,17 +5,15 @@ import LoopbackService from 'services/Loopback';
 const MODULE_NAME = 'app.page.admin.add.controller';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [ uiRouter, LoopbackService ])
-  .controller('AddController', AddController);
+angular.module(MODULE_NAME, [uiRouter, LoopbackService]).controller('AddController', AddController);
 
 /** @ngInject **/
 function AddController($log, $state, $q, Question) {
   const $ctrl = this;
 
-  ////////////////
+  // //////////////
 
-  $ctrl.submit = question => {
+  $ctrl.submit = (question) => {
     if ($ctrl.canAddChoice(question)) $ctrl.addChoice(question);
     else if ($ctrl.canAddQuestion(question)) $ctrl.addQuestion(question);
   };
@@ -23,7 +21,7 @@ function AddController($log, $state, $q, Question) {
   $ctrl.canAddChoice = ({ addChoice, choices }) => {
     if (angular.isUndefined(addChoice)) return false;
     if (!addChoice.text.length) return false;
-    if (angular.isDefined(choices) && choices.map(choice => choice.text).includes(addChoice.text)) return false;
+    if (angular.isDefined(choices) && choices.map((choice) => choice.text).includes(addChoice.text)) return false;
 
     return true;
   };
@@ -37,7 +35,7 @@ function AddController($log, $state, $q, Question) {
     return true;
   };
 
-  $ctrl.addChoice = question => {
+  $ctrl.addChoice = (question) => {
     if (!$ctrl.canAddChoice(question)) return;
 
     question.choices = question.choices || [];
@@ -45,17 +43,16 @@ function AddController($log, $state, $q, Question) {
     question.addChoice.text = '';
   };
 
-  $ctrl.addQuestion = question => {
+  $ctrl.addQuestion = (question) => {
     if (!$ctrl.canAddQuestion(question)) return;
 
     const { text, choices } = question;
     Question.createWithChoices({ text, choices })
-      .$promise
-      .then(results => {
+      .$promise.then((results) => {
         $state.reload();
         return results;
       })
-      .catch(error => {
+      .catch((error) => {
         $log.error('AddController error: %s\n', error.data.error.message, error);
         return $q.reject(error);
       });

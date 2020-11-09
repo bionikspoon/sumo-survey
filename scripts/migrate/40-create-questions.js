@@ -5,15 +5,15 @@ module.exports = function createQuestions(app) {
   const { Question, Admin, Choice } = app.models;
 
   return Admin.findOne({})
-    .then(admin => getSurvey(admin))
-    .then(questions => Question._createWithChoices(questions))
+    .then((admin) => getSurvey(admin))
+    .then((questions) => Question._createWithChoices(questions))
     .then(logResults);
 
   function logResults(questions) {
     return Question.count()
-      .then(questionCount => console.log('Created %d Questions', questionCount))
+      .then((questionCount) => console.log('Created %d Questions', questionCount))
       .then(() => Choice.count())
-      .then(choiceCount => console.log('Created %d Choices', choiceCount))
+      .then((choiceCount) => console.log('Created %d Choices', choiceCount))
       .then(() => questions);
   }
 };
@@ -38,10 +38,9 @@ function getSurvey(admin) {
     'Strongly Agree',
   ];
 
-  return surveyQuestions.map(question => ({
+  return surveyQuestions.map((question) => ({
     text: question,
     choices: surveyAnswers.map((text, order) => ({ text, order })),
     creator: admin,
   }));
 }
-

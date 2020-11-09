@@ -15,12 +15,11 @@ module.exports = function createGuests(app) {
   );
 
   // return promise
-  return guestsPromise
-    .then(logResults);
+  return guestsPromise.then(logResults);
 
   function logResults(data) {
     return Guest.count({ ip: '*' })
-      .then(guestCount => console.log('Created %d Guests.', guestCount))
+      .then((guestCount) => console.log('Created %d Guests.', guestCount))
       .then(() => data);
   }
 };

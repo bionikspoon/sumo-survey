@@ -4,26 +4,25 @@
   "private": true,
   "main": "server/server.js",
   "scripts": {
-    "prestart": "npm run migrate",
+    "prestart": "yarn run migrate",
     "start": "slr .",
-    "dev": "gulp dev --debug",
+    "dev": "gulp dev --inspect",
     "test": "karma start --debug",
     "posttest": "nsp check",
     "test:watch": "karma start --debug --auto-watch --no-single-run",
     "coveralls": "[ -e ./coverage/lcov.txt ] && cat ./coverage/lcov.txt | coveralls || exit 1",
     "migrate": "./bin/migrate",
     "build": "gulp build",
-    "build:debug": "npm run build -- --debug",
-    "prebuild:serve": "npm run build",
-    "build:serve": "npm install strong-supervisor",
-    "postbuild:serve": "npm run start",
-    "preheroku-postbuild": "npm run build",
-    "heroku-postbuild": "npm install -g strong-supervisor",
-    "postheroku-postbuild": "npm prune --production"
+    "build:debug": "yarn run build -- --debug",
+    "prebuild:serve": "yarn run build",
+    "build:serve": "yarn install strong-supervisor",
+    "postbuild:serve": "yarn run start",
+    "preheroku-postbuild": "yarn run build",
+    "heroku-postbuild": "yarn install -g strong-supervisor",
+    "postheroku-postbuild": "yarn prune --production"
   },
   "engines": {
-    "node": "5.11.x",
-    "npm": "3.9.x"
+    "node": "15.1.x"
   },
   "vendor": [
     "angular",
@@ -36,10 +35,7 @@
     "client/lbServices"
   ],
   "dependencies": {
-    "babel-core": "6.10.4",
-    "babel-plugin-add-module-exports": "0.2.1",
-    "babel-polyfill": "6.9.1",
-    "babel-preset-es2015": "6.9.0",
+    "@babel/polyfill": "7.12.1",
     "bluebird": "3.4.1",
     "compression": "1.6.2",
     "connect-history-api-fallback": "1.2.0",
@@ -51,11 +47,16 @@
     "loopback-component-explorer": "2.5.0",
     "loopback-connector-mysql": "2.3.0",
     "loopback-datasource-juggler": "2.46.1",
-    "morgan": "1.7.0",
     "middleware-client-ip": "file:./lib/middleware-client-ip",
-    "middleware-current-user": "file:./lib/middleware-current-user"
+    "middleware-current-user": "file:./lib/middleware-current-user",
+    "morgan": "1.7.0"
   },
   "devDependencies": {
+    "@babel/cli": "7.12.1",
+    "@babel/core": "7.12.3",
+    "@babel/eslint-parser": "7.12.1",
+    "@babel/preset-env": "7.12.1",
+    "@babel/register": "7.12.1",
     "angular": "1.5.7",
     "angular-animate": "1.5.7",
     "angular-autoload-loader": "file:./lib/angular-autoload-loader",
@@ -65,11 +66,8 @@
     "angular-ui-router": "0.3.1",
     "animate.css": "3.5.1",
     "autoprefixer": "6.3.6",
-    "babel-cli": "6.10.1",
-    "babel-eslint": "6.1.0",
     "babel-istanbul-loader": "0.1.0",
-    "babel-loader": "6.2.4",
-    "babel-register": "6.9.0",
+    "babel-loader": "8.1.0",
     "baggage-loader": "0.2.4",
     "bootstrap": "3.3.6",
     "bootstrap-sass": "3.3.6",
@@ -83,6 +81,7 @@
     "eslint": "2.13.1",
     "eslint-config-airbnb-base": "3.0.1",
     "eslint-config-angular": "0.5.0",
+    "eslint-config-prettier": "6.15.0",
     "eslint-import-resolver-webpack": "0.3.1",
     "eslint-loader": "1.3.0",
     "eslint-plugin-angular": "1.1.1",
@@ -90,16 +89,18 @@
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.9.0",
     "fingerprintjs2": "1.4.0",
-    "fs-extra": "0.30.0",
+    "fs-extra": "9.0.1",
     "graceful-fs": "4.1.4",
-    "gulp": "3.9.1",
+    "gulp": "4.0.2",
+    "gulp-cli": "2.3.0",
     "gulp-loopback-sdk-angular": "0.1.4",
-    "gulp-nodemon": "2.1.0",
+    "gulp-nodemon": "2.5.0",
     "gulp-rename": "1.2.2",
     "gulp-util": "3.0.7",
     "html-loader": "0.4.3",
     "html-webpack-plugin": "2.21.0",
     "html-webpack-template": "5.0.0",
+    "husky": "4.3.0",
     "istanbul-instrumenter-loader": "0.2.0",
     "jshint": "2.9.2",
     "json-loader": "0.5.4",
@@ -112,11 +113,12 @@
     "karma-phantomjs-launcher": "1.0.1",
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "1.7.0",
+    "lint-staged": "10.5.1",
     "mocha": "2.5.3",
     "mocha-loader": "0.7.1",
     "ng-annotate-loader": "0.1.0",
     "ngtemplate-loader": "1.3.1",
-    "node-sass": "3.8.0",
+    "node-sass": "5.0.0",
     "normalize.css": "4.1.1",
     "npm-install-webpack-plugin": "4.0.3",
     "nsp": "2.4.0",
@@ -126,6 +128,7 @@
     "postcss-import": "8.1.2",
     "postcss-loader": "0.9.1",
     "precss": "1.4.0",
+    "prettier": "2.1.2",
     "raw-loader": "0.5.1",
     "resolve-url-loader": "1.4.4",
     "run-sequence": "1.2.1",
@@ -158,5 +161,14 @@
   "bugs": {
     "url": "https://github.com/bionikspoon/sumo-survey/issues"
   },
-  "homepage": "https://github.com/bionikspoon/sumo-survey#readme"
+  "homepage": "https://github.com/bionikspoon/sumo-survey#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "browserslist": "> 0.25%"
 }

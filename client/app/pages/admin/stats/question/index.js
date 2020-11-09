@@ -6,23 +6,20 @@ import barchart from 'components/barchart';
 const MODULE_NAME = 'app.admin.stats.question.page';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [ uiRouter, barchart, StatsService ])
-  .config(routeConfig);
+angular.module(MODULE_NAME, [uiRouter, barchart, StatsService]).config(routeConfig);
 
 /** @ngInject **/
 function routeConfig($stateProvider) {
-  $stateProvider
-    .state('admin.stats.question', {
-      url: ':id/',
-      templateUrl: require('./question.html'),
-      controller: QuestionController,
-      controllerAs: '$ctrl',
-      authenticate: true,
-      resolve: {
-        question: /** @ngInject **/(Stats, $stateParams) => Stats.question($stateParams.id),
-      },
-    });
+  $stateProvider.state('admin.stats.question', {
+    url: ':id/',
+    templateUrl: require('./question.html'),
+    controller: QuestionController,
+    controllerAs: '$ctrl',
+    authenticate: true,
+    resolve: {
+      question: /** @ngInject **/ (Stats, $stateParams) => Stats.question($stateParams.id),
+    },
+  });
 }
 
 /** @ngInject **/
@@ -32,8 +29,7 @@ function QuestionController($log, question) {
   $ctrl.question = question;
   activate();
 
-  ////////////////
+  // //////////////
 
-  function activate() {
-  }
+  function activate() {}
 }

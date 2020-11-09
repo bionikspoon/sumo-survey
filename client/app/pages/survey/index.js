@@ -6,22 +6,19 @@ import componentsNav from 'components/nav';
 const MODULE_NAME = 'app.page.survey';
 export default MODULE_NAME;
 
-angular
-  .module(MODULE_NAME, [ uiRouter, SurveyServices, componentsNav ])
-  .config(routeConfig);
+angular.module(MODULE_NAME, [uiRouter, SurveyServices, componentsNav]).config(routeConfig);
 
 /** @ngInject **/
 function routeConfig($stateProvider) {
-  $stateProvider
-    .state('survey', {
-      url: '/survey/',
-      templateUrl: require('./survey.html'),
-      controller: SurveyController,
-      controllerAs: '$ctrl',
-      resolve: {
-        question: /** @ngInject **/Survey => Survey.question(),
-      },
-    });
+  $stateProvider.state('survey', {
+    url: '/survey/',
+    templateUrl: require('./survey.html'),
+    controller: SurveyController,
+    controllerAs: '$ctrl',
+    resolve: {
+      question: /** @ngInject **/ (Survey) => Survey.question(),
+    },
+  });
 }
 
 function SurveyController($log, $state, $q, Survey, question) {
@@ -30,22 +27,20 @@ function SurveyController($log, $state, $q, Survey, question) {
   const $ctrl = this;
   $ctrl.question = question;
 
-  ////////////////
+  // //////////////
 
-  $ctrl.setResponse = response => {
+  $ctrl.setResponse = (response) => {
     if (response.$invalid) return;
     response.questionId = $ctrl.question.id;
 
-    Survey
-      .answer(response)
-      .then(data => {
+    Survey.answer(response)
+      .then((data) => {
         $state.reload();
         return data;
       })
-      .catch(error => {
+      .catch((error) => {
         $log.error('SurveyController error: %s\n', error.data.error.message, error);
         return $q.reject(error);
       });
   };
 }
-
